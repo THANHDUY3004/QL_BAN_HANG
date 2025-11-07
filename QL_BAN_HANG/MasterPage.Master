@@ -1,0 +1,36 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterPage.master.cs" Inherits="QL_BAN_HANG.MasterPage" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link href="layout/Style.css" rel="stylesheet" />
+</head>
+<body>
+     <div id="wrapper">
+<form runat="server">
+    <div id="Banner"></div>
+    <div id="MainMenu">
+        <asp:ContentPlaceHolder ID="ContentPlaceHolderMainMenu" runat="server" />
+    </div>
+    <div id="Contens">
+        <div id="SubMenu">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolderSubMenu" runat="server" />
+        </div>
+        <div id="Content">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolderContent" runat="server" />
+        </div>
+      <div id="HotNews">
+         <asp:ContentPlaceHolder ID="ContentPlaceHolderHotNews" runat="server" />
+     </div>
+    </div>
+    <div id="Bottom">
+        <asp:ContentPlaceHolder ID="ContentPlaceHolderBottom" runat="server" />
+    </div>
+</form>
+</div>
+</body>
+</html>
