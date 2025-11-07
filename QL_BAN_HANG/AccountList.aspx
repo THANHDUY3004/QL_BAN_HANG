@@ -1,79 +1,66 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Kiem_tra.aspx.cs" Inherits="QL_BAN_HANG.Kiem_tra" %>
-
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-        <form id="form1" runat="server">
-        <div class="container">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage_admin.Master" AutoEventWireup="true" CodeBehind="AccountList.aspx.cs" Inherits="QL_BAN_HANG.AccountList" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <link href="layout/accountlist.css" rel="stylesheet" />
+</asp:Content>
+<asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolderContent" runat="server">
+    <div class="container">
     <h2 style="text-align: center;"> QUẢN LÝ TÀI KHOẢN</h2>
     
     <div style="text-align: center; margin: 20px 0; border-bottom: 1px solid #eee; padding-bottom: 20px;">
-        <asp:Button ID="btnRegisterAccount" 
-                    runat="server" 
-                    Text="Đăng Ký Tài Khoản Mới" 
-                    OnClick="btnRegisterAccount_Click" 
-                    CssClass="admin-button btn-register" />
+        
 
         <asp:Button ID="btnLoginPage" 
                     runat="server" 
-                    Text="Đăng Nhập Tài Khoản" 
+                    Text="Đăng Xuất Tài Khoản" 
                     OnClick="btnLoginPage_Click" 
                     CssClass="admin-button btn-login" />
     </div>
-    <h3 style="text-align: left;">👤 Account List</h3>
+    <br />
+        <br />
+        <table style="width:100%;">
+            <tr>
+                <td>
+                    <h3 style="text-align: left;">👤 Account List</h3>
+                </td>
+                <td>
     <asp:DropDownList ID="ddlPhanQuyen" runat="server" width="246px" AutoPostBack="True" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged" style="margin-top: 19px" Height="52px">
     </asp:DropDownList>
-    <br />
-    <br />
-    &nbsp;<br />
+                </td>
+            </tr>
+            <tr>
+                <td>Họ Và Tên :</td>
+                <td><asp:TextBox ID="txtht" runat="server" Width="200px"></asp:TextBox> 
+                </td>
+            </tr>
+            <tr>
+                <td>Số Điện Thoại : </td>
+                <td> <asp:TextBox ID="txtsdt" runat="server" Width="200px"></asp:TextBox> 
+                </td>
+            </tr>
+            <tr>
+                <td>Địa Chỉ :</td>
+                <td><asp:TextBox ID="txtdchi" runat="server" Width="200px"></asp:TextBox> 
+                </td>
+            </tr>
+            <tr>
+                <td>Mật Khẩu:</td>
+                <td> <asp:TextBox ID="txtmk" runat="server" Width="200px"></asp:TextBox> 
 
-            <br />
-            <br />
-            <br />
-            <table style="width:100%;">
-                <tr>
-                    <td>Họ Và Tên :</td>
-                    <td><asp:TextBox ID="txtht" runat="server" Width="200px"></asp:TextBox> 
-                    </td>
-                </tr>
-                <tr>
-                    <td>Số Điện Thoại :</td>
-                    <td> <asp:TextBox ID="txtsdt" runat="server" Width="200px"></asp:TextBox> 
-                    </td>
-                </tr>
-                <tr>
-                    <td>Địa Chỉ :</td>
-                    <td><asp:TextBox ID="txtdchi" runat="server" Width="200px"></asp:TextBox> 
-                    </td>
-                </tr>
-                <tr>
-                    <td>Mật Khẩu: </td>
-                    <td> <asp:TextBox ID="txtmk" runat="server" Width="200px"></asp:TextBox> 
-
-                    </td>
-                </tr>
-                <tr>
-                    <td> 
-
-                        &nbsp;</td>
-                    <td> 
-
-    <asp:Button ID="butAdd" runat="server" Text="Add" OnClick="butAdd_Click" />
-
-                    </td>
-                </tr>
-            </table>
-    <br />
+                </td>
+            </tr>
+            <tr>
+                <td>
 
     <b><asp:Label ID="lblMessage" runat="server" Text="" ></asp:Label>
-    <br />
     </b>
+                </td>
+                <td> <asp:Button ID="butAdd" runat="server" Text="Thêm tài khoản" OnClick="butAdd_Click" Width="100px" />
+
+                </td>
+            </tr>
+        </table>
     <h3 style="text-align: left;">
-        <asp:GridView ID="GridViewAccounts" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" DataKeyNames="So_dien_thoai" OnRowDeleting="GridView1_RowDeleting" Width="900px" OnRowDataBound="GridView1_RowDataBound" OnSelectedIndexChanged="GridViewAccounts_SelectedIndexChanged">
+        <asp:GridView ID="GridViewAccounts" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" DataKeyNames="So_dien_thoai" OnRowDeleting="GridView1_RowDeleting" Width="840px" OnRowDataBound="GridView1_RowDataBound" OnSelectedIndexChanged="GridViewAccounts_SelectedIndexChanged">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
                 <asp:BoundField DataField="Ho_va_ten" HeaderText="Họ và Tên">
@@ -117,6 +104,4 @@
         </asp:GridView>
     </h3>
 </div>
-        </form>
-</body>
-</html>
+</asp:Content>

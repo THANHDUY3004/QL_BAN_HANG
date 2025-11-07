@@ -1,4 +1,4 @@
-﻿body {
+﻿/*body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f0f8ff;
     display: flex;
@@ -6,28 +6,28 @@
     align-items: center;
     min-height: 100vh;
     margin: 0;
-}
+}*/
 
 /* Container chính của Form */
-.register-box {
+/*.register-box {
     background-color: #ffffff;
     padding: 30px 40px;
     border-radius: 12px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 450px;
-}
+}*/
 
 /* Tiêu đề */
-h2 {
+/*h2 {
     text-align: center;
     color: #4a90e2;
     margin-bottom: 25px;
     font-weight: 600;
-}
+}*/
 
 /* Nhóm điều khiển Input */
-.input-group {
+/*.input-group {
     margin-bottom: 15px;
 }
 
@@ -36,10 +36,10 @@ h2 {
         font-weight: 500;
         color: #555;
         margin-bottom: 5px;
-    }
+    }*/
 
 /* Thiết kế cho TextBox và Input */
-.form-control {
+/*.form-control {
     width: 100%;
     padding: 10px 12px;
     border: 1px solid #ddd;
@@ -52,10 +52,10 @@ h2 {
         border-color: #4a90e2;
         outline: none;
         box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
-    }
+    }*/
 
 /* Nút Đăng ký */
-.btn-register {
+/*.btn-register {
     width: 100%;
     padding: 12px;
     background-color: #4a90e2;
@@ -70,10 +70,10 @@ h2 {
 
     .btn-register:hover {
         background-color: #357bd8;
-    }
+    }*/
 
 /* Thông báo lỗi và xác thực */
-.validation-error {
+/*.validation-error {
     color: #ff4d4f;
     font-size: 0.85em;
     display: block;
@@ -84,10 +84,10 @@ h2 {
     text-align: center;
     margin-top: 15px;
     font-weight: bold;
-}
+}*/
 
 /* Liên kết Đăng nhập */
-.login-link {
+/*.login-link {
     text-align: center;
     margin-top: 25px;
     font-size: 0.9em;
@@ -102,4 +102,4 @@ h2 {
 
         .login-link a:hover {
             text-decoration: underline;
-        }
+        }*/

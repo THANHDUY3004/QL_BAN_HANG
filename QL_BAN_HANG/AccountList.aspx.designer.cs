@@ -11,26 +11,8 @@ namespace QL_BAN_HANG
 {
 
 
-    public partial class Kiem_tra
+    public partial class AccountList
     {
-
-        /// <summary>
-        /// form1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-
-        /// <summary>
-        /// btnRegisterAccount control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnRegisterAccount;
 
         /// <summary>
         /// btnLoginPage control.
@@ -87,15 +69,6 @@ namespace QL_BAN_HANG
         protected global::System.Web.UI.WebControls.TextBox txtmk;
 
         /// <summary>
-        /// butAdd control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button butAdd;
-
-        /// <summary>
         /// lblMessage control.
         /// </summary>
         /// <remarks>
@@ -103,6 +76,15 @@ namespace QL_BAN_HANG
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblMessage;
+
+        /// <summary>
+        /// butAdd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button butAdd;
 
         /// <summary>
         /// GridViewAccounts control.

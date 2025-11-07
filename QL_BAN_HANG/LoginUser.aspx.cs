@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -14,12 +16,23 @@ namespace QL_BAN_HANG
         {
 
         }
-        public class UserAccount
+        public string ToMD5(string input)
         {
-            public string Username { get; set; }
-            public string Password { get; set; }
-        }
+            using (MD5 md5 = MD5.Create())
+            {
+                byte[] inputBytes = Encoding.UTF8.GetBytes(input);
+                byte[] hashBytes = md5.ComputeHash(inputBytes);
 
+                // Chuyển đổi sang chuỗi hex
+                StringBuilder sb = new StringBuilder();
+                foreach (byte b in hashBytes)
+                {
+                    sb.Append(b.ToString("x2")); // "x2" để giữ định dạng 2 chữ số hex
+                }
+
+                return sb.ToString();
+            }
+        }
         protected void btnLogin_Click(object sender, EventArgs e)
         {
             lblMessage.Text = string.Empty;
@@ -29,36 +42,51 @@ namespace QL_BAN_HANG
 
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
-                lblMessage.Text = "Vui lòng nhập đầy đủ tên đăng nhập và mật khẩu.";
+                lblMessage.Text = "Vui lòng nhập đầy đủ số điện thoại và mật khẩu.";
                 return;
             }
 
             try
             {
-                // Sử dụng Cua_Hang_Tra_SuaDataContext để kết nối Database
+                // Kết nối CSDL
                 Cua_Hang_Tra_SuaDataContext context = new Cua_Hang_Tra_SuaDataContext();
 
-                // Tìm tài khoản khớp trong bảng Tai_Khoan
+                // Mã hóa mật khẩu nếu đang dùng MD5
+                string hashedPassword = ToMD5(password);
+
+                // Tìm tài khoản khớp
                 var foundUser = context.Tai_Khoans.SingleOrDefault(t =>
                     t.So_dien_thoai == username &&
-                    t.Mat_khau == password); // Cần đảm bảo tên cột là chính xác
+                    t.Mat_khau == hashedPassword);
 
                 if (foundUser != null)
                 {
-                    // Đăng nhập thành công
-                    Session["LoggedInUser"] = foundUser.Ho_va_ten; // Lấy Họ và tên từ Database
-                    Response.Redirect("Default.aspx");
+                    // Lưu thông tin đăng nhập
+                    Session["LoggedInUser"] = foundUser.Ho_va_ten;
+                    Session["UserRole"] = foundUser.Phan_quyen;
+
+                    // Điều hướng theo phân quyền
+                    if (foundUser.Phan_quyen == "Khách Hàng")
+                    {
+                        Response.Redirect("Default.aspx");
+                    }
+                    else if (foundUser.Phan_quyen == "Quản Trị")
+                    {
+                        Response.Redirect("AccountList.aspx");
+                    }
+                    else
+                    {
+                        lblMessage.Text = "⚠️ Phân quyền không hợp lệ.";
+                    }
                 }
                 else
                 {
-                    // Đăng nhập thất bại: Tài khoản không tồn tại hoặc mật khẩu sai
                     lblMessage.Text = "Tên đăng nhập hoặc mật khẩu không đúng.";
                 }
             }
             catch (Exception ex)
             {
-                lblMessage.Text = "Lỗi kết nối hoặc xử lý dữ liệu." + ex.Message;
-                // Ghi log lỗi (ex.Message)
+                lblMessage.Text = "❌ Lỗi kết nối hoặc xử lý dữ liệu: " + ex.Message;
             }
         }
     }

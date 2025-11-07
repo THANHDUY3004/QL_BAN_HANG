@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterPage.master.cs" Inherits="QL_BAN_HANG.MasterPage" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterPage_admin.master.cs" Inherits="QL_BAN_HANG.MasterPage_admin" %>
 
 <!DOCTYPE html>
 
@@ -30,18 +30,13 @@
                     </ul>
                 </li>
                 <li id="nav-right"><a href="LoginUser.aspx">Đăng nhập</a></li>
-                <li id="nav-right-2"><a href="#">Tài Khoản</a></li>
+                <li id="nav-right-2"><a href="AccountList.aspx">Tài Khoản</a></li>
             </ul>
         </asp:ContentPlaceHolder>
 
     </div>
     <div id="Contens">
-        <div id="SubMenu">
-            <asp:ContentPlaceHolder ID="ContentPlaceHolderSubMenu" runat="server" />
-        </div>
-        <div id="Content">
-            <asp:ContentPlaceHolder ID="ContentPlaceHolderContent" runat="server" />
-        </div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolderContent" runat="server" />
     </div>
     <div id="Bottom">
         <asp:ContentPlaceHolder ID="ContentPlaceHolderBottom" runat="server" >
@@ -68,3 +63,4 @@
 </div>
 </body>
 </html>
+

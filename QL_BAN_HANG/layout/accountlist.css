@@ -1,0 +1,42 @@
+﻿/* ... CSS hiện có ... */
+.container {
+    margin: 30px auto;
+    width: 95%;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.section-separator {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+/* Thêm CSS cơ bản cho nút */
+.admin-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-right: 15px;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+.btn-register {
+    background-color: #007bff; /* Blue */
+}
+
+    .btn-register:hover {
+        background-color: #0056b3;
+    }
+
+.btn-login {
+    background-color: #28a745; /* Green */
+}
+
+    .btn-login:hover {
+        background-color: #1e7e34;
+    }
