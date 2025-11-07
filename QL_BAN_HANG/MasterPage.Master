@@ -23,9 +23,6 @@
         <div id="Content">
             <asp:ContentPlaceHolder ID="ContentPlaceHolderContent" runat="server" />
         </div>
-      <div id="HotNews">
-         <asp:ContentPlaceHolder ID="ContentPlaceHolderHotNews" runat="server" />
-     </div>
     </div>
     <div id="Bottom">
         <asp:ContentPlaceHolder ID="ContentPlaceHolderBottom" runat="server" />
