@@ -1,0 +1,98 @@
+﻿
+/* Thanh điều hướng chính */
+/* Thanh điều hướng chính */
+#nav {
+    list-style: none;
+    background-color: #2c3e50; /* Màu nền cho thanh nav */
+    /* Nếu muốn dùng hình nền thay vì màu, dùng dòng dưới: */
+    background-image: url('duong-dan-den-hinh-anh.jpg');   /*Hình nền cho thanh nav */
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start; /* Sắp xếp các mục từ trái sang phải */
+    padding: 0 20px;
+    width: auto; /* Chiều ngang tự động theo nội dung */
+}
+
+
+    #nav > li {
+        position: relative;
+    }
+
+        #nav > li > a {
+            display: block;
+            padding: 15px 20px;
+            color: white;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+            #nav > li > a:hover {
+                background-color: #34495e;
+            }
+
+    /* Dropdown menu */
+    #nav li ul {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: #34495e;
+        display: none;
+        min-width: 180px;
+        z-index: 1000;
+    }
+
+    #nav li:hover ul {
+        display: block;
+    }
+
+    #nav li ul li a {
+        padding: 12px 16px;
+        color: white;
+        display: block;
+        text-decoration: none;
+    }
+
+        #nav li ul li a:hover {
+            background-color: #3d566e;
+        }
+
+    /* Các mục bên phải */
+    #nav #nav-right,
+    #nav #nav-right-2 {
+        margin-left: auto;
+    }
+
+/* Responsive toggle */
+.nav-toggle {
+    display: none;
+    font-size: 24px;
+    color: white;
+    padding: 15px;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    #nav {
+        flex-direction: column;
+        display: none;
+    }
+
+        #nav.show {
+            display: flex;
+        }
+
+    .nav-toggle {
+        display: block;
+        background-color: #2c3e50;
+    }
+
+    #nav > li {
+        width: 100%;
+    }
+
+    #nav li ul {
+        position: static;
+    }
+}

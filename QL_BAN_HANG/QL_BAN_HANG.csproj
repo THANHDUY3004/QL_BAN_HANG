@@ -44,6 +44,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -68,9 +69,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Default.aspx" />
+    <Content Include="Kiem_tra.aspx" />
+    <Content Include="layout\loginuser.css" />
+    <Content Include="layout\master.css" />
+    <Content Include="layout\nav.css" />
+    <Content Include="layout\registeruser.css" />
     <Content Include="layout\scripts.js" />
     <Content Include="layout\Style.css" />
     <Content Include="LoginUser.aspx" />
+    <Content Include="RegisterUser.aspx" />
+    <Content Include="uploads\icons\pngtree-background-of-monitor-computer-with-online-game-streaming-desktop-image_15734080.jpg" />
+    <Content Include="uploads\images\background-banner.png" />
+    <Content Include="uploads\images\background-content.png" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -80,6 +90,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Kiem_tra.aspx.cs">
+      <DependentUpon>Kiem_tra.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Kiem_tra.aspx.designer.cs">
+      <DependentUpon>Kiem_tra.aspx</DependentUpon>
     </Compile>
     <Compile Include="LoginUser.aspx.cs">
       <DependentUpon>LoginUser.aspx</DependentUpon>
@@ -96,6 +113,13 @@
       <DependentUpon>MasterPage.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegisterUser.aspx.cs">
+      <DependentUpon>RegisterUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RegisterUser.aspx.designer.cs">
+      <DependentUpon>RegisterUser.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="MasterPage.Master" />
