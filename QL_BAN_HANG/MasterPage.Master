@@ -18,8 +18,7 @@
     <div id="Banner"></div>
     <div id="MainMenu">
         <asp:ContentPlaceHolder ID="ContentPlaceHolderMainMenu" runat="server">
-            <div class="nav-toggle" onclick="toggleNav()">☰ Menu</div>
-            <ul id="nav">
+s            <ul id="nav">
                 <li><a href="Default.aspx">Giới Thiệu</a></li>
                 <li><a href="#">Danh Mục Sản Phẩm &raquo;</a>
                     <ul>
@@ -29,8 +28,8 @@
                         <li><a href="#">Tất cả sản phẩm</a></li>
                     </ul>
                 </li>
-                <li id="nav-right"><a href="LoginUser.aspx">Đăng nhập</a></li>
-                <li id="nav-right-2"><a href="#">Tài Khoản</a></li>
+                <li id="nav-right-2"><a href="#">Giỏ Hàng</a></li>
+                <asp:PlaceHolder ID="phUserTab" runat="server" />
             </ul>
         </asp:ContentPlaceHolder>
 

@@ -29,7 +29,6 @@
                         <li><a href="#">Tất cả sản phẩm</a></li>
                     </ul>
                 </li>
-                <li id="nav-right"><a href="LoginUser.aspx">Đăng nhập</a></li>
                 <li id="nav-right-2"><a href="AccountList.aspx">Tài Khoản</a></li>
             </ul>
         </asp:ContentPlaceHolder>

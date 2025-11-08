@@ -24,76 +24,40 @@ namespace QL_BAN_HANG
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// btnRegisterAccount control.
+        /// LogoutUser control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnRegisterAccount;
+        protected global::System.Web.UI.WebControls.Button LogoutUser;
 
         /// <summary>
-        /// btnLoginPage control.
+        /// txtHoTen control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnLoginPage;
+        protected global::System.Web.UI.WebControls.TextBox txtHoTen;
 
         /// <summary>
-        /// ddlPhanQuyen control.
+        /// txtSDT control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlPhanQuyen;
+        protected global::System.Web.UI.WebControls.TextBox txtSDT;
 
         /// <summary>
-        /// txtht control.
+        /// txtDiaChi control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtht;
-
-        /// <summary>
-        /// txtsdt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtsdt;
-
-        /// <summary>
-        /// txtdchi control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtdchi;
-
-        /// <summary>
-        /// txtmk control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtmk;
-
-        /// <summary>
-        /// butAdd control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button butAdd;
+        protected global::System.Web.UI.WebControls.TextBox txtDiaChi;
 
         /// <summary>
         /// lblMessage control.
@@ -105,12 +69,30 @@ namespace QL_BAN_HANG
         protected global::System.Web.UI.WebControls.Label lblMessage;
 
         /// <summary>
-        /// GridViewAccounts control.
+        /// btnSua control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridViewAccounts;
+        protected global::System.Web.UI.WebControls.Button btnSua;
+
+        /// <summary>
+        /// btnLuu control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnLuu;
+
+        /// <summary>
+        /// btnHuy control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnHuy;
     }
 }

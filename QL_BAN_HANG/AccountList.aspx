@@ -1,6 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage_admin.Master" AutoEventWireup="true" CodeBehind="AccountList.aspx.cs" Inherits="QL_BAN_HANG.AccountList" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="layout/accountlist.css" rel="stylesheet" />
+    <style type="text/css">
+        .form-control {}
+    </style>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolderContent" runat="server">
     <div class="container">
@@ -60,14 +63,19 @@
             </tr>
         </table>
     <h3 style="text-align: left;">
-        <asp:GridView ID="GridViewAccounts" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" DataKeyNames="So_dien_thoai" OnRowDeleting="GridView1_RowDeleting" Width="840px" OnRowDataBound="GridView1_RowDataBound" OnSelectedIndexChanged="GridViewAccounts_SelectedIndexChanged">
+        
+        <div style="text-align: left;">
+            <asp:TextBox ID="txtTuKhoa" runat="server" CssClass="form-control" placeholder="Nhập tên hoặc số điện thoại" Width="220px" />
+            <asp:Button ID="btnTimKiem" runat="server" Text="🔍 Tìm kiếm" OnClick="btnTimKiem_Click" CssClass="btn-primary" />
+        </div>
+        <asp:GridView ID="GridViewAccounts" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" DataKeyNames="So_dien_thoai" OnRowDeleting="GridView1_RowDeleting" Width="840px" OnRowDataBound="GridView1_RowDataBound" OnSelectedIndexChanged="GridViewAccounts_SelectedIndexChanged" OnDataBound="GridViewAccounts_DataBound" OnRowCancelingEdit="GridViewAccounts_RowCancelingEdit" OnRowEditing="GridViewAccounts_RowEditing" OnRowUpdating="GridViewAccounts_RowUpdating">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
                 <asp:BoundField DataField="Ho_va_ten" HeaderText="Họ và Tên">
                 <FooterStyle Width="80px" />
                 <HeaderStyle HorizontalAlign="Center" />
                 </asp:BoundField>
-                <asp:BoundField DataField="So_dien_thoai" HeaderText="Số Điện Thoại">
+                <asp:BoundField DataField="So_dien_thoai" HeaderText="Số Điện Thoại" ReadOnly="True">
                 <FooterStyle Width="80px" />
                 <HeaderStyle HorizontalAlign="Center" />
                 </asp:BoundField>
@@ -75,11 +83,11 @@
                 <FooterStyle Width="80px" />
                 <HeaderStyle HorizontalAlign="Center" />
                 </asp:BoundField>
-                <asp:BoundField DataField="Mat_khau" HeaderText="Mật Khẩu">
+                <asp:BoundField DataField="Mat_khau" HeaderText="Mật Khẩu" ReadOnly="True">
                 <FooterStyle Width="80px" />
-                <HeaderStyle HorizontalAlign="Center" />
+                <HeaderStyle HorizontalAlign="Center" Width="50px" />
                 </asp:BoundField>
-                <asp:HyperLinkField DataNavigateUrlFields="So_dien_thoai" Text="Sửa" />
+                <asp:CommandField CancelText="Hủy" EditText="Sửa" ShowEditButton="True" UpdateText="Lưu" />
                 <asp:CommandField DeleteText="Xóa" ShowDeleteButton="True" />
                 <asp:TemplateField>
                     <HeaderTemplate>

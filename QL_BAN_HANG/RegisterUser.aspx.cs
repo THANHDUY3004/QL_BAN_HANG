@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -14,7 +16,22 @@ namespace QL_BAN_HANG
         {
 
         }
+        public string ToMD5(string input)
+        {
+            using (MD5 md5 = MD5.Create())
+            {
+                byte[] inputBytes = Encoding.UTF8.GetBytes(input);
+                byte[] hashBytes = md5.ComputeHash(inputBytes);
 
+                StringBuilder sb = new StringBuilder();
+                foreach (byte b in hashBytes)
+                {
+                    sb.Append(b.ToString("x2"));
+                }
+
+                return sb.ToString();
+            }
+        }
         protected void btnDangKy_Click(object sender, EventArgs e)
         {
             if (!Page.IsValid)
@@ -49,7 +66,7 @@ namespace QL_BAN_HANG
                         Ho_va_ten = hoTen,
                         So_dien_thoai = soDienThoai,
                         Dia_chi = string.IsNullOrWhiteSpace(diaChi) ? null : diaChi,
-                        Mat_khau = matKhau,
+                        Mat_khau = ToMD5(matKhau),
                         Phan_quyen = phanQuyenMacDinh
                     };
 

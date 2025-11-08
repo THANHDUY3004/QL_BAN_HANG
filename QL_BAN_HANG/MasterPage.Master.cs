@@ -11,7 +11,23 @@ namespace QL_BAN_HANG
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                if (Session["LoggedInUser"] == null)
+                {
+                    phUserTab.Controls.Add(new Literal
+                    {
+                        Text = "<li><a href='LoginUser.aspx'>Đăng nhập</a></li>"
+                    });
+                }
+                else
+                {
+                    phUserTab.Controls.Add(new Literal
+                    {
+                        Text = "<li><a href='PersonalPage.aspx'>Thông tin tài khoản</a></li>"
+                    });
+                }
+            }
         }
     }
 }

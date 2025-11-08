@@ -62,13 +62,13 @@ namespace QL_BAN_HANG
                 if (foundUser != null)
                 {
                     // Lưu thông tin đăng nhập
-                    Session["LoggedInUser"] = foundUser.Ho_va_ten;
+                    Session["LoggedInUser"] = foundUser.So_dien_thoai;
                     Session["UserRole"] = foundUser.Phan_quyen;
 
                     // Điều hướng theo phân quyền
                     if (foundUser.Phan_quyen == "Khách Hàng")
                     {
-                        Response.Redirect("Default.aspx");
+                        Response.Redirect("PersonalPage.aspx");
                     }
                     else if (foundUser.Phan_quyen == "Quản Trị")
                     {

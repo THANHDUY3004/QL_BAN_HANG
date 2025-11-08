@@ -7,116 +7,50 @@
     <title></title>
 </head>
 <body>
-        <form id="form1" runat="server">
+    <form id="form1" runat="server">
         <div class="container">
-    <h2 style="text-align: center;"> QUẢN LÝ TÀI KHOẢN</h2>
-    
-    <div style="text-align: center; margin: 20px 0; border-bottom: 1px solid #eee; padding-bottom: 20px;">
-        <asp:Button ID="btnRegisterAccount" 
-                    runat="server" 
-                    Text="Đăng Ký Tài Khoản Mới" 
-                    OnClick="btnRegisterAccount_Click" 
-                    CssClass="admin-button btn-register" />
-
-        <asp:Button ID="btnLoginPage" 
-                    runat="server" 
-                    Text="Đăng Nhập Tài Khoản" 
-                    OnClick="btnLoginPage_Click" 
-                    CssClass="admin-button btn-login" />
-    </div>
-    <h3 style="text-align: left;">👤 Account List</h3>
-    <asp:DropDownList ID="ddlPhanQuyen" runat="server" width="246px" AutoPostBack="True" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged" style="margin-top: 19px" Height="52px">
-    </asp:DropDownList>
-    <br />
-    <br />
-    &nbsp;<br />
-
-            <br />
-            <br />
+        <h2><i class="fas fa-user"></i> Thông Tin Tài Khoản</h2>
+            <asp:Button ID="LogoutUser" runat="server" Text="Đăng xuất tài khoản" OnClick="LogoutUser_Click" />
             <br />
             <table style="width:100%;">
                 <tr>
-                    <td>Họ Và Tên :</td>
-                    <td><asp:TextBox ID="txtht" runat="server" Width="200px"></asp:TextBox> 
+                    <td>
+            <asp:Label AssociatedControlID="txtHoTen" Text="👤 Họ và tên" runat="server" />
+                    </td>
+                    <td>
+            <asp:TextBox ID="txtHoTen" runat="server" CssClass="form-control" ReadOnly="true" />
                     </td>
                 </tr>
                 <tr>
-                    <td>Số Điện Thoại :</td>
-                    <td> <asp:TextBox ID="txtsdt" runat="server" Width="200px"></asp:TextBox> 
+                    <td>
+            <asp:Label AssociatedControlID="txtSDT" Text="📱 Số điện thoại" runat="server" />
+                    </td>
+                    <td>
+            <asp:TextBox ID="txtSDT" runat="server" CssClass="form-control" ReadOnly="true" OnTextChanged="txtSDT_TextChanged" />
                     </td>
                 </tr>
                 <tr>
-                    <td>Địa Chỉ :</td>
-                    <td><asp:TextBox ID="txtdchi" runat="server" Width="200px"></asp:TextBox> 
+                    <td>
+            <asp:Label AssociatedControlID="txtDiaChi" Text="🏠 Địa chỉ" runat="server" />
+                    </td>
+                    <td>
+            <asp:TextBox ID="txtDiaChi" runat="server" CssClass="form-control" ReadOnly="true" />
                     </td>
                 </tr>
-                <tr>
-                    <td>Mật Khẩu: </td>
-                    <td> <asp:TextBox ID="txtmk" runat="server" Width="200px"></asp:TextBox> 
+                    <tr>
+                    <td>
 
+        <asp:Label ID="lblMessage" runat="server" CssClass="validation-error" />
                     </td>
-                </tr>
-                <tr>
-                    <td> 
-
-                        &nbsp;</td>
-                    <td> 
-
-    <asp:Button ID="butAdd" runat="server" Text="Add" OnClick="butAdd_Click" />
+                    <td>
+            <asp:Button ID="btnSua" runat="server" Text="✏️ Sửa" CssClass="btn-secondary" OnClick="btnSua_Click" />
+            <asp:Button ID="btnLuu" runat="server" Text="💾 Lưu" CssClass="btn-primary" OnClick="btnLuu_Click" Visible="false" />
+            <asp:Button ID="btnHuy" runat="server" Text="❌ Hủy" CssClass="btn-danger" OnClick="btnHuy_Click" Visible="false" />
 
                     </td>
                 </tr>
             </table>
-    <br />
-
-    <b><asp:Label ID="lblMessage" runat="server" Text="" ></asp:Label>
-    <br />
-    </b>
-    <h3 style="text-align: left;">
-        <asp:GridView ID="GridViewAccounts" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" DataKeyNames="So_dien_thoai" OnRowDeleting="GridView1_RowDeleting" Width="900px" OnRowDataBound="GridView1_RowDataBound" OnSelectedIndexChanged="GridViewAccounts_SelectedIndexChanged">
-            <AlternatingRowStyle BackColor="White" />
-            <Columns>
-                <asp:BoundField DataField="Ho_va_ten" HeaderText="Họ và Tên">
-                <FooterStyle Width="80px" />
-                <HeaderStyle HorizontalAlign="Center" />
-                </asp:BoundField>
-                <asp:BoundField DataField="So_dien_thoai" HeaderText="Số Điện Thoại">
-                <FooterStyle Width="80px" />
-                <HeaderStyle HorizontalAlign="Center" />
-                </asp:BoundField>
-                <asp:BoundField DataField="Dia_Chi" HeaderText="Địa Chỉ">
-                <FooterStyle Width="80px" />
-                <HeaderStyle HorizontalAlign="Center" />
-                </asp:BoundField>
-                <asp:BoundField DataField="Mat_khau" HeaderText="Mật Khẩu">
-                <FooterStyle Width="80px" />
-                <HeaderStyle HorizontalAlign="Center" />
-                </asp:BoundField>
-                <asp:HyperLinkField DataNavigateUrlFields="So_dien_thoai" Text="Sửa" />
-                <asp:CommandField DeleteText="Xóa" ShowDeleteButton="True" />
-                <asp:TemplateField>
-                    <HeaderTemplate>
-                        <asp:Button ID="butDelete" runat="server" OnClick="butDelete_Click" Text="Xóa" />
-                    </HeaderTemplate>
-                    <ItemTemplate>
-                        <asp:CheckBox ID="ckhDelete" runat="server"  />
-                    </ItemTemplate>
-                    <FooterStyle HorizontalAlign="Center" Width="80px" />
-                </asp:TemplateField>
-            </Columns>
-            <EditRowStyle BackColor="#2461BF" />
-            <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-            <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-            <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-            <RowStyle BackColor="#EFF3FB" />
-            <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
-            <SortedAscendingCellStyle BackColor="#F5F7FB" />
-            <SortedAscendingHeaderStyle BackColor="#6D95E1" />
-            <SortedDescendingCellStyle BackColor="#E9EBEF" />
-            <SortedDescendingHeaderStyle BackColor="#4870BE" />
-        </asp:GridView>
-    </h3>
-</div>
-        </form>
+    </div>
+    </form>
 </body>
 </html>

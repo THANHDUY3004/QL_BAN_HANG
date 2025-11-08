@@ -11,62 +11,89 @@ namespace QL_BAN_HANG
 {
 
 
-    public partial class AccountList
+    public partial class PersonalPage
     {
 
         /// <summary>
-        /// btnLoginPage control.
+        /// txtHoTen control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnLoginPage;
+        protected global::System.Web.UI.WebControls.TextBox txtHoTen;
 
         /// <summary>
-        /// ddlPhanQuyen control.
+        /// txtSoDienThoai control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlPhanQuyen;
+        protected global::System.Web.UI.WebControls.TextBox txtSoDienThoai;
 
         /// <summary>
-        /// txtht control.
+        /// txtDiaChi control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtht;
+        protected global::System.Web.UI.WebControls.TextBox txtDiaChi;
 
         /// <summary>
-        /// txtsdt control.
+        /// txtMatKhau control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtsdt;
+        protected global::System.Web.UI.WebControls.TextBox txtMatKhau;
 
         /// <summary>
-        /// txtdchi control.
+        /// txtXacNhanMatKhau control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtdchi;
+        protected global::System.Web.UI.WebControls.TextBox txtXacNhanMatKhau;
 
         /// <summary>
-        /// txtmk control.
+        /// btnSuaThongTin control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtmk;
+        protected global::System.Web.UI.WebControls.Button btnSuaThongTin;
+
+        /// <summary>
+        /// btnLuuThongTin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnLuuThongTin;
+
+        /// <summary>
+        /// btnHuy control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnHuy;
+
+        /// <summary>
+        /// btnDangXuat control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnDangXuat;
 
         /// <summary>
         /// lblMessage control.
@@ -76,41 +103,5 @@ namespace QL_BAN_HANG
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblMessage;
-
-        /// <summary>
-        /// butAdd control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button butAdd;
-
-        /// <summary>
-        /// txtTuKhoa control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTuKhoa;
-
-        /// <summary>
-        /// btnTimKiem control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnTimKiem;
-
-        /// <summary>
-        /// GridViewAccounts control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridViewAccounts;
     }
 }
