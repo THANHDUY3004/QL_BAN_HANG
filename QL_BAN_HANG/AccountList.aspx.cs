@@ -76,11 +76,11 @@ namespace QL_BAN_HANG
             }
         }
 
-    /// <summary>
-    /// Tải các phân quyền duy nhất (ví dụ: Quản Trị, Khách Hàng) 
-    /// từ bảng Tai_Khoan vào DropDownList.
-    /// </summary>
-    private void LoadDataDropDownList()
+        /// <summary>
+        /// Tải các phân quyền duy nhất (ví dụ: Quản Trị, Khách Hàng) 
+        /// từ bảng Tai_Khoan vào DropDownList.
+        /// </summary>
+        private void LoadDataDropDownList()
         {
             // 1. Khởi tạo DataContext
             // (Giả sử bạn đang dùng NEWSDataContext như các ví dụ trước)
@@ -256,42 +256,51 @@ namespace QL_BAN_HANG
         {
             int countDeleted = 0;
 
-            using (Cua_Hang_Tra_SuaDataContext context = new Cua_Hang_Tra_SuaDataContext())
+            try
             {
-                foreach (GridViewRow row in GridViewAccounts.Rows)
+                using (Cua_Hang_Tra_SuaDataContext context = new Cua_Hang_Tra_SuaDataContext())
                 {
-                    CheckBox chk = row.FindControl("ckhDelete") as CheckBox;
-                    if (chk != null && chk.Checked)
+                    foreach (GridViewRow row in GridViewAccounts.Rows)
                     {
-                        // Lấy số điện thoại từ DataKeys (không nên lấy từ Cell.Text)
-                        string soDienThoai = GridViewAccounts.DataKeys[row.RowIndex].Value.ToString();
+                        CheckBox chkDelete = row.FindControl("ckhDelete") as CheckBox;
 
-                        // Tìm tài khoản theo số điện thoại
-                        var taiKhoan = context.Tai_Khoans.SingleOrDefault(tk => tk.So_dien_thoai == soDienThoai);
-                        if (taiKhoan != null)
+                        if (chkDelete != null && chkDelete.Checked)
                         {
-                            context.Tai_Khoans.DeleteOnSubmit(taiKhoan);
-                            countDeleted++;
+                            // Lấy khóa chính từ DataKeys
+                            string soDienThoai = GridViewAccounts.DataKeys[row.RowIndex].Value.ToString();
+
+                            // Truy vấn tài khoản cần xóa
+                            var taiKhoan = context.Tai_Khoans.SingleOrDefault(tk => tk.So_dien_thoai == soDienThoai);
+
+                            if (taiKhoan != null)
+                            {
+                                context.Tai_Khoans.DeleteOnSubmit(taiKhoan);
+                                countDeleted++;
+                            }
                         }
                     }
-                }
 
-                // Lưu thay đổi nếu có tài khoản bị xóa
-                if (countDeleted > 0)
-                {
-                    context.SubmitChanges();
-                    lblMessage.Text = $"✅ Đã xóa {countDeleted} tài khoản.";
+                    // Nếu có tài khoản bị xóa thì lưu thay đổi
+                    if (countDeleted > 0)
+                    {
+                        context.SubmitChanges();
+                        lblMessage.Text = $"✅ Đã xóa {countDeleted} tài khoản.";
+                    }
+                    else
+                    {
+                        lblMessage.Text = "⚠️ Vui lòng chọn ít nhất một tài khoản để xóa.";
+                    }
+
+                    // Tải lại dữ liệu
                     LoadDataAccount();
                 }
-                else
-                {
-                    lblMessage.Text = "⚠️ Vui lòng chọn ít nhất một tài khoản để xóa.";
-                }
-
-                // Tải lại danh sách
-                LoadDataAccount();
+            }
+            catch (Exception ex)
+            {
+                lblMessage.Text = $"❌ Đã xảy ra lỗi: {ex.Message}";
             }
         }
+
 
 
 
@@ -321,35 +330,39 @@ namespace QL_BAN_HANG
             GridViewAccounts.EditIndex = e.NewEditIndex;
             LoadDataAccount(); // Tải lại dữ liệu để hiển thị dòng đang chỉnh sửa
         }
-
-
         protected void GridViewAccounts_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
             try
             {
-                // Lấy số điện thoại từ DataKeys (khóa chính)
-                string soDienThoai = GridViewAccounts.DataKeys[e.RowIndex].Value.ToString();
+                // Lấy dòng đang chỉnh sửa
+                GridViewRow row = GridViewAccounts.Rows[e.RowIndex];
 
-                // Khởi tạo kết nối CSDL
+                // Lấy số điện thoại từ cột 1 (Cells[0])
+                string soDienThoai = row.Cells[0].Text.Trim();
+
+                // Lấy các TextBox trong TemplateField
+                TextBox txtHoTen = row.FindControl("txtEditHoTen") as TextBox;
+                TextBox txtDiaChi = row.FindControl("txtEditDiaChi") as TextBox;
+
+                if (txtHoTen == null || txtDiaChi == null)
+                {
+                    lblMessage.Text = "⚠️ Không tìm thấy ô nhập dữ liệu.";
+                    return;
+                }
+
                 using (Cua_Hang_Tra_SuaDataContext context = new Cua_Hang_Tra_SuaDataContext())
                 {
-                    // Tìm tài khoản cần cập nhật
+                    // Tìm tài khoản theo số điện thoại
                     Tai_Khoan tk = context.Tai_Khoans.SingleOrDefault(t => t.So_dien_thoai == soDienThoai);
+
                     if (tk != null)
                     {
-                        // Lấy các TextBox trong dòng đang chỉnh sửa
-                        TextBox txtHoTen = (TextBox)GridViewAccounts.Rows[e.RowIndex].Cells[0].Controls[0];
-                        TextBox txtDiaChi = (TextBox)GridViewAccounts.Rows[e.RowIndex].Cells[2].Controls[0];
-                        //DropDownList ddlQuyen = (DropDownList)GridViewAccounts.Rows[e.RowIndex].FindControl("ddlEditPhanQuyen");
-
                         // Gán giá trị mới
                         tk.Ho_va_ten = txtHoTen.Text.Trim();
                         tk.Dia_chi = txtDiaChi.Text.Trim();
-                        //tk.Phan_quyen = ddlQuyen.SelectedValue;
 
                         // Lưu thay đổi
                         context.SubmitChanges();
-
                         lblMessage.Text = "✅ Cập nhật tài khoản thành công.";
                     }
                     else
@@ -357,7 +370,7 @@ namespace QL_BAN_HANG
                         lblMessage.Text = "⚠️ Không tìm thấy tài khoản để cập nhật.";
                     }
 
-                    // Thoát chế độ chỉnh sửa
+                    // Thoát chế độ chỉnh sửa và tải lại dữ liệu
                     GridViewAccounts.EditIndex = -1;
                     LoadDataAccount();
                 }
@@ -367,6 +380,9 @@ namespace QL_BAN_HANG
                 lblMessage.Text = "❌ Lỗi khi cập nhật: " + ex.Message;
             }
         }
+
+
+
 
     }
 }

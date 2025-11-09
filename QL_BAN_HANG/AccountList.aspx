@@ -62,12 +62,13 @@
                 </td>
             </tr>
         </table>
+    <div style="text-align: left;">
+                <asp:TextBox ID="txtTuKhoa" runat="server" CssClass="form-control" placeholder="Nhập tên hoặc số điện thoại" Width="220px" />
+                <asp:Button ID="btnTimKiem" runat="server" Text="🔍 Tìm kiếm" OnClick="btnTimKiem_Click" CssClass="btn-primary" />
+            </div>
     <h3 style="text-align: left;">
         
-        <div style="text-align: left;">
-            <asp:TextBox ID="txtTuKhoa" runat="server" CssClass="form-control" placeholder="Nhập tên hoặc số điện thoại" Width="220px" />
-            <asp:Button ID="btnTimKiem" runat="server" Text="🔍 Tìm kiếm" OnClick="btnTimKiem_Click" CssClass="btn-primary" />
-        </div>
+        
         <asp:GridView ID="GridViewAccounts" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" DataKeyNames="So_dien_thoai" OnRowDeleting="GridView1_RowDeleting" Width="840px" OnRowDataBound="GridView1_RowDataBound" OnSelectedIndexChanged="GridViewAccounts_SelectedIndexChanged" OnDataBound="GridViewAccounts_DataBound" OnRowCancelingEdit="GridViewAccounts_RowCancelingEdit" OnRowEditing="GridViewAccounts_RowEditing" OnRowUpdating="GridViewAccounts_RowUpdating">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
@@ -85,7 +86,8 @@
                 </asp:BoundField>
                 <asp:BoundField DataField="Mat_khau" HeaderText="Mật Khẩu" ReadOnly="True">
                 <FooterStyle Width="80px" />
-                <HeaderStyle HorizontalAlign="Center" Width="50px" />
+                <HeaderStyle HorizontalAlign="Center" Width="80px" />
+                <ItemStyle Width="80px" />
                 </asp:BoundField>
                 <asp:CommandField CancelText="Hủy" EditText="Sửa" ShowEditButton="True" UpdateText="Lưu" />
                 <asp:CommandField DeleteText="Xóa" ShowDeleteButton="True" />
@@ -94,10 +96,11 @@
                         <asp:Button ID="butDelete" runat="server" OnClick="butDelete_Click" Text="Xóa" />
                     </HeaderTemplate>
                     <ItemTemplate>
-                        <asp:CheckBox ID="ckhDelete" runat="server"  />
+                        <asp:CheckBox ID="ckhDelete" runat="server" />
                     </ItemTemplate>
-                    <FooterStyle HorizontalAlign="Center" Width="80px" />
+                    <HeaderStyle Width="50px" />
                 </asp:TemplateField>
+
             </Columns>
             <EditRowStyle BackColor="#2461BF" />
             <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
