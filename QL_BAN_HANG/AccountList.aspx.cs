@@ -90,12 +90,14 @@ namespace QL_BAN_HANG
             // Chúng ta tạo một đối tượng tạm thời 'new { Quyen = ... }' 
             // để dễ dàng gán DataTextField và DataValueField.
             var phanQuyenList = context.Tai_Khoans
-                                       .Select(tk => new { Quyen = tk.Phan_quyen })
-                                       .Distinct()
-                                       .OrderBy(q => q.Quyen); // Sắp xếp A-Z
+                           .Select(tk => new { Quyen = tk.Phan_quyen })
+                           .Distinct()
+                           .OrderBy(q => q.Quyen)
+                           .ToList();
+
 
             // 3. Gán dữ liệu cho DropDownList (Giả sử ID là ddlPhanQuyen)
-            ddlPhanQuyen.DataSource = phanQuyenList.ToList();
+            ddlPhanQuyen.DataSource = phanQuyenList;
 
             // 4. Chỉ định cột để hiển thị Text và cột chứa Value
             // (Trong trường hợp này, cả hai đều là tên phân quyền)
@@ -213,7 +215,7 @@ namespace QL_BAN_HANG
                     So_dien_thoai = txtsdt.Text.Trim(),
                     Dia_chi = txtdchi.Text.Trim(),
                     Mat_khau = ToMD5(txtmk.Text.Trim()),
-                    Phan_quyen = ddlPhanQuyen.SelectedValue
+                    Phan_quyen = ddlPhanQuyen.SelectedValue.ToString().Trim()
                 };
 
                 // Kiểm tra trùng số điện thoại
@@ -230,6 +232,7 @@ namespace QL_BAN_HANG
 
                 lblMessage.Text = "✅ Thêm tài khoản thành công.";
                 ClearForm();
+                LoadDataAccount();
             }
             catch (Exception ex)
             {
@@ -334,41 +337,28 @@ namespace QL_BAN_HANG
         {
             try
             {
+                Cua_Hang_Tra_SuaDataContext context = new Cua_Hang_Tra_SuaDataContext();
                 // Lấy dòng đang chỉnh sửa
                 GridViewRow row = GridViewAccounts.Rows[e.RowIndex];
+                String soDienThoai = Convert.ToString(GridViewAccounts.Rows[e.RowIndex].Cells[1].Text);
 
-                // Lấy số điện thoại từ cột 1 (Cells[0])
-                string soDienThoai = row.Cells[0].Text.Trim();
+                Tai_Khoan ac = context.Tai_Khoans.SingleOrDefault(a => a.So_dien_thoai == soDienThoai);
 
-                // Lấy các TextBox trong TemplateField
-                TextBox txtHoTen = row.FindControl("txtEditHoTen") as TextBox;
-                TextBox txtDiaChi = row.FindControl("txtEditDiaChi") as TextBox;
 
-                if (txtHoTen == null || txtDiaChi == null)
+                if (ac != null)
                 {
-                    lblMessage.Text = "⚠️ Không tìm thấy ô nhập dữ liệu.";
-                    return;
-                }
+                    // Lấy giá trị Label từ ô nhập trong cột thứ 2
+                    TextBox txtHvT = (TextBox)GridViewAccounts.Rows[e.RowIndex].Cells[0].Controls[1];
+                    ac.Ho_va_ten = txtHvT.Text;
 
-                using (Cua_Hang_Tra_SuaDataContext context = new Cua_Hang_Tra_SuaDataContext())
-                {
-                    // Tìm tài khoản theo số điện thoại
-                    Tai_Khoan tk = context.Tai_Khoans.SingleOrDefault(t => t.So_dien_thoai == soDienThoai);
+                    // Lấy giá trị Pos từ ô nhập trong cột thứ 3
+                    TextBox txtDc = (TextBox)GridViewAccounts.Rows[e.RowIndex].Cells[2].Controls[1];
+                    ac.Dia_chi = txtDc.Text;
 
-                    if (tk != null)
-                    {
-                        // Gán giá trị mới
-                        tk.Ho_va_ten = txtHoTen.Text.Trim();
-                        tk.Dia_chi = txtDiaChi.Text.Trim();
+                    // Lưu thay đổi vào cơ sở dữ liệu
+                    context.SubmitChanges();
+                    lblMessage.Text = "✅ Cập nhật tài khoản thành công.";
 
-                        // Lưu thay đổi
-                        context.SubmitChanges();
-                        lblMessage.Text = "✅ Cập nhật tài khoản thành công.";
-                    }
-                    else
-                    {
-                        lblMessage.Text = "⚠️ Không tìm thấy tài khoản để cập nhật.";
-                    }
 
                     // Thoát chế độ chỉnh sửa và tải lại dữ liệu
                     GridViewAccounts.EditIndex = -1;
@@ -380,9 +370,5 @@ namespace QL_BAN_HANG
                 lblMessage.Text = "❌ Lỗi khi cập nhật: " + ex.Message;
             }
         }
-
-
-
-
     }
 }
