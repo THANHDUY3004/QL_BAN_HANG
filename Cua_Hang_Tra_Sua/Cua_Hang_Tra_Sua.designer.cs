@@ -39,6 +39,9 @@ namespace Cua_Hang_Tra_Sua
     partial void InsertChi_Tiet_Don_Hang(Chi_Tiet_Don_Hang instance);
     partial void UpdateChi_Tiet_Don_Hang(Chi_Tiet_Don_Hang instance);
     partial void DeleteChi_Tiet_Don_Hang(Chi_Tiet_Don_Hang instance);
+    partial void InsertGio_Hang(Gio_Hang instance);
+    partial void UpdateGio_Hang(Gio_Hang instance);
+    partial void DeleteGio_Hang(Gio_Hang instance);
     partial void InsertLich_Su_Don_Hang(Lich_Su_Don_Hang instance);
     partial void UpdateLich_Su_Don_Hang(Lich_Su_Don_Hang instance);
     partial void DeleteLich_Su_Don_Hang(Lich_Su_Don_Hang instance);
@@ -54,7 +57,7 @@ namespace Cua_Hang_Tra_Sua
     #endregion
 		
 		public Cua_Hang_Tra_SuaDataContext() : 
-				base(global::Cua_Hang_Tra_Sua.Properties.Settings.Default.Cua_Hang_Tra_SuaConnectionString, mappingSource)
+				base(global::Cua_Hang_Tra_Sua.Properties.Settings.Default.Cua_Hang_Tra_SuaConnectionString1, mappingSource)
 		{
 			OnCreated();
 		}
@@ -104,6 +107,14 @@ namespace Cua_Hang_Tra_Sua
 			get
 			{
 				return this.GetTable<Chi_Tiet_Don_Hang>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Gio_Hang> Gio_Hangs
+		{
+			get
+			{
+				return this.GetTable<Gio_Hang>();
 			}
 		}
 		
@@ -405,6 +416,8 @@ namespace Cua_Hang_Tra_Sua
 		
 		private EntitySet<Chi_Tiet_Don_Hang> _Chi_Tiet_Don_Hangs;
 		
+		private EntitySet<Gio_Hang> _Gio_Hangs;
+		
 		private EntitySet<Lich_Su_Don_Hang> _Lich_Su_Don_Hangs;
 		
     #region Extensibility Method Definitions
@@ -426,6 +439,7 @@ namespace Cua_Hang_Tra_Sua
 		public Tai_Khoan()
 		{
 			this._Chi_Tiet_Don_Hangs = new EntitySet<Chi_Tiet_Don_Hang>(new Action<Chi_Tiet_Don_Hang>(this.attach_Chi_Tiet_Don_Hangs), new Action<Chi_Tiet_Don_Hang>(this.detach_Chi_Tiet_Don_Hangs));
+			this._Gio_Hangs = new EntitySet<Gio_Hang>(new Action<Gio_Hang>(this.attach_Gio_Hangs), new Action<Gio_Hang>(this.detach_Gio_Hangs));
 			this._Lich_Su_Don_Hangs = new EntitySet<Lich_Su_Don_Hang>(new Action<Lich_Su_Don_Hang>(this.attach_Lich_Su_Don_Hangs), new Action<Lich_Su_Don_Hang>(this.detach_Lich_Su_Don_Hangs));
 			OnCreated();
 		}
@@ -543,6 +557,19 @@ namespace Cua_Hang_Tra_Sua
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Tai_Khoan_Gio_Hang", Storage="_Gio_Hangs", ThisKey="So_dien_thoai", OtherKey="So_dien_thoai")]
+		public EntitySet<Gio_Hang> Gio_Hangs
+		{
+			get
+			{
+				return this._Gio_Hangs;
+			}
+			set
+			{
+				this._Gio_Hangs.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Tai_Khoan_Lich_Su_Don_Hang", Storage="_Lich_Su_Don_Hangs", ThisKey="So_dien_thoai", OtherKey="So_dien_thoai")]
 		public EntitySet<Lich_Su_Don_Hang> Lich_Su_Don_Hangs
 		{
@@ -583,6 +610,18 @@ namespace Cua_Hang_Tra_Sua
 		}
 		
 		private void detach_Chi_Tiet_Don_Hangs(Chi_Tiet_Don_Hang entity)
+		{
+			this.SendPropertyChanging();
+			entity.Tai_Khoan = null;
+		}
+		
+		private void attach_Gio_Hangs(Gio_Hang entity)
+		{
+			this.SendPropertyChanging();
+			entity.Tai_Khoan = this;
+		}
+		
+		private void detach_Gio_Hangs(Gio_Hang entity)
 		{
 			this.SendPropertyChanging();
 			entity.Tai_Khoan = null;
@@ -849,6 +888,294 @@ namespace Cua_Hang_Tra_Sua
 		{
 			this.SendPropertyChanging();
 			entity.Chi_Tiet_Don_Hang = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Gio_Hang")]
+	public partial class Gio_Hang : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID_GH;
+		
+		private string _So_dien_thoai;
+		
+		private int _ID_SP;
+		
+		private int _So_luong;
+		
+		private System.Nullable<decimal> _Gia_tai_thoi_diem;
+		
+		private string _Ghi_chu;
+		
+		private System.DateTime _Ngay_them;
+		
+		private EntityRef<Tai_Khoan> _Tai_Khoan;
+		
+		private EntityRef<San_Pham> _San_Pham;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnID_GHChanging(int value);
+    partial void OnID_GHChanged();
+    partial void OnSo_dien_thoaiChanging(string value);
+    partial void OnSo_dien_thoaiChanged();
+    partial void OnID_SPChanging(int value);
+    partial void OnID_SPChanged();
+    partial void OnSo_luongChanging(int value);
+    partial void OnSo_luongChanged();
+    partial void OnGia_tai_thoi_diemChanging(System.Nullable<decimal> value);
+    partial void OnGia_tai_thoi_diemChanged();
+    partial void OnGhi_chuChanging(string value);
+    partial void OnGhi_chuChanged();
+    partial void OnNgay_themChanging(System.DateTime value);
+    partial void OnNgay_themChanged();
+    #endregion
+		
+		public Gio_Hang()
+		{
+			this._Tai_Khoan = default(EntityRef<Tai_Khoan>);
+			this._San_Pham = default(EntityRef<San_Pham>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_GH", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID_GH
+		{
+			get
+			{
+				return this._ID_GH;
+			}
+			set
+			{
+				if ((this._ID_GH != value))
+				{
+					this.OnID_GHChanging(value);
+					this.SendPropertyChanging();
+					this._ID_GH = value;
+					this.SendPropertyChanged("ID_GH");
+					this.OnID_GHChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_So_dien_thoai", DbType="VarChar(15) NOT NULL", CanBeNull=false)]
+		public string So_dien_thoai
+		{
+			get
+			{
+				return this._So_dien_thoai;
+			}
+			set
+			{
+				if ((this._So_dien_thoai != value))
+				{
+					if (this._Tai_Khoan.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnSo_dien_thoaiChanging(value);
+					this.SendPropertyChanging();
+					this._So_dien_thoai = value;
+					this.SendPropertyChanged("So_dien_thoai");
+					this.OnSo_dien_thoaiChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_SP", DbType="Int NOT NULL")]
+		public int ID_SP
+		{
+			get
+			{
+				return this._ID_SP;
+			}
+			set
+			{
+				if ((this._ID_SP != value))
+				{
+					if (this._San_Pham.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnID_SPChanging(value);
+					this.SendPropertyChanging();
+					this._ID_SP = value;
+					this.SendPropertyChanged("ID_SP");
+					this.OnID_SPChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_So_luong", DbType="Int NOT NULL")]
+		public int So_luong
+		{
+			get
+			{
+				return this._So_luong;
+			}
+			set
+			{
+				if ((this._So_luong != value))
+				{
+					this.OnSo_luongChanging(value);
+					this.SendPropertyChanging();
+					this._So_luong = value;
+					this.SendPropertyChanged("So_luong");
+					this.OnSo_luongChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Gia_tai_thoi_diem", DbType="Decimal(10,2)")]
+		public System.Nullable<decimal> Gia_tai_thoi_diem
+		{
+			get
+			{
+				return this._Gia_tai_thoi_diem;
+			}
+			set
+			{
+				if ((this._Gia_tai_thoi_diem != value))
+				{
+					this.OnGia_tai_thoi_diemChanging(value);
+					this.SendPropertyChanging();
+					this._Gia_tai_thoi_diem = value;
+					this.SendPropertyChanged("Gia_tai_thoi_diem");
+					this.OnGia_tai_thoi_diemChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Ghi_chu", DbType="NVarChar(255)")]
+		public string Ghi_chu
+		{
+			get
+			{
+				return this._Ghi_chu;
+			}
+			set
+			{
+				if ((this._Ghi_chu != value))
+				{
+					this.OnGhi_chuChanging(value);
+					this.SendPropertyChanging();
+					this._Ghi_chu = value;
+					this.SendPropertyChanged("Ghi_chu");
+					this.OnGhi_chuChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Ngay_them", DbType="DateTime NOT NULL")]
+		public System.DateTime Ngay_them
+		{
+			get
+			{
+				return this._Ngay_them;
+			}
+			set
+			{
+				if ((this._Ngay_them != value))
+				{
+					this.OnNgay_themChanging(value);
+					this.SendPropertyChanging();
+					this._Ngay_them = value;
+					this.SendPropertyChanged("Ngay_them");
+					this.OnNgay_themChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Tai_Khoan_Gio_Hang", Storage="_Tai_Khoan", ThisKey="So_dien_thoai", OtherKey="So_dien_thoai", IsForeignKey=true)]
+		public Tai_Khoan Tai_Khoan
+		{
+			get
+			{
+				return this._Tai_Khoan.Entity;
+			}
+			set
+			{
+				Tai_Khoan previousValue = this._Tai_Khoan.Entity;
+				if (((previousValue != value) 
+							|| (this._Tai_Khoan.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Tai_Khoan.Entity = null;
+						previousValue.Gio_Hangs.Remove(this);
+					}
+					this._Tai_Khoan.Entity = value;
+					if ((value != null))
+					{
+						value.Gio_Hangs.Add(this);
+						this._So_dien_thoai = value.So_dien_thoai;
+					}
+					else
+					{
+						this._So_dien_thoai = default(string);
+					}
+					this.SendPropertyChanged("Tai_Khoan");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="San_Pham_Gio_Hang", Storage="_San_Pham", ThisKey="ID_SP", OtherKey="ID_SP", IsForeignKey=true)]
+		public San_Pham San_Pham
+		{
+			get
+			{
+				return this._San_Pham.Entity;
+			}
+			set
+			{
+				San_Pham previousValue = this._San_Pham.Entity;
+				if (((previousValue != value) 
+							|| (this._San_Pham.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._San_Pham.Entity = null;
+						previousValue.Gio_Hangs.Remove(this);
+					}
+					this._San_Pham.Entity = value;
+					if ((value != null))
+					{
+						value.Gio_Hangs.Add(this);
+						this._ID_SP = value.ID_SP;
+					}
+					else
+					{
+						this._ID_SP = default(int);
+					}
+					this.SendPropertyChanged("San_Pham");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 	
@@ -1134,7 +1461,11 @@ namespace Cua_Hang_Tra_Sua
 		
 		private EntitySet<Bai_Viet> _Bai_Viets;
 		
+		private EntitySet<Menus> _Menus2;
+		
 		private EntitySet<San_Pham> _San_Phams;
+		
+		private EntityRef<Menus> _Menus1;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1155,7 +1486,9 @@ namespace Cua_Hang_Tra_Sua
 		public Menus()
 		{
 			this._Bai_Viets = new EntitySet<Bai_Viet>(new Action<Bai_Viet>(this.attach_Bai_Viets), new Action<Bai_Viet>(this.detach_Bai_Viets));
+			this._Menus2 = new EntitySet<Menus>(new Action<Menus>(this.attach_Menus2), new Action<Menus>(this.detach_Menus2));
 			this._San_Phams = new EntitySet<San_Pham>(new Action<San_Pham>(this.attach_San_Phams), new Action<San_Pham>(this.detach_San_Phams));
+			this._Menus1 = default(EntityRef<Menus>);
 			OnCreated();
 		}
 		
@@ -1190,6 +1523,10 @@ namespace Cua_Hang_Tra_Sua
 			{
 				if ((this._Parent != value))
 				{
+					if (this._Menus1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnParentChanging(value);
 					this.SendPropertyChanging();
 					this._Parent = value;
@@ -1272,6 +1609,19 @@ namespace Cua_Hang_Tra_Sua
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Menus_Menus", Storage="_Menus2", ThisKey="ID_MN", OtherKey="Parent")]
+		public EntitySet<Menus> Menus2
+		{
+			get
+			{
+				return this._Menus2;
+			}
+			set
+			{
+				this._Menus2.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Menus_San_Pham", Storage="_San_Phams", ThisKey="ID_MN", OtherKey="ID_MN")]
 		public EntitySet<San_Pham> San_Phams
 		{
@@ -1282,6 +1632,40 @@ namespace Cua_Hang_Tra_Sua
 			set
 			{
 				this._San_Phams.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Menus_Menus", Storage="_Menus1", ThisKey="Parent", OtherKey="ID_MN", IsForeignKey=true)]
+		public Menus Menus1
+		{
+			get
+			{
+				return this._Menus1.Entity;
+			}
+			set
+			{
+				Menus previousValue = this._Menus1.Entity;
+				if (((previousValue != value) 
+							|| (this._Menus1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Menus1.Entity = null;
+						previousValue.Menus2.Remove(this);
+					}
+					this._Menus1.Entity = value;
+					if ((value != null))
+					{
+						value.Menus2.Add(this);
+						this._Parent = value.ID_MN;
+					}
+					else
+					{
+						this._Parent = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Menus1");
+				}
 			}
 		}
 		
@@ -1317,6 +1701,18 @@ namespace Cua_Hang_Tra_Sua
 			entity.Menus = null;
 		}
 		
+		private void attach_Menus2(Menus entity)
+		{
+			this.SendPropertyChanging();
+			entity.Menus1 = this;
+		}
+		
+		private void detach_Menus2(Menus entity)
+		{
+			this.SendPropertyChanging();
+			entity.Menus1 = null;
+		}
+		
 		private void attach_San_Phams(San_Pham entity)
 		{
 			this.SendPropertyChanging();
@@ -1350,6 +1746,8 @@ namespace Cua_Hang_Tra_Sua
 		
 		private string _Trang_thai;
 		
+		private EntitySet<Gio_Hang> _Gio_Hangs;
+		
 		private EntitySet<SP_Don_Hang> _SP_Don_Hangs;
 		
 		private EntityRef<Menus> _Menus;
@@ -1376,6 +1774,7 @@ namespace Cua_Hang_Tra_Sua
 		
 		public San_Pham()
 		{
+			this._Gio_Hangs = new EntitySet<Gio_Hang>(new Action<Gio_Hang>(this.attach_Gio_Hangs), new Action<Gio_Hang>(this.detach_Gio_Hangs));
 			this._SP_Don_Hangs = new EntitySet<SP_Don_Hang>(new Action<SP_Don_Hang>(this.attach_SP_Don_Hangs), new Action<SP_Don_Hang>(this.detach_SP_Don_Hangs));
 			this._Menus = default(EntityRef<Menus>);
 			OnCreated();
@@ -1525,6 +1924,19 @@ namespace Cua_Hang_Tra_Sua
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="San_Pham_Gio_Hang", Storage="_Gio_Hangs", ThisKey="ID_SP", OtherKey="ID_SP")]
+		public EntitySet<Gio_Hang> Gio_Hangs
+		{
+			get
+			{
+				return this._Gio_Hangs;
+			}
+			set
+			{
+				this._Gio_Hangs.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="San_Pham_SP_Don_Hang", Storage="_SP_Don_Hangs", ThisKey="ID_SP", OtherKey="ID_SP")]
 		public EntitySet<SP_Don_Hang> SP_Don_Hangs
 		{
@@ -1590,6 +2002,18 @@ namespace Cua_Hang_Tra_Sua
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_Gio_Hangs(Gio_Hang entity)
+		{
+			this.SendPropertyChanging();
+			entity.San_Pham = this;
+		}
+		
+		private void detach_Gio_Hangs(Gio_Hang entity)
+		{
+			this.SendPropertyChanging();
+			entity.San_Pham = null;
 		}
 		
 		private void attach_SP_Don_Hangs(SP_Don_Hang entity)

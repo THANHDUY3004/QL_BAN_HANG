@@ -70,6 +70,7 @@
   <ItemGroup>
     <Content Include="AccountList.aspx" />
     <Content Include="Default.aspx" />
+    <Content Include="EditAccount.aspx" />
     <Content Include="Kiem_tra.aspx" />
     <Content Include="layout\accountlist.css" />
     <Content Include="layout\loginuser.css" />
@@ -100,6 +101,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EditAccount.aspx.cs">
+      <DependentUpon>EditAccount.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditAccount.aspx.designer.cs">
+      <DependentUpon>EditAccount.aspx</DependentUpon>
     </Compile>
     <Compile Include="Kiem_tra.aspx.cs">
       <DependentUpon>Kiem_tra.aspx</DependentUpon>

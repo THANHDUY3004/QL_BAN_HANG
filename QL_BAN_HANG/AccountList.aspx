@@ -69,7 +69,7 @@
     <h3 style="text-align: left;">
         
         
-        <asp:GridView ID="GridViewAccounts" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" DataKeyNames="So_dien_thoai" OnRowDeleting="GridView1_RowDeleting" Width="840px" OnRowDataBound="GridView1_RowDataBound" OnSelectedIndexChanged="GridViewAccounts_SelectedIndexChanged" OnDataBound="GridViewAccounts_DataBound" OnRowCancelingEdit="GridViewAccounts_RowCancelingEdit" OnRowEditing="GridViewAccounts_RowEditing" OnRowUpdating="GridViewAccounts_RowUpdating">
+        <asp:GridView ID="GridViewAccounts" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" DataKeyNames="So_dien_thoai" OnRowDeleting="GridView1_RowDeleting" Width="840px" OnRowDataBound="GridView1_RowDataBound" OnSelectedIndexChanged="GridViewAccounts_SelectedIndexChanged">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
                 <asp:BoundField DataField="Ho_va_ten" HeaderText="Họ và Tên">
@@ -89,7 +89,7 @@
                 <HeaderStyle HorizontalAlign="Center" Width="80px" />
                 <ItemStyle Width="80px" />
                 </asp:BoundField>
-                <asp:CommandField CancelText="Hủy" EditText="Sửa" ShowEditButton="True" UpdateText="Lưu" />
+                <asp:HyperLinkField DataNavigateUrlFields="So_dien_thoai" DataNavigateUrlFormatString="EditAccount.aspx?ID={0}" Text="Sửa" />
                 <asp:CommandField DeleteText="Xóa" ShowDeleteButton="True" />
                 <asp:TemplateField>
                     <HeaderTemplate>
@@ -99,6 +99,7 @@
                         <asp:CheckBox ID="ckhDelete" runat="server" />
                     </ItemTemplate>
                     <HeaderStyle Width="50px" />
+                    <ItemStyle Width="50px" />
                 </asp:TemplateField>
 
             </Columns>

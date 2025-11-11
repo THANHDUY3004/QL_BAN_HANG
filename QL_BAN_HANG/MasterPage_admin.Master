@@ -29,7 +29,7 @@
                         <li><a href="#">Tất cả sản phẩm</a></li>
                     </ul>
                 </li>
-                <li id="nav-right"><a href="#">Giỏ Hàng</a></li>
+                <li id="nav-right"><a href="#">Đơn Hàng</a></li>
                 <li id="nav-right-2"><a href="AccountList.aspx">Tài Khoản</a></li>
             </ul>
         </asp:ContentPlaceHolder>
