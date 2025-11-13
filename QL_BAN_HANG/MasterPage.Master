@@ -20,12 +20,11 @@
         <asp:ContentPlaceHolder ID="ContentPlaceHolderMainMenu" runat="server">
 s            <ul id="nav">
                 <li><a href="Default.aspx">Giới Thiệu</a></li>
-                <li><a href="#">Danh Mục Sản Phẩm &raquo;</a>
+                <li><a href="ProductUser.aspx">Danh Mục Sản Phẩm &raquo;</a>
                     <ul>
-                        <li><a href="#">Trà Sữa</a></li>
-                        <li><a href="#">Trà Trái Cây</a></li>
-                        <li><a href="#">Bánh Ngọt</a></li>
-                        <li><a href="#">Tất cả sản phẩm</a></li>
+                        <li><a href="ProductUser.aspx?ID_MN=3">Trà Sữa</a></li>
+                        <li><a href="ProductUser.aspx?ID_MN=4">Trà Trái Cây</a></li>
+                        <li><a href="ProductUser.aspx?ID_MN=5">Bánh Ngọt</a></li>
                     </ul>
                 </li>
                 <li id="nav-right-2"><a href="#">Giỏ Hàng</a></li>

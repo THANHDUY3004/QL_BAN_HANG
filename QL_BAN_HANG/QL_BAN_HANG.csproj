@@ -71,20 +71,34 @@
     <Content Include="AccountList.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="EditAccount.aspx" />
-    <Content Include="Kiem_tra.aspx" />
     <Content Include="layout\accountlist.css" />
     <Content Include="layout\loginuser.css" />
     <Content Include="layout\master.css" />
     <Content Include="layout\nav.css" />
+    <Content Include="layout\product.css" />
+    <Content Include="layout\productuser.css" />
     <Content Include="layout\registeruser.css" />
     <Content Include="layout\scripts.js" />
     <Content Include="layout\Style.css" />
     <Content Include="LoginUser.aspx" />
     <Content Include="PersonalPage.aspx" />
+    <Content Include="ProductList.aspx" />
+    <Content Include="ProductUser.aspx" />
     <Content Include="RegisterUser.aspx" />
     <Content Include="uploads\icons\pngtree-background-of-monitor-computer-with-online-game-streaming-desktop-image_15734080.jpg" />
+    <Content Include="uploads\images\0.jpg" />
     <Content Include="uploads\images\background-banner.png" />
     <Content Include="uploads\images\background-content.png" />
+    <Content Include="uploads\images\camsa.jpg" />
+    <Content Include="uploads\images\chanhmatong.jpg" />
+    <Content Include="uploads\images\dautay.jpg" />
+    <Content Include="uploads\images\khoaimon.jpg" />
+    <Content Include="uploads\images\mousse.jpg" />
+    <Content Include="uploads\images\sôcola.jpg" />
+    <Content Include="uploads\images\tiramisu.jpg" />
+    <Content Include="uploads\images\ts.jpg" />
+    <Content Include="uploads\images\tx.jpg" />
+    <Content Include="uploads\images\vai.jpg" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -108,13 +122,6 @@
     </Compile>
     <Compile Include="EditAccount.aspx.designer.cs">
       <DependentUpon>EditAccount.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Kiem_tra.aspx.cs">
-      <DependentUpon>Kiem_tra.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Kiem_tra.aspx.designer.cs">
-      <DependentUpon>Kiem_tra.aspx</DependentUpon>
     </Compile>
     <Compile Include="LoginUser.aspx.cs">
       <DependentUpon>LoginUser.aspx</DependentUpon>
@@ -143,6 +150,20 @@
     </Compile>
     <Compile Include="PersonalPage.aspx.designer.cs">
       <DependentUpon>PersonalPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProductList.aspx.cs">
+      <DependentUpon>ProductList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProductList.aspx.designer.cs">
+      <DependentUpon>ProductList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProductUser.aspx.cs">
+      <DependentUpon>ProductUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProductUser.aspx.designer.cs">
+      <DependentUpon>ProductUser.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegisterUser.aspx.cs">
