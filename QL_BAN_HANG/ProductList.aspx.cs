@@ -11,7 +11,7 @@ namespace QL_BAN_HANG
 {
     public partial class ProductList : System.Web.UI.Page
     {
-        private Cua_Hang_Tra_SuaDataContext context = new Cua_Hang_Tra_SuaDataContext();
+        public Cua_Hang_Tra_SuaDataContext context = new Cua_Hang_Tra_SuaDataContext();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -43,6 +43,7 @@ namespace QL_BAN_HANG
             try
             {
                 var menuList = context.Menus
+                                        .Where(m => m.Parent == 2) // Chỉ lấy danh mục con của "Sản phẩm"
                                       .OrderBy(m => m.OrderKey)
                                       .Select(m => new { ID_MN = m.ID_MN, Label = m.Label })
                                       .ToList();
@@ -65,6 +66,7 @@ namespace QL_BAN_HANG
             try
             {
                 var categoryList = context.Menus
+                                           .Where(m => m.Parent ==2) // Chỉ lấy danh mục con của "Sản phẩm"
                                           .OrderBy(m => m.Label)
                                           .Select(m => new { ID_MN = m.ID_MN, Label = m.Label })
                                           .ToList();

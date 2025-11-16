@@ -1,0 +1,199 @@
+﻿body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+}
+
+.container {
+    margin: 30px auto;
+    width: 95%;
+    max-width: 1200px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+h2 {
+    color: #007bff;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+    h2 i {
+        margin-right: 10px;
+        color: #ffc107;
+    }
+
+h3 {
+    color: #555;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    margin-top: 20px;
+}
+
+/* GridView Giỏ Hàng */
+.gridview-style {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+    .gridview-style th, .gridview-style td {
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        text-align: left;
+        vertical-align: middle;
+    }
+
+    .gridview-style th {
+        background-color: #507CD1;
+        color: white;
+        font-size: 14px;
+        text-transform: uppercase;
+    }
+
+    .gridview-style tr:nth-child(even) {
+        background-color: #f6f6f6;
+    }
+
+    .gridview-style tr:hover {
+        background-color: #e9ecef;
+    }
+
+    .gridview-style img {
+        max-width: 80px;
+        max-height: 80px;
+        border-radius: 4px;
+        object-fit: cover;
+        border: 1px solid #ddd;
+    }
+
+    .gridview-style .product-name {
+        font-weight: bold;
+        font-size: 1.1em;
+        color: #007bff;
+    }
+
+    .gridview-style .price {
+        color: #dc3545;
+        font-weight: bold;
+    }
+
+    .gridview-style input[type="text"] {
+        width: 60px;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        text-align: center;
+    }
+
+/* Vùng Tổng Tiền và Thanh Toán */
+.checkout-area {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 2px solid #007bff;
+}
+
+.summary-total {
+    flex-basis: 48%;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #dc3545;
+    text-align: right;
+    padding-top: 10px;
+}
+
+.checkout-form {
+    flex-basis: 48%;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #eee;
+}
+    /* ... CSS cho form group giữ nguyên ... */
+    .checkout-form .form-group {
+        margin-bottom: 15px;
+    }
+
+    .checkout-form label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .checkout-form input[type="text"],
+    .checkout-form select,
+    .checkout-form textarea {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    .checkout-form textarea {
+        min-height: 70px;
+        resize: vertical;
+    }
+
+.action-button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    color: white;
+    font-size: 1.1em;
+    transition: background-color 0.3s;
+}
+
+.btn-update {
+    background-color: #007bff;
+    color: white;
+    padding: 5px 10px;
+    font-size: 0.9em;
+    border-radius: 3px;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+    color: white;
+    padding: 5px 10px;
+    font-size: 0.9em;
+    border-radius: 3px;
+}
+
+.btn-checkout {
+    background-color: #28a745;
+    box-shadow: 0 4px 6px rgba(40, 167, 69, 0.3);
+}
+
+    .btn-checkout:hover {
+        background-color: #1e7e34;
+    }
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .checkout-area {
+        flex-direction: column;
+    }
+
+    .summary-total, .checkout-form {
+        flex-basis: 100%;
+    }
+
+    .summary-total {
+        text-align: left;
+        margin-top: 20px;
+        border-top: 1px dashed #ccc;
+        padding-top: 15px;
+    }
+}

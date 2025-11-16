@@ -9,23 +9,29 @@ namespace QL_BAN_HANG
 {
     public partial class MasterPage : System.Web.UI.MasterPage
     {
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["LoggedInUser"] == null)
-            {
-                phUserTab.Controls.Add(new Literal
+                if (Session["LoggedInUser"] != null)
                 {
-                    Text = "<li><a href='LoginUser.aspx'>Đăng nhập</a></li>"
-                });
-            }
-            else
-            {
-                phUserTab.Controls.Add(new Literal
-                {
-                    Text = "<li><a href='PersonalPage.aspx'>Thông tin tài khoản</a></li>"
-                });
-            }
+                lnkGioHang.NavigateUrl = "ShoppingUser.aspx";
+                // Đã đăng nhập
+                phUserTab.Text = ""; // Ẩn liên kết "Đăng nhập"
+                phUserTab.NavigateUrl = "";
 
+                phUserTab1.Text = "Thông tin tài khoản";
+                phUserTab1.NavigateUrl = "~/PersonalPage.aspx";
+                }
+                else
+                {
+                lnkGioHang.NavigateUrl = "LoginUser.aspx";
+                // Chưa đăng nhập
+                phUserTab.Text = "Đăng nhập";
+                phUserTab.NavigateUrl = "~/LoginUser.aspx";
+
+                phUserTab1.Text = ""; // Ẩn liên kết "Thông tin tài khoản"
+                phUserTab1.NavigateUrl = "";
+                } 
         }
     }
 }

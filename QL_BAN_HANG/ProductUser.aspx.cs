@@ -78,5 +78,74 @@ namespace QL_BAN_HANG
                 lblMessage.Text = "❌ Lỗi tải danh sách sản phẩm: " + ex.Message;
             }
         }
+
+        protected void btnAddCart_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Kiểm tra người dùng đã đăng nhập chưa
+                string sdt = Session["LoggedInUser"]?.ToString();
+                if (string.IsNullOrEmpty(sdt))
+                {
+                    lblMessage.Text = "❌ Vui lòng đăng nhập trước khi thêm sản phẩm vào giỏ hàng.";
+                    return;
+                }
+
+                // Lấy ID sản phẩm từ CommandArgument của nút bấm
+                Button btn = sender as Button;
+                if (btn == null) return;
+
+                int idSp;
+                if (!int.TryParse(btn.CommandArgument, out idSp))
+                {
+                    lblMessage.Text = "❌ ID sản phẩm không hợp lệ.";
+                    return;
+                }
+
+                using (Cua_Hang_Tra_SuaDataContext context = new Cua_Hang_Tra_SuaDataContext())
+                {
+                    // Kiểm tra sản phẩm có tồn tại không
+                    var sanPham = context.San_Phams.FirstOrDefault(sp => sp.ID_SP == idSp);
+                    if (sanPham == null)
+                    {
+                        lblMessage.Text = "❌ Không tìm thấy sản phẩm.";
+                        return;
+                    }
+
+                    // Kiểm tra sản phẩm đã có trong giỏ hàng chưa
+                    var gioHangItem = context.Gio_Hangs.FirstOrDefault(g => g.So_dien_thoai == sdt && g.ID_SP == idSp);
+
+                    if (gioHangItem != null)
+                    {
+                        // Nếu đã có thì tăng số lượng
+                        gioHangItem.So_luong += 1;
+                        lblMessage.Text = $"🔄 Đã cập nhật số lượng sản phẩm {sanPham.Ten_san_pham} trong giỏ hàng.";
+                    }
+                    else
+                    {
+                        // Nếu chưa có thì thêm mới
+                        Gio_Hang newItem = new Gio_Hang
+                        {
+                            So_dien_thoai = sdt,
+                            ID_SP = sanPham.ID_SP,
+                            So_luong = 1,
+                            Gia_tai_thoi_diem = sanPham.Gia_co_ban,
+                            Ghi_chu = "",
+                            Ngay_them = DateTime.Now // ✅ Bắt buộc phải gán để tránh lỗi SqlDateTime overflow
+                        };
+                        context.Gio_Hangs.InsertOnSubmit(newItem);
+                        lblMessage.Text = $"✅ Đã thêm sản phẩm {sanPham.Ten_san_pham} vào giỏ hàng.";
+                    }
+
+                    // Lưu thay đổi vào DB
+                    context.SubmitChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                lblMessage.Text = "❌ Lỗi khi thêm sản phẩm vào giỏ hàng: " + ex.Message;
+            }
+        }
+
     }
 }

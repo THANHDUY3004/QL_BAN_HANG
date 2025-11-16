@@ -70,8 +70,10 @@
   <ItemGroup>
     <Content Include="AccountList.aspx" />
     <Content Include="Default.aspx" />
+    <Content Include="Default_admin.aspx" />
     <Content Include="EditAccount.aspx" />
     <Content Include="layout\accountlist.css" />
+    <Content Include="layout\default_admin.css" />
     <Content Include="layout\loginuser.css" />
     <Content Include="layout\master.css" />
     <Content Include="layout\nav.css" />
@@ -79,12 +81,15 @@
     <Content Include="layout\productuser.css" />
     <Content Include="layout\registeruser.css" />
     <Content Include="layout\scripts.js" />
+    <Content Include="layout\shopping.css" />
     <Content Include="layout\Style.css" />
     <Content Include="LoginUser.aspx" />
     <Content Include="PersonalPage.aspx" />
     <Content Include="ProductList.aspx" />
     <Content Include="ProductUser.aspx" />
     <Content Include="RegisterUser.aspx" />
+    <Content Include="ShoppingList.aspx" />
+    <Content Include="ShoppingUser.aspx" />
     <Content Include="uploads\icons\pngtree-background-of-monitor-computer-with-online-game-streaming-desktop-image_15734080.jpg" />
     <Content Include="uploads\images\0.jpg" />
     <Content Include="uploads\images\background-banner.png" />
@@ -115,6 +120,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Default_admin.aspx.cs">
+      <DependentUpon>Default_admin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default_admin.aspx.designer.cs">
+      <DependentUpon>Default_admin.aspx</DependentUpon>
     </Compile>
     <Compile Include="EditAccount.aspx.cs">
       <DependentUpon>EditAccount.aspx</DependentUpon>
@@ -172,6 +184,20 @@
     </Compile>
     <Compile Include="RegisterUser.aspx.designer.cs">
       <DependentUpon>RegisterUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ShoppingList.aspx.cs">
+      <DependentUpon>ShoppingList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShoppingList.aspx.designer.cs">
+      <DependentUpon>ShoppingList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ShoppingUser.aspx.cs">
+      <DependentUpon>ShoppingUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShoppingUser.aspx.designer.cs">
+      <DependentUpon>ShoppingUser.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

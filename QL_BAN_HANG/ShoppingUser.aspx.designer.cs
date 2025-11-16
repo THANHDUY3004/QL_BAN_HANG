@@ -11,79 +11,88 @@ namespace QL_BAN_HANG
 {
 
 
-    public partial class MasterPage
+    public partial class ShoppingUser
     {
 
         /// <summary>
-        /// head control.
+        /// lblMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
+        protected global::System.Web.UI.WebControls.Label lblMessage;
 
         /// <summary>
-        /// ContentPlaceHolderMainMenu control.
+        /// gvGioHang control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolderMainMenu;
+        protected global::System.Web.UI.WebControls.GridView gvGioHang;
 
         /// <summary>
-        /// lnkGioHang control.
+        /// lblThongBaoTrong control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink lnkGioHang;
+        protected global::System.Web.UI.WebControls.Label lblThongBaoTrong;
 
         /// <summary>
-        /// phUserTab control.
+        /// txtSoDienThoai control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink phUserTab;
+        protected global::System.Web.UI.WebControls.TextBox txtSoDienThoai;
 
         /// <summary>
-        /// phUserTab1 control.
+        /// txtDiaChiGiaoHang control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink phUserTab1;
+        protected global::System.Web.UI.WebControls.TextBox txtDiaChiGiaoHang;
 
         /// <summary>
-        /// ContentPlaceHolderSubMenu control.
+        /// ddlHinhThucDatDon control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolderSubMenu;
+        protected global::System.Web.UI.WebControls.DropDownList ddlHinhThucDatDon;
 
         /// <summary>
-        /// ContentPlaceHolderContent control.
+        /// txtGhiChuChung control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolderContent;
+        protected global::System.Web.UI.WebControls.TextBox txtGhiChuChung;
 
         /// <summary>
-        /// ContentPlaceHolderBottom control.
+        /// btnDatHang control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolderBottom;
+        protected global::System.Web.UI.WebControls.Button btnDatHang;
+
+        /// <summary>
+        /// lblTongTien control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTongTien;
     }
 }

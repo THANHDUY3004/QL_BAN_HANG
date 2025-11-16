@@ -11,79 +11,106 @@ namespace QL_BAN_HANG
 {
 
 
-    public partial class MasterPage
+    public partial class Default_admin
     {
 
         /// <summary>
-        /// head control.
+        /// ddlFilterMenus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
+        protected global::System.Web.UI.WebControls.DropDownList ddlFilterMenus;
 
         /// <summary>
-        /// ContentPlaceHolderMainMenu control.
+        /// butDeleteSelected control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolderMainMenu;
+        protected global::System.Web.UI.WebControls.Button butDeleteSelected;
 
         /// <summary>
-        /// lnkGioHang control.
+        /// ddlAddMenu control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink lnkGioHang;
+        protected global::System.Web.UI.WebControls.DropDownList ddlAddMenu;
 
         /// <summary>
-        /// phUserTab control.
+        /// txtAddOrderKey control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink phUserTab;
+        protected global::System.Web.UI.WebControls.TextBox txtAddOrderKey;
 
         /// <summary>
-        /// phUserTab1 control.
+        /// txtAddTieuDe control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink phUserTab1;
+        protected global::System.Web.UI.WebControls.TextBox txtAddTieuDe;
 
         /// <summary>
-        /// ContentPlaceHolderSubMenu control.
+        /// txtAddTomTat control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolderSubMenu;
+        protected global::System.Web.UI.WebControls.TextBox txtAddTomTat;
 
         /// <summary>
-        /// ContentPlaceHolderContent control.
+        /// txtAddNoiDung control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolderContent;
+        protected global::System.Web.UI.WebControls.TextBox txtAddNoiDung;
 
         /// <summary>
-        /// ContentPlaceHolderBottom control.
+        /// fileUploadHinhAnh control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolderBottom;
+        protected global::System.Web.UI.WebControls.FileUpload fileUploadHinhAnh;
+
+        /// <summary>
+        /// butAdd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button butAdd;
+
+        /// <summary>
+        /// lblMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMessage;
+
+        /// <summary>
+        /// GridViewBaiViet control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GridViewBaiViet;
     }
 }

@@ -27,8 +27,20 @@ s            <ul id="nav">
                         <li><a href="ProductUser.aspx?ID_MN=5">Bánh Ngọt</a></li>
                     </ul>
                 </li>
-                <li id="nav-right-2"><a href="#">Giỏ Hàng</a></li>
-                <asp:PlaceHolder ID="phUserTab" runat="server" />
+
+                <!-- Link giỏ hàng động -->
+                <li id="nav-right-2">
+                    <asp:HyperLink ID="lnkGioHang" runat="server" Text="Giỏ Hàng" NavigateUrl="#" />
+                </li>
+
+                <!-- Vùng hiển thị thông tin tài khoản hoặc đăng nhập -->
+                <li id="nav-right">
+                    <asp:HyperLink ID="phUserTab" runat="server" Text="Đăng Nhập" NavigateUrl="LoginUser.aspx" />
+                </li>
+                <li id="nav-right-3">
+                    <asp:HyperLink ID="phUserTab1" runat="server" Text="Thông Tin Tài Khoản" NavigateUrl="PersonalPage.aspx" />
+                </li>
+
             </ul>
         </asp:ContentPlaceHolder>
 

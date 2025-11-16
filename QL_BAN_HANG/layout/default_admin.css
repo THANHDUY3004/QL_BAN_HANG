@@ -1,0 +1,143 @@
+﻿body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+}
+
+.container {
+    margin: 30px auto;
+    width: 95%;
+    max-width: 1400px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+h2 {
+    color: #007bff;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+h3 {
+    color: #555;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    margin-top: 20px;
+}
+
+.control-area {
+    display: grid; /* Dùng Grid để sắp xếp form thêm mới */
+    grid-template-columns: auto 1fr; /* Cột 1: Nhãn, Cột 2: Ô nhập */
+    gap: 15px 10px;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+    .control-area.filter-area { /* Dùng Flex cho vùng lọc */
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .control-area label {
+        font-weight: bold;
+        text-align: right;
+    }
+
+    .control-area input[type="text"], .control-area select, .control-area textarea {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        width: 100%;
+        box-sizing: border-box; /* Đảm bảo padding không làm vỡ layout */
+    }
+
+    .control-area textarea {
+        min-height: 80px;
+        resize: vertical;
+    }
+
+    .control-area .full-width {
+        grid-column: 1 / -1; /* Cho phép control chiếm trọn 2 cột */
+        display: flex;
+        justify-content: flex-end; /* Đẩy nút Add về bên phải */
+    }
+
+/* Nút */
+.action-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    color: white;
+    transition: background-color 0.3s, transform 0.1s;
+}
+
+    .action-button:hover {
+        transform: translateY(-1px);
+    }
+
+.btn-add {
+    background-color: #28a745;
+}
+
+    .btn-add:hover {
+        background-color: #1e7e34;
+    }
+
+.btn-delete {
+    background-color: #dc3545;
+}
+
+    .btn-delete:hover {
+        background-color: #c82333;
+    }
+
+/* GridView Styling */
+.gridview-style {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+    .gridview-style th, .gridview-style td {
+        padding: 12px;
+        border: 1px solid #ddd;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .gridview-style th {
+        background-color: #507CD1;
+        color: white;
+        font-size: 14px;
+    }
+
+    .gridview-style tr:nth-child(even) {
+        background-color: #f6f6f6;
+    }
+
+    .gridview-style tr:hover {
+        background-color: #e9ecef;
+    }
+
+    .gridview-style img {
+        max-width: 100px;
+        max-height: 100px;
+        border-radius: 4px;
+    }
+
+    .gridview-style .col-tomtat {
+        max-width: 250px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        text-align: left;
+    }

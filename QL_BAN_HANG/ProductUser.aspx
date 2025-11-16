@@ -28,8 +28,7 @@
 
                             <!-- Nút hành động -->
                             <div class="product-actions">
-                                <asp:Button ID="btnBuy" runat="server" Text="Mua ngay" CssClass="btn-buy" />
-                                <asp:Button ID="btnAddCart" runat="server" Text="Thêm Giỏ Hàng" CssClass="btn-cart" />
+                                <asp:Button ID="btnAddCart" runat="server" Text="Thêm Giỏ Hàng" CssClass="btn-cart" CommandArgument='<%# Eval("ID_SP") %>' OnClick="btnAddCart_Click" />
                             </div>
                         </div>
                     </ItemTemplate>

@@ -20,17 +20,10 @@
         <asp:ContentPlaceHolder ID="ContentPlaceHolderMainMenu" runat="server">
             <div class="nav-toggle" onclick="toggleNav()">☰ Menu</div>
             <ul id="nav">
-                <li><a href="Default.aspx">Giới Thiệu</a></li>
-                <li><a href="#">Danh Mục Sản Phẩm &raquo;</a>
-                    <ul>
-                        <li><a href="#">Trà Sữa</a></li>
-                        <li><a href="#">Trà Trái Cây</a></li>
-                        <li><a href="#">Bánh Ngọt</a></li>
-                        <li><a href="#">Tất cả sản phẩm</a></li>
-                    </ul>
-                </li>
-                <li id="nav-right"><a href="#">Đơn Hàng</a></li>
-                <li id="nav-right-2"><a href="AccountList.aspx">Tài Khoản</a></li>
+                <li><a href="Default_admin.aspx">Giới Thiệu</a></li>
+                <li><a href="ProductList.aspx">Danh Mục Sản Phẩm &raquo;</a></li>
+                <li id="nav-right"><a href="ShoppingList.aspx">Đơn Hàng</a></li>
+                <li><a href="AccountList.aspx">Tài Khoản</a></li>
             </ul>
         </asp:ContentPlaceHolder>
 
