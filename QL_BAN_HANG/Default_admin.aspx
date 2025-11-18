@@ -60,7 +60,7 @@
                 <Columns>
                     <asp:BoundField DataField="ID_BV" HeaderText="ID_BV" ReadOnly="True" ItemStyle-Width="50px" >
                     
-<ItemStyle Width="50px"></ItemStyle>
+<ItemStyle Width="20px"></ItemStyle>
                     </asp:BoundField>
                     
                     <asp:TemplateField HeaderText="Hình ảnh" ItemStyle-Width="120px">
@@ -74,6 +74,8 @@
                             <asp:TextBox ID="txtEditHinhAnh" runat="server" Text='<%# Bind("Hinh_anh_page") %>' Width="100px"></asp:TextBox>
                         </EditItemTemplate>
 
+                        <HeaderStyle Width="50px" />
+
 <ItemStyle Width="120px"></ItemStyle>
                     </asp:TemplateField>
 
@@ -85,29 +87,23 @@
                             <asp:TextBox ID="txtEditTieuDe" runat="server" Text='<%# Bind("Tieu_de") %>' Width="95%"></asp:TextBox>
                         </EditItemTemplate>
 
+                        <HeaderStyle Width="50px" />
+
 <ItemStyle HorizontalAlign="Left"></ItemStyle>
                     </asp:TemplateField>
 
                     <asp:TemplateField HeaderText="Tóm tắt" ItemStyle-CssClass="col-tomtat">
                          <ItemTemplate>
-                            <asp:Label runat="server" Text='<%# Eval("Tom_tac") %>'></asp:Label>
+                             <asp:Label ID="Label2" runat="server" Text='<%# Eval("Tom_tac") %>'></asp:Label>
                          </ItemTemplate>
-                        <EditItemTemplate>
-                            <asp:TextBox ID="txtEditTomTat" runat="server" Text='<%# Bind("Tom_tac") %>' Width="95%" TextMode="MultiLine" Rows="3"></asp:TextBox>
-                        </EditItemTemplate>
-
-<ItemStyle CssClass="col-tomtat"></ItemStyle>
                     </asp:TemplateField>
 
-                    <asp:TemplateField HeaderText="ID Menu" ItemStyle-Width="80px">
+                    <asp:TemplateField HeaderText="Nội dung" ItemStyle-Width="80px">
                          <ItemTemplate>
-                            <asp:Label runat="server" Text='<%# Eval("ID_MN") %>'></asp:Label>
+                             <asp:Label ID="Label1" runat="server" Text='<%# Eval("Noi_dung") %>'></asp:Label>
                          </ItemTemplate>
-                        <EditItemTemplate>
-                            <asp:TextBox ID="txtEditIDMN" runat="server" Text='<%# Bind("ID_MN") %>' Width="60px"></asp:TextBox>
-                        </EditItemTemplate>
-
-<ItemStyle Width="80px"></ItemStyle>
+                         <HeaderStyle Width="100px" />
+                         <ItemStyle Width="80px" />
                     </asp:TemplateField>
 
                     <asp:TemplateField HeaderText="Thứ tự" ItemStyle-Width="80px">
@@ -117,6 +113,8 @@
                         <EditItemTemplate>
                             <asp:TextBox ID="txtEditOrderKey" runat="server" Text='<%# Bind("OrderKey") %>' Width="60px"></asp:TextBox>
                         </EditItemTemplate>
+
+                         <HeaderStyle Width="50px" />
 
 <ItemStyle Width="80px"></ItemStyle>
                     </asp:TemplateField>

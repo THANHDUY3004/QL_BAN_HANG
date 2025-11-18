@@ -141,3 +141,73 @@ h3 {
         white-space: nowrap;
         text-align: left;
     }
+
+/* GridView tổng thể */
+.gridview-style {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 14px;
+    margin: 20px 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+    /* Header */
+    .gridview-style th {
+        background-color: #507CD1;
+        color: #fff;
+        font-weight: bold;
+        text-align: center;
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        line-height: 1.4;
+    }
+
+    /* Nội dung ô */
+    .gridview-style td {
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        color: #333;
+        vertical-align: middle; /* căn giữa theo chiều dọc */
+        line-height: 1.5; /* chiều cao dòng đều */
+        word-break: break-word; /* xuống dòng khi chữ dài */
+    }
+
+    /* Dòng xen kẽ */
+    .gridview-style tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    /* Hover */
+    .gridview-style tr:hover {
+        background-color: #e6f0ff;
+        cursor: pointer;
+    }
+
+    /* Label và TextBox bên trong */
+    .gridview-style label,
+    .gridview-style input[type="text"] {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        font-size: 14px;
+        line-height: 1.4;
+        padding: 4px 6px;
+    }
+
+    /* Nút bấm */
+    .gridview-style input[type="submit"],
+    .gridview-style button {
+        background-color: #507CD1;
+        color: #fff;
+        border: none;
+        padding: 6px 12px;
+        border-radius: 4px;
+        transition: background-color 0.3s ease;
+        font-size: 13px;
+    }
+
+        .gridview-style input[type="submit"]:hover,
+        .gridview-style button:hover {
+            background-color: #365fa3;
+        }

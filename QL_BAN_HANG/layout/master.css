@@ -41,11 +41,11 @@ body {
 }
 
 #Contents {
-    width: auto;
+    width: 1000px;
     min-height: 300px;
     display: flex;
     justify-content: center; /* Căn giữa ngang */
-    text-align: center;      /* Căn giữa văn bản */
+    text-align: center; /* Căn giữa văn bản */
 }
 
 #SubMenu {
@@ -75,7 +75,7 @@ body {
 
 #Content {
     min-height: 300px;
-    min-width: 500px;
+    width: 1000px;
     background-image: url('../uploads/images/background-content.png');
     background-repeat: no-repeat; /* Không lặp ảnh */
     background-size: 100% auto; /* Chiều ngang 100%, chiều dọc tự động */
