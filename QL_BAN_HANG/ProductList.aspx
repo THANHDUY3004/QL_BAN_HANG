@@ -10,8 +10,6 @@
                 <label>Danh mục:</label>
                 <asp:DropDownList ID="ddlMenus" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlMenus_SelectedIndexChanged">
                 </asp:DropDownList>
-                
-                <asp:Button ID="butDeleteSelected" runat="server" Text="Xóa Sản Phẩm Đã Chọn" OnClick="butDeleteSelected_Click" CssClass="action-button btn-delete" />
             </div>
 
             <h3>➕ Thêm Sản Phẩm Mới</h3>
@@ -121,7 +119,7 @@
 
                     <asp:TemplateField HeaderText="Chọn Xóa" ItemStyle-Width="80px">
                         <HeaderTemplate>
-                            <asp:Button ID="butDelete" runat="server" OnClick="Button2_Click" Text="Xóa" />
+                            <asp:Button ID="butDelete" runat="server" OnClick="Button2_Click" CssClass="action-button btn-delete" Text="Xóa" />
                         </HeaderTemplate>
                         <ItemTemplate>
                             <asp:CheckBox ID="chkDelete" runat="server" />

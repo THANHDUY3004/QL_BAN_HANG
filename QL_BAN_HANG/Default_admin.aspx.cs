@@ -163,6 +163,7 @@ namespace QL_BAN_HANG
                 // 3. Tạo đối tượng Bai_Viet mới
                 Bai_Viet newBaiViet = new Bai_Viet
                 {
+                    //ID_BV tự động tăng
                     ID_MN = idMn,
                     Tieu_de = txtAddTieuDe.Text.Trim(),
                     Tom_tac = txtAddTomTat.Text.Trim(),
@@ -436,14 +437,6 @@ namespace QL_BAN_HANG
             LoadDataBaiViet();
         }
 
-        protected void GridViewBaiViet_SelectedIndexChanged(object sender, EventArgs e)
-        {
 
-        }
-
-        protected void butDelete_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

@@ -1,25 +1,20 @@
-﻿using System;
+﻿using Cua_Hang_Tra_Sua;
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Web;
+using System.Web.UI;
 using System.Web.UI.WebControls;
-using Cua_Hang_Tra_Sua;
 
 namespace QL_BAN_HANG
 {
-    public partial class ProductUser : System.Web.UI.Page
+    public partial class CHECK : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                int idMn = 0;
-                if (int.TryParse(Request.QueryString["ID_MN"], out idMn))
-                {
-                    LoadProductsByMenu(idMn);
-                }
-                else
-                {
-                    LoadAllProducts();
-                }
+                LoadAllProducts();
             }
         }
 
@@ -40,48 +35,9 @@ namespace QL_BAN_HANG
             }
             catch (Exception ex)
             {
-                lblMessage.Text = "❌ Lỗi tải sản phẩm: " + ex.Message;
+                lblMessage.Text = "❌ Lỗi tải toàn bộ sản phẩm: " + ex.Message;
             }
         }
-
-        private void LoadProductsByMenu(int idMn)
-        {
-            try
-            {
-                using (Cua_Hang_Tra_SuaDataContext context = new Cua_Hang_Tra_SuaDataContext())
-                {
-                    var products = context.San_Phams
-                                          .Where(sp => sp.ID_MN == idMn)
-                                          .OrderBy(sp => sp.Ten_san_pham)
-                                          .ToList();
-
-                    RepeaterProducts.DataSource = products;
-                    RepeaterProducts.DataBind();
-                    if (idMn == 3) 
-                    {
-                        lblMessage.Text = $"📦 Đã tải {products.Count} sản phẩm thuộc menu Trà Sữa";
-                    }
-                    else if(idMn == 4) 
-                    {
-                        lblMessage.Text = $"📦 Đã tải {products.Count} sản phẩm thuộc menu Trà Trái Cây";
-                    }
-                    else if(idMn == 5)
-                    {
-                        lblMessage.Text = $"📦 Đã tải {products.Count} sản phẩm thuộc menu Bánh Ngọt";
-                    }
-                    else
-                    {
-                        lblMessage.Text = $"📦 Đã tải toàn bộ {products.Count} sản phẩm";
-
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                lblMessage.Text = "❌ Lỗi khi tải sản phẩm theo menu: " + ex.Message;
-            }
-        }
-
         protected void btnAddCart_Click(object sender, EventArgs e)
         {
             try
@@ -133,7 +89,6 @@ namespace QL_BAN_HANG
                         lblMessage.Text = $"✅ Đã thêm sản phẩm {sanPham.Ten_san_pham} vào giỏ hàng.";
                     }
 
-                    // Lưu thay đổi vào cơ sở dữ liệu
                     context.SubmitChanges();
                 }
             }
@@ -142,5 +97,7 @@ namespace QL_BAN_HANG
                 lblMessage.Text = "❌ Lỗi khi thêm sản phẩm vào giỏ hàng: " + ex.Message;
             }
         }
+
+
     }
 }

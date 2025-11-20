@@ -139,21 +139,22 @@ namespace QL_BAN_HANG
                 }
 
                 // (BƯỚC MỚI) Xử lý file Upload
-                string fileName = null;
-                if (fileUploadHinhAnh.HasFile)
-                {
-                    try
-                    {
-                        fileName = Path.GetFileName(fileUploadHinhAnh.FileName);
-                        string savePath = Server.MapPath("~/Images/") + fileName;
-                        fileUploadHinhAnh.SaveAs(savePath);
-                    }
-                    catch (Exception ex)
-                    {
-                        lblMessage.Text = "❌ Lỗi khi tải lên hình ảnh: " + ex.Message;
-                        return;
-                    }
-                }
+                // (BƯỚC MỚI) Xử lý file Upload
+                string fileName = null;
+                if (fileUploadHinhAnh.HasFile)
+                {
+                    try
+                    {
+                        fileName = Path.GetFileName(fileUploadHinhAnh.FileName);
+                        string savePath = Server.MapPath("~/uploads/images/") + fileName; // Đã thêm '/' ở cuối để đảm bảo đường dẫn
+                        fileUploadHinhAnh.SaveAs(savePath);
+                    }
+                    catch (Exception ex)
+                    {
+                        lblMessage.Text = "❌ Lỗi khi tải lên hình ảnh: " + ex.Message;
+                        return;
+                    }
+                }
 
                 San_Pham newProduct = new San_Pham
                 {
@@ -213,45 +214,6 @@ namespace QL_BAN_HANG
             }
         }
 
-        protected void butDeleteSelected_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                List<San_Pham> productsToDelete = new List<San_Pham>();
-                int soSpDaChon = 0;
-
-                for (int i = 0; i < GridViewProducts.Rows.Count; i++)
-                {
-                    CheckBox chk = (CheckBox)GridViewProducts.Rows[i].FindControl("chkDelete");
-                    if (chk != null && chk.Checked)
-                    {
-                        int idSp = Convert.ToInt32(GridViewProducts.DataKeys[i].Value);
-                        San_Pham sp = context.San_Phams.SingleOrDefault(t => t.ID_SP == idSp);
-                        if (sp != null)
-                        {
-                            productsToDelete.Add(sp);
-                            soSpDaChon++;
-                        }
-                    }
-                }
-
-                if (soSpDaChon > 0)
-                {
-                    context.San_Phams.DeleteAllOnSubmit(productsToDelete);
-                    context.SubmitChanges();
-                    lblMessage.Text = $"✅ Đã xóa thành công {soSpDaChon} sản phẩm được chọn.";
-                }
-                else
-                {
-                    lblMessage.Text = "⚠️ Vui lòng chọn ít nhất một sản phẩm để xóa.";
-                }
-                LoadDataProducts();
-            }
-            catch (Exception ex)
-            {
-                lblMessage.Text = "❌ Lỗi khi xóa hàng loạt: " + ex.Message;
-            }
-        }
 
         // -------------------------------------------------------------
         // Xử lý Cập nhật (Đã sửa logic Trạng thái)

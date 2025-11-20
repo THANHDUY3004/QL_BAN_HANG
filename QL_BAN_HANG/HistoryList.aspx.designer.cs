@@ -11,125 +11,71 @@ namespace QL_BAN_HANG
 {
 
 
-    public partial class ShoppingUser
+    public partial class HistoryList
     {
 
         /// <summary>
-        /// lblMessage control.
+        /// ScriptManager1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMessage;
+        protected global::System.Web.UI.ScriptManager ScriptManager1;
 
         /// <summary>
-        /// gvGioHang control.
+        /// bnt_dh control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvGioHang;
+        protected global::System.Web.UI.WebControls.Button bnt_dh;
 
         /// <summary>
-        /// lblThongBaoTrong control.
+        /// pnlHistory control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblThongBaoTrong;
+        protected global::System.Web.UI.WebControls.Panel pnlHistory;
 
         /// <summary>
-        /// txtSoDienThoai control.
+        /// ddlStatusHistory control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSoDienThoai;
+        protected global::System.Web.UI.WebControls.DropDownList ddlStatusHistory;
 
         /// <summary>
-        /// txtDiaChiGiaoHang control.
+        /// txtSearchHistory control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDiaChiGiaoHang;
+        protected global::System.Web.UI.WebControls.TextBox txtSearchHistory;
 
         /// <summary>
-        /// ddlHinhThucDatDon control.
+        /// btnSearchHistory control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlHinhThucDatDon;
+        protected global::System.Web.UI.WebControls.Button btnSearchHistory;
 
         /// <summary>
-        /// txtGhiChuChung control.
+        /// gvHistoryOrders control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtGhiChuChung;
-
-        /// <summary>
-        /// btnDatHang control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnDatHang;
-
-        /// <summary>
-        /// lblTongTien control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTongTien;
-
-        /// <summary>
-        /// gvPendingOrders control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvPendingOrders;
-
-        /// <summary>
-        /// lblNoPendingOrders control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNoPendingOrders;
-
-        /// <summary>
-        /// gvCompletedOrders control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvCompletedOrders;
-
-        /// <summary>
-        /// lblNoCompletedOrders control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNoCompletedOrders;
+        protected global::System.Web.UI.WebControls.GridView gvHistoryOrders;
 
         /// <summary>
         /// pnlDetailModal control.
@@ -204,6 +150,15 @@ namespace QL_BAN_HANG
         protected global::System.Web.UI.WebControls.Label lblNote;
 
         /// <summary>
+        /// gvOrderDetail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvOrderDetail;
+
+        /// <summary>
         /// lblTotalDetail control.
         /// </summary>
         /// <remarks>
@@ -213,12 +168,21 @@ namespace QL_BAN_HANG
         protected global::System.Web.UI.WebControls.Label lblTotalDetail;
 
         /// <summary>
-        /// gvOrderDetail control.
+        /// btnCloseDetail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvOrderDetail;
+        protected global::System.Web.UI.WebControls.Button btnCloseDetail;
+
+        /// <summary>
+        /// lblNotification control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNotification;
     }
 }

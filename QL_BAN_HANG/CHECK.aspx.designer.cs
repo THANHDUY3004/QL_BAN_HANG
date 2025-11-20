@@ -11,43 +11,34 @@ namespace QL_BAN_HANG
 {
 
 
-    public partial class Default
+    public partial class CHECK
     {
 
         /// <summary>
-        /// Image_hot control.
+        /// form1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image_hot;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// Tieu_de_hot control.
+        /// lblMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Tieu_de_hot;
+        protected global::System.Web.UI.WebControls.Label lblMessage;
 
         /// <summary>
-        /// Tom_tac_hot control.
+        /// RepeaterProducts control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Tom_tac_hot;
-
-        /// <summary>
-        /// Noi_dung_hot control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal Noi_dung_hot;
+        protected global::System.Web.UI.WebControls.Repeater RepeaterProducts;
     }
 }

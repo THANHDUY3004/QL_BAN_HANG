@@ -16,11 +16,8 @@ namespace QL_BAN_HANG
                 {
                 lnkGioHang.NavigateUrl = "ShoppingUser.aspx";
                 // Đã đăng nhập
-                phUserTab.Text = ""; // Ẩn liên kết "Đăng nhập"
-                phUserTab.NavigateUrl = "";
-
-                phUserTab1.Text = "Thông tin tài khoản";
-                phUserTab1.NavigateUrl = "~/PersonalPage.aspx";
+                phUserTab.Text = "Thông tin tài khoản";
+                phUserTab.NavigateUrl = "~/PersonalPage.aspx";
                 }
                 else
                 {
@@ -28,9 +25,6 @@ namespace QL_BAN_HANG
                 // Chưa đăng nhập
                 phUserTab.Text = "Đăng nhập";
                 phUserTab.NavigateUrl = "~/LoginUser.aspx";
-
-                phUserTab1.Text = ""; // Ẩn liên kết "Thông tin tài khoản"
-                phUserTab1.NavigateUrl = "";
                 } 
         }
     }

@@ -10,19 +10,19 @@ using System.Web.UI.WebControls;
 
 namespace QL_BAN_HANG
 {
-    public partial class ShoppingList : System.Web.UI.Page
+    public partial class HistoryList : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                // Tải dữ liệu mặc định cho đơn hàng đang chờ
-                BindOrders(ddlStatusPending.SelectedValue, txtSearchPending.Text);
+                // Tải dữ liệu cho lịch sử đơn hàng
+                BindOrders(ddlStatusHistory.SelectedValue, txtSearchHistory.Text);
             }
         }
 
         /// <summary>
-        /// Hàm hiển thị thông báo JS (sử dụng ScriptManager)
+        /// Hàm hiển thị thông báo JS
         /// </summary>
         private void ShowNotification(string message, string type)
         {
@@ -32,19 +32,19 @@ namespace QL_BAN_HANG
         }
 
         /// <summary>
-        /// Xử lý sự kiện lọc (DropDownList và Button)
+        /// Xử lý lọc cho lịch sử đơn hàng
         /// </summary>
-        protected void Filter_Pending_Click(object sender, EventArgs e)
+        protected void Filter_History_Click(object sender, EventArgs e)
         {
-            BindOrders(ddlStatusPending.SelectedValue, txtSearchPending.Text);
+            BindOrders(ddlStatusHistory.SelectedValue, txtSearchHistory.Text);
         }
 
         /// <summary>
-        /// Xử lý các lệnh từ GridView (Xác nhận, Hủy, Chi tiết, Hoàn thành)
+        /// Xử lý các nút trong GridView (chỉ Chi tiết cho History)
         /// </summary>
         protected void gvOrders_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            int idCtdh;
+            int idCtdh = 0;
             if (!int.TryParse(e.CommandArgument.ToString(), out idCtdh))
             {
                 ShowNotification("Lỗi: ID đơn hàng không hợp lệ.", "error");
@@ -53,27 +53,10 @@ namespace QL_BAN_HANG
 
             try
             {
-                switch (e.CommandName)
+                if (e.CommandName == "ViewDetail")
                 {
-                    case "ConfirmOrder":
-                        Update_OrderStatus(idCtdh, "Đang giao");
-                        ShowNotification($"Đơn hàng #{idCtdh} đã được xác nhận và đang giao.", "success");
-                        BindOrders(ddlStatusPending.SelectedValue, txtSearchPending.Text);
-                        break;
-                    case "CompleteOrder":
-                        Update_OrderStatus(idCtdh, "Hoàn thành");
-                        ShowNotification($"Đơn hàng #{idCtdh} đã được hoàn thành.", "success");
-                        BindOrders(ddlStatusPending.SelectedValue, txtSearchPending.Text);
-                        break;
-                    case "CancelOrder":
-                        Update_OrderStatus(idCtdh, "Đã hủy");
-                        ShowNotification($"Đơn hàng #{idCtdh} đã được hủy.", "success");
-                        BindOrders(ddlStatusPending.SelectedValue, txtSearchPending.Text);
-                        break;
-                    case "ViewDetail":
-                        LoadDetailModal(idCtdh);
-                        pnlDetailModal.Visible = true;
-                        break;
+                    LoadDetailModal(idCtdh);
+                    pnlDetailModal.Visible = true;
                 }
             }
             catch (Exception ex)
@@ -83,77 +66,44 @@ namespace QL_BAN_HANG
         }
 
         /// <summary>
-        /// Áp dụng CSS cho trạng thái trong GridView và điều chỉnh hiển thị nút dựa trên trạng thái
+        /// Xử lý màu mè cho Trạng thái trong GridView
         /// </summary>
         protected void gvOrders_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                // Áp dụng CSS cho trạng thái
-                Label lblStatus = (Label)e.Row.FindControl("lblStatusPending");
+                Label lblStatus = (Label)e.Row.FindControl("lblStatusHistory");
+
                 if (lblStatus != null)
                 {
-                    string status = lblStatus.Text.ToLower();
+                    string status = lblStatus.Text;
                     string cssClass = "status-badge ";
-                    switch (status)
+
+                    switch (status.ToLower())
                     {
                         case "đang xử lý":
-                            cssClass += "status-pending";
+                            cssClass += "status-pending"; // Vàng
                             break;
                         case "đang giao":
-                            cssClass += "status-shipping";
+                            cssClass += "status-shipping"; // Xanh dương
                             break;
                         case "hoàn thành":
-                            cssClass += "status-completed";
+                            cssClass += "status-completed"; // Xanh lá
                             break;
                         case "đã hủy":
-                            cssClass += "status-cancelled";
+                            cssClass += "status-cancelled"; // Đỏ
                             break;
                         default:
-                            cssClass += "bg-gray-400 text-gray-800";
+                            cssClass += "bg-gray-400 text-gray-800"; // Xám
                             break;
                     }
                     lblStatus.CssClass = cssClass;
                 }
-
-                // Điều chỉnh hiển thị nút dựa trên trạng thái
-                string orderStatus = DataBinder.Eval(e.Row.DataItem, "Trang_thai").ToString();
-                LinkButton lnkConfirm = (LinkButton)e.Row.FindControl("lnkConfirm");
-                LinkButton lnkComplete = (LinkButton)e.Row.FindControl("lnkComplete");
-                LinkButton lnkCancel = (LinkButton)e.Row.FindControl("lnkCancel");
-                LinkButton lnkViewDetail = (LinkButton)e.Row.FindControl("lnkViewDetail");
-
-                if (lnkConfirm != null && lnkComplete != null)
-                {
-                    if (orderStatus == "Đang xử lý")
-                    {
-                        lnkConfirm.Visible = true;
-                        lnkConfirm.Text = "Xác nhận & Giao";
-                        lnkComplete.Visible = false;
-                    }
-                    else if (orderStatus == "Đang giao")
-                    {
-                        lnkConfirm.Visible = false;
-                        lnkComplete.Visible = true;
-                        lnkConfirm.Text = "";
-                        lnkComplete.Text = "Xác nhận & Hoàn thành";
-                    }
-                    else
-                    {
-                        // Ẩn cả hai nếu không phải trạng thái pending
-                        lnkConfirm.Visible = false;
-                        lnkComplete.Visible = false;
-                    }
-                }
-
-                // Luôn hiển thị Hủy và Chi tiết
-                if (lnkCancel != null) lnkCancel.Visible = true;
-                if (lnkViewDetail != null) lnkViewDetail.Visible = true;
             }
         }
 
         /// <summary>
-        /// Đóng modal chi tiết
+        /// Xử lý nút Đóng Modal
         /// </summary>
         protected void btnCloseDetail_Click(object sender, EventArgs e)
         {
@@ -161,7 +111,7 @@ namespace QL_BAN_HANG
         }
 
         /// <summary>
-        /// Tải dữ liệu cho GridView Pending Orders
+        /// Hàm tải dữ liệu cho GridView (chỉ History)
         /// </summary>
         private void BindOrders(string statusFilter, string searchTerm)
         {
@@ -184,16 +134,16 @@ namespace QL_BAN_HANG
                                     Thoi_gian_dat = lsdh != null ? lsdh.Ngay_gio_ghi_nhan : DateTime.Now
                                 };
 
-                    // Lọc cho Pending: "Đang xử lý" hoặc "Đang giao"
-                    query = query.Where(q => q.Trang_thai == "Đang xử lý" || q.Trang_thai == "Đang giao");
+                    // Lọc cho History
+                    query = query.Where(q => q.Trang_thai == "Hoàn thành" || q.Trang_thai == "Đã hủy");
 
                     // Lọc theo DropDownList
-                    if (!string.IsNullOrEmpty(statusFilter) && statusFilter != "Tất cả Đơn Chờ")
+                    if (statusFilter != "Tất Cả Lịch Sử")
                     {
                         query = query.Where(q => q.Trang_thai == statusFilter);
                     }
 
-                    // Lọc theo từ khóa tìm kiếm
+                    // Lọc theo Search Term
                     if (!string.IsNullOrWhiteSpace(searchTerm))
                     {
                         query = query.Where(q => q.Ten_khach_hang.Contains(searchTerm) ||
@@ -201,14 +151,12 @@ namespace QL_BAN_HANG
                                                   q.ID_DH.ToString().Contains(searchTerm));
                     }
 
-                    // Sắp xếp và thực thi
                     var result = query.OrderByDescending(q => q.Thoi_gian_dat).ToList();
 
-                    // Chuyển sang DataTable để bind
                     DataTable dt = new DataTable();
                     dt.Columns.Add("ID_DH", typeof(int));
                     dt.Columns.Add("Ten_khach_hang", typeof(string));
-                    dt.Columns.Add("Dia_chi", typeof(string)); // Thêm nếu cần dùng sau
+                    dt.Columns.Add("Dia_chi", typeof(string));
                     dt.Columns.Add("Tong_tien", typeof(decimal));
                     dt.Columns.Add("Thoi_gian_dat", typeof(DateTime));
                     dt.Columns.Add("Trang_thai", typeof(string));
@@ -218,45 +166,18 @@ namespace QL_BAN_HANG
                         dt.Rows.Add(item.ID_DH, item.Ten_khach_hang, item.Dia_chi, item.Tong_tien, item.Thoi_gian_dat, item.Trang_thai);
                     }
 
-                    gvPendingOrders.DataSource = dt;
-                    gvPendingOrders.DataBind();
+                    gvHistoryOrders.DataSource = dt;
+                    gvHistoryOrders.DataBind();
                 }
                 catch (Exception ex)
                 {
-                    ShowNotification($"Lỗi tải dữ liệu: {ex.Message}", "error");
+                    ShowNotification($"Lỗi kết nối hoặc tải dữ liệu CSDL: {ex.Message}", "error");
                 }
             }
         }
 
         /// <summary>
-        /// Cập nhật trạng thái đơn hàng
-        /// </summary>
-        private void Update_OrderStatus(int orderId, string status)
-        {
-            using (var context = new Cua_Hang_Tra_SuaDataContext())
-            {
-                try
-                {
-                    var order = context.Chi_Tiet_Don_Hangs.SingleOrDefault(o => o.ID_CTDH == orderId);
-                    if (order != null)
-                    {
-                        order.Trang_thai_don = status;
-                        context.SubmitChanges();
-                    }
-                    else
-                    {
-                        ShowNotification("Không tìm thấy đơn hàng để cập nhật.", "error");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    ShowNotification($"Lỗi cập nhật trạng thái: {ex.Message}", "error");
-                }
-            }
-        }
-
-        /// <summary>
-        /// Tải chi tiết đơn hàng lên modal
+        /// Tải chi tiết đơn hàng lên Modal
         /// </summary>
         private void LoadDetailModal(int idCtdh)
         {
@@ -264,7 +185,6 @@ namespace QL_BAN_HANG
             {
                 try
                 {
-                    // Lấy thông tin chung đơn hàng
                     var orderQuery = from ctdh in context.Chi_Tiet_Don_Hangs
                                      join tk in context.Tai_Khoans on ctdh.So_dien_thoai equals tk.So_dien_thoai
                                      join lsdh in context.Lich_Su_Don_Hangs on ctdh.ID_CTDH equals lsdh.ID_DH into lsdhGroup
@@ -291,20 +211,19 @@ namespace QL_BAN_HANG
                         lblAddress.Text = order.Dia_chi;
                         lblOrderTime.Text = order.Thoi_gian_dat.ToString("g");
                         lblStatusDetail.Text = order.Trang_thai_don;
-                        lblNote.Text = order.Ghi_chu ?? string.Empty;
+                        lblNote.Text = order.Ghi_chu;
                         lblTotalDetail.Text = order.Tong_tien.ToString("N0") + " VNĐ";
                     }
 
-                    // Lấy chi tiết sản phẩm
                     var detailQuery = from spdh in context.SP_Don_Hangs
                                       join sp in context.San_Phams on spdh.ID_SP equals sp.ID_SP
                                       where spdh.ID_CTDH == idCtdh
                                       select new
                                       {
-                                          Ten_san_pham = sp.Ten_san_pham,
                                           So_luong = spdh.So_luong,
-                                          Gia_tai_thoi_diem = spdh.Gia_Ban, // Giả sử Gia_Ban là giá tại thời điểm; đổi nếu cần
-                                          Ghi_chu_item = spdh.Ghi_chu_item ?? string.Empty
+                                          Gia_Ban = spdh.Gia_Ban,
+                                          Ghi_chu_item = spdh.Ghi_chu_item,
+                                          Ten_san_pham = sp.Ten_san_pham
                                       };
 
                     var details = detailQuery.ToList();
@@ -313,15 +232,14 @@ namespace QL_BAN_HANG
                 }
                 catch (Exception ex)
                 {
-                    ShowNotification($"Lỗi tải chi tiết: {ex.Message}", "error");
+                    ShowNotification("Lỗi khi tải chi tiết đơn hàng: " + ex.Message, "error");
                 }
             }
         }
 
-        protected void btn_ls_Click(object sender, EventArgs e)
+        protected void bnt_dh_Click(object sender, EventArgs e)
         {
-            //chuyển sang trang HitoryList
-            Response.Redirect("HistoryList.aspx");
+            Response.Redirect("ShoppingList.aspx");
         }
     }
 }
