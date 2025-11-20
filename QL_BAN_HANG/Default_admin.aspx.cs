@@ -150,8 +150,8 @@ namespace QL_BAN_HANG
                     try
                     {
                         fileName = Path.GetFileName(fileUploadHinhAnh.FileName);
-                        string savePath = Server.MapPath("~/Images/") + fileName;
-                        fileUploadHinhAnh.SaveAs(savePath); // Lưu file vào thư mục /Images/
+                        string savePath = Server.MapPath("~/uploads/images/") + fileName;
+                        fileUploadHinhAnh.SaveAs(savePath); // Lưu file vào thư mục 
                     }
                     catch (Exception ex)
                     {
@@ -277,13 +277,13 @@ namespace QL_BAN_HANG
         }
 
         /// <summary>
-        /// Hàm hỗ trợ xóa file ảnh vật lý từ thư mục ~/Images/
+        /// Hàm hỗ trợ xóa file ảnh vật lý từ thư mục 
         /// </summary>
         private void DeleteImageFile(string fileName)
         {
             if (!string.IsNullOrEmpty(fileName))
             {
-                string path = Server.MapPath("~/Images/") + fileName;
+                string path = Server.MapPath("~/uploads/images/") + fileName;
                 if (File.Exists(path))
                 {
                     try
