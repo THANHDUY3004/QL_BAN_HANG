@@ -15,6 +15,7 @@ namespace QL_BAN_HANG
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            lblMessage.Text = ""; // Xóa thông báo cũ mỗi lần tải trang
             if (!IsPostBack)
             {
                 // Chỉ nạp dữ liệu DropDownList lần đầu
@@ -203,25 +204,46 @@ namespace QL_BAN_HANG
         {
             try
             {
+                string hoTen = txtht.Text.Trim();
+                string soDienThoai = txtsdt.Text.Trim();
+                string diaChi = txtdchi.Text.Trim();
+                string matKhau = txtmk.Text.Trim();
+                string phanQuyen = ddlPhanQuyen.SelectedValue.ToString().Trim();
+
+                // ✅ Kiểm tra họ tên (không chứa ký tự đặc biệt hoặc số)
+                if (!System.Text.RegularExpressions.Regex.IsMatch(hoTen, @"^[a-zA-ZÀ-ỹ\s]+$"))
+                {
+                    lblMessage.Text = "⚠️ Họ tên không được chứa số hoặc ký tự đặc biệt.";
+                    return;
+                }
+
+                // ✅ Kiểm tra số điện thoại (10 ký tự, toàn số, bắt đầu bằng 0)
+                if (soDienThoai.Length != 10 || !soDienThoai.All(char.IsDigit) || !soDienThoai.StartsWith("0"))
+                {
+                    lblMessage.Text = "⚠️ Số điện thoại phải gồm 10 chữ số và bắt đầu bằng số 0.";
+                    return;
+                }
+
                 // Khởi tạo kết nối CSDL
                 Cua_Hang_Tra_SuaDataContext context = new Cua_Hang_Tra_SuaDataContext();
-                // Tạo đối tượng tài khoản mới
-                Tai_Khoan tk = new Tai_Khoan
-                {
-                    Ho_va_ten = txtht.Text.Trim(),
-                    So_dien_thoai = txtsdt.Text.Trim(),
-                    Dia_chi = txtdchi.Text.Trim(),
-                    Mat_khau = ToMD5(txtmk.Text.Trim()),
-                    Phan_quyen = ddlPhanQuyen.SelectedValue.ToString().Trim()
-                };
 
                 // Kiểm tra trùng số điện thoại
-                var check = context.Tai_Khoans.SingleOrDefault(x => x.So_dien_thoai == tk.So_dien_thoai);
+                var check = context.Tai_Khoans.SingleOrDefault(x => x.So_dien_thoai == soDienThoai);
                 if (check != null)
                 {
                     lblMessage.Text = "⚠️ Số điện thoại đã tồn tại.";
                     return;
                 }
+
+                // Tạo đối tượng tài khoản mới
+                Tai_Khoan tk = new Tai_Khoan
+                {
+                    Ho_va_ten = hoTen,
+                    So_dien_thoai = soDienThoai,
+                    Dia_chi = diaChi,
+                    Mat_khau = ToMD5(matKhau),
+                    Phan_quyen = phanQuyen
+                };
 
                 // Thêm vào CSDL
                 context.Tai_Khoans.InsertOnSubmit(tk);
@@ -236,6 +258,7 @@ namespace QL_BAN_HANG
                 lblMessage.Text = "❌ Lỗi: " + ex.Message;
             }
         }
+
         // Hàm xóa dữ liệu form sau khi thêm
         private void ClearForm()
         {
@@ -273,6 +296,11 @@ namespace QL_BAN_HANG
 
                                 if (taiKhoan != null)
                                 {
+                                    // Xóa các bản ghi con trong Gio_Hang trước
+                                    var gioHangs = context.Gio_Hangs.Where(g => g.So_dien_thoai == soDienThoai);
+                                    context.Gio_Hangs.DeleteAllOnSubmit(gioHangs);
+
+                                    // Sau đó xóa tài khoản
                                     context.Tai_Khoans.DeleteOnSubmit(taiKhoan);
                                     soTaiKhoanDaXoa++;
                                 }

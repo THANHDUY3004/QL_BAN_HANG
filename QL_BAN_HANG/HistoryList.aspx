@@ -35,7 +35,7 @@
                 <asp:Button ID="btnSearchHistory" runat="server" Text="Tìm kiếm" OnClick="Filter_History_Click" 
                     CssClass="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-150" />
             </div>
-
+            <asp:Label ID="lblMessage" runat="server" Text=""></asp:Label>
             <asp:GridView ID="gvHistoryOrders" runat="server" AutoGenerateColumns="False" 
                 DataKeyNames="ID_DH" CssClass="gridview-style" 
                 OnRowDataBound="gvOrders_RowDataBound" OnRowCommand="gvOrders_RowCommand">

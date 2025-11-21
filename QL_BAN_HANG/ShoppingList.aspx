@@ -40,6 +40,7 @@
                 <asp:Button ID="btnSearchPending" runat="server" Text="Tìm kiếm" OnClick="Filter_Pending_Click" 
                     CssClass="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-150" />
             </div>
+            <asp:Label ID="lblMessage" runat="server" Text=""></asp:Label>
 
             <asp:GridView ID="gvPendingOrders" runat="server" AutoGenerateColumns="False" 
                 DataKeyNames="ID_DH" CssClass="gridview-style" 

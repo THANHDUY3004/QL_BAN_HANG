@@ -45,9 +45,29 @@ namespace QL_BAN_HANG
             string soDienThoai = txtSoDienThoai.Text.Trim();
             string diaChi = txtDiaChi.Text.Trim();
             string matKhau = txtMatKhau.Text;
-
+            string nhapLaiMatKhau = txtXacNhanMatKhau.Text;
             const string phanQuyenMacDinh = "Khách Hàng";
 
+            // ✅ Kiểm tra số điện thoại
+            if (soDienThoai.Length != 10 || !soDienThoai.All(char.IsDigit) || !soDienThoai.StartsWith("0"))
+            {
+                lblMessage.Text = "Số điện thoại phải gồm 10 số và bắt đầu bằng số 0.";
+                lblMessage.ForeColor = System.Drawing.Color.Red;
+                return;
+            }
+
+            if (matKhau != nhapLaiMatKhau)
+            {
+                lblMessage.Text = "Mật khẩu và xác nhận mật khẩu không khớp.";
+                lblMessage.ForeColor = System.Drawing.Color.Red;
+                return;
+            }
+            if (!System.Text.RegularExpressions.Regex.IsMatch(hoTen, @"^[a-zA-ZÀ-ỹ\s]+$"))
+            {
+                lblMessage.Text = "Họ tên không được chứa ký tự đặc biệt hoặc số.";
+                lblMessage.ForeColor = System.Drawing.Color.Red;
+                return;
+            }
             try
             {
                 using (Cua_Hang_Tra_SuaDataContext context = new Cua_Hang_Tra_SuaDataContext())
@@ -85,5 +105,6 @@ namespace QL_BAN_HANG
                 lblMessage.ForeColor = System.Drawing.Color.Red;
             }
         }
+
     }
 }

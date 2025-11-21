@@ -14,6 +14,7 @@ namespace QL_BAN_HANG
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            lblMessage.Text = "";
             if (!IsPostBack)
             {
                 // Tải dữ liệu cho lịch sử đơn hàng
@@ -37,6 +38,10 @@ namespace QL_BAN_HANG
         protected void Filter_History_Click(object sender, EventArgs e)
         {
             BindOrders(ddlStatusHistory.SelectedValue, txtSearchHistory.Text);
+            if (gvHistoryOrders.Rows.Count == 0)
+            {
+                lblMessage.Text = "Không tìm thấy đơn hàng phù hợp với tiêu chí lọc.";
+            }
         }
 
         /// <summary>

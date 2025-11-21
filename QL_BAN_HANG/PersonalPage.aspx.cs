@@ -153,15 +153,48 @@ namespace QL_BAN_HANG
             string matKhau = txtMatKhau.Text.Trim();
             string xacNhan = txtXacNhanMatKhau.Text.Trim();
 
-            if (!string.IsNullOrEmpty(matKhau) && matKhau != xacNhan)
+            // ✅ Kiểm tra họ tên (không chứa ký tự đặc biệt hoặc số)
+            if (!System.Text.RegularExpressions.Regex.IsMatch(hoTen, @"^[a-zA-ZÀ-ỹ\s]+$"))
             {
-                lblMessage.Text = "❌ Mật khẩu xác nhận không khớp.";
+                lblMessage.Text = "❌ Họ tên không được chứa số hoặc ký tự đặc biệt.";
                 lblMessage.ForeColor = System.Drawing.Color.Red;
                 return;
             }
 
+            // ✅ Kiểm tra số điện thoại (10 chữ số, bắt đầu bằng số 0)
+            if (sdt.Length != 10 || !sdt.All(char.IsDigit) || !sdt.StartsWith("0"))
+            {
+                lblMessage.Text = "❌ Số điện thoại phải gồm 10 chữ số và bắt đầu bằng số 0.";
+                lblMessage.ForeColor = System.Drawing.Color.Red;
+                return;
+            }
+
+            // ✅ Kiểm tra mật khẩu (nếu có nhập)
+            if (!string.IsNullOrEmpty(matKhau))
+            {
+                if (matKhau != xacNhan)
+                {
+                    lblMessage.Text = "❌ Mật khẩu xác nhận không khớp.";
+                    lblMessage.ForeColor = System.Drawing.Color.Red;
+                    return;
+                }
+
+                // Có thể thêm kiểm tra độ mạnh mật khẩu (tối thiểu 8 ký tự, có chữ hoa, chữ thường, số)
+                if (matKhau.Length < 8 ||
+                    !matKhau.Any(char.IsUpper) ||
+                    !matKhau.Any(char.IsLower) ||
+                    !matKhau.Any(char.IsDigit))
+                {
+                    lblMessage.Text = "❌ Mật khẩu phải có ít nhất 8 ký tự, gồm chữ hoa, chữ thường và số.";
+                    lblMessage.ForeColor = System.Drawing.Color.Red;
+                    return;
+                }
+            }
+
+            // ✅ Gọi hàm cập nhật
             EditAccountByPhone(sdt, hoTen, diaChi, matKhau);
 
+            // Khóa lại các ô nhập
             txtHoTen.ReadOnly = true;
             txtDiaChi.ReadOnly = true;
             txtMatKhau.ReadOnly = true;
@@ -170,7 +203,11 @@ namespace QL_BAN_HANG
             btnSuaThongTin.Visible = true;
             btnLuuThongTin.Visible = false;
             btnHuy.Visible = false;
+
+            lblMessage.Text = "✅ Thông tin đã được lưu thành công.";
+            lblMessage.ForeColor = System.Drawing.Color.Green;
         }
+
 
         protected void btnDangXuat_Click(object sender, EventArgs e)
         {

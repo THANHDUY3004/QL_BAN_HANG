@@ -122,6 +122,7 @@ namespace QL_BAN_HANG
                 string selectedCategoryId = ddlAddCategory.SelectedValue;
                 string giaNhap = txtGia.Text.Trim().Replace(",", "");
 
+                // ✅ Kiểm tra bắt buộc nhập
                 if (string.IsNullOrWhiteSpace(txtTenSP.Text) || string.IsNullOrWhiteSpace(giaNhap))
                 {
                     lblMessage.Text = "⚠️ Vui lòng nhập đủ Tên SP và Giá.";
@@ -132,37 +133,46 @@ namespace QL_BAN_HANG
                     lblMessage.Text = "⚠️ Vui lòng chọn Danh mục.";
                     return;
                 }
-                if (!decimal.TryParse(giaNhap, out decimal giaCoBan) || !int.TryParse(selectedCategoryId, out int idMn))
+
+                // ✅ Kiểm tra giá tiền phải là số
+                if (!decimal.TryParse(giaNhap, out decimal giaCoBan))
                 {
-                    lblMessage.Text = "❌ Lỗi định dạng Giá hoặc ID Danh mục.";
+                    lblMessage.Text = "❌ Giá tiền phải là số hợp lệ.";
+                    return;
+                }
+
+                // ✅ Kiểm tra ID danh mục phải là số
+                if (!int.TryParse(selectedCategoryId, out int idMn))
+                {
+                    lblMessage.Text = "❌ ID Danh mục không hợp lệ.";
                     return;
                 }
 
                 // (BƯỚC MỚI) Xử lý file Upload
-                // (BƯỚC MỚI) Xử lý file Upload
-                string fileName = null;
-                if (fileUploadHinhAnh.HasFile)
-                {
-                    try
-                    {
-                        fileName = Path.GetFileName(fileUploadHinhAnh.FileName);
-                        string savePath = Server.MapPath("~/uploads/images/") + fileName; // Đã thêm '/' ở cuối để đảm bảo đường dẫn
-                        fileUploadHinhAnh.SaveAs(savePath);
-                    }
-                    catch (Exception ex)
-                    {
-                        lblMessage.Text = "❌ Lỗi khi tải lên hình ảnh: " + ex.Message;
-                        return;
-                    }
-                }
+                string fileName = null;
+                if (fileUploadHinhAnh.HasFile)
+                {
+                    try
+                    {
+                        fileName = Path.GetFileName(fileUploadHinhAnh.FileName);
+                        string savePath = Server.MapPath("~/uploads/images/") + fileName;
+                        fileUploadHinhAnh.SaveAs(savePath);
+                    }
+                    catch (Exception ex)
+                    {
+                        lblMessage.Text = "❌ Lỗi khi tải lên hình ảnh: " + ex.Message;
+                        return;
+                    }
+                }
 
+                // ✅ Tạo đối tượng sản phẩm mới
                 San_Pham newProduct = new San_Pham
                 {
                     Ten_san_pham = txtTenSP.Text.Trim(),
                     Gia_co_ban = giaCoBan,
                     Mo_ta_san_pham = txtMoTa.Text.Trim(),
                     ID_MN = idMn,
-                    Trang_thai = DropDownList1.SelectedValue, // <-- SỬA LỖI 1: Lấy từ DropDownList1
+                    Trang_thai = DropDownList1.SelectedValue,
                     Hinh_anh = fileName
                 };
 
@@ -171,11 +181,12 @@ namespace QL_BAN_HANG
 
                 lblMessage.Text = $"✅ Thêm sản phẩm '{newProduct.Ten_san_pham}' thành công.";
 
+                // Reset form
                 txtTenSP.Text = string.Empty;
                 txtGia.Text = string.Empty;
                 txtMoTa.Text = string.Empty;
                 ddlAddCategory.SelectedIndex = 0;
-                DropDownList1.SelectedIndex = 0; // <-- THÊM MỚI: Reset trạng thái
+                DropDownList1.SelectedIndex = 0;
 
                 LoadDataProducts();
             }
@@ -184,6 +195,7 @@ namespace QL_BAN_HANG
                 lblMessage.Text = "❌ Lỗi khi thêm sản phẩm: " + ex.Message;
             }
         }
+
 
         // -------------------------------------------------------------
         // Xử lý Xóa (Giữ nguyên)
@@ -326,9 +338,6 @@ namespace QL_BAN_HANG
                         }
                     }
                 }
-
-
-
                 if (soSpDaChon > 0)
                 {
                     // Xóa tất cả các sản phẩm đã chọn

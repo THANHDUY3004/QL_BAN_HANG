@@ -13,6 +13,7 @@ namespace QL_BAN_HANG
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            lblMessage.Text = "";
             if (lblMessage == null)
             {
                 // Tạo một Label giả lập nếu nó chưa tồn tại trên trang ASPX

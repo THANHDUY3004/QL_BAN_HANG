@@ -44,6 +44,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="RichTextEditor, Version=8.2.0.0, Culture=neutral, PublicKeyToken=3858aa6802b1223a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\New folder\richtexteditor\net_cs\bin\RichTextEditor.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -119,10 +123,10 @@
     <Content Include="bin\roslyn\System.Xml.XPath.XDocument.dll" />
     <Content Include="bin\roslyn\vbc.exe" />
     <Content Include="bin\roslyn\VBCSCompiler.exe" />
-    <Content Include="CHECK.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Default_admin.aspx" />
     <Content Include="EditAccount.aspx" />
+    <Content Include="EditDefault_admin.aspx" />
     <Content Include="HistoryList.aspx" />
     <Content Include="layout\accountlist.css" />
     <Content Include="layout\default_admin.css" />
@@ -1226,13 +1230,6 @@
     <Compile Include="AccountList.aspx.designer.cs">
       <DependentUpon>AccountList.aspx</DependentUpon>
     </Compile>
-    <Compile Include="CHECK.aspx.cs">
-      <DependentUpon>CHECK.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="CHECK.aspx.designer.cs">
-      <DependentUpon>CHECK.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1253,6 +1250,13 @@
     </Compile>
     <Compile Include="EditAccount.aspx.designer.cs">
       <DependentUpon>EditAccount.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EditDefault_admin.aspx.cs">
+      <DependentUpon>EditDefault_admin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditDefault_admin.aspx.designer.cs">
+      <DependentUpon>EditDefault_admin.aspx</DependentUpon>
     </Compile>
     <Compile Include="HistoryList.aspx.cs">
       <DependentUpon>HistoryList.aspx</DependentUpon>

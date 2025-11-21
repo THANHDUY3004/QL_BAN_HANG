@@ -14,6 +14,8 @@ namespace QL_BAN_HANG
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            lblMessage.Text = "";
+            //clear llMessage
             if (!IsPostBack)
             {
                 // Tải dữ liệu mặc định cho đơn hàng đang chờ
@@ -37,6 +39,10 @@ namespace QL_BAN_HANG
         protected void Filter_Pending_Click(object sender, EventArgs e)
         {
             BindOrders(ddlStatusPending.SelectedValue, txtSearchPending.Text);
+            if(gvPendingOrders.Rows.Count == 0)
+            {
+                lblMessage.Text = "Không tìm thấy đơn hàng phù hợp với tiêu chí lọc.";
+            }
         }
 
         /// <summary>

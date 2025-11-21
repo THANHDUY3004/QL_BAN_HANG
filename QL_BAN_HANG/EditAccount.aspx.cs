@@ -109,19 +109,32 @@ namespace QL_BAN_HANG
 
                     if (taiKhoan != null)
                     {
-                        // Gán lại dữ liệu từ form
-                        taiKhoan.Ho_va_ten = txtHoTen.Text.Trim();
-                        // KHÔNG cho sửa số điện thoại
-                        taiKhoan.Dia_chi = string.IsNullOrWhiteSpace(txtDiaChi.Text) ? null : txtDiaChi.Text.Trim();
+                        string hoTen = txtHoTen.Text.Trim();
+                        string diaChi = txtDiaChi.Text.Trim();
+                        string matKhau = txtMatKhau.Text.Trim();
+                        string nhapLaiMatKhau = txtXacNhanMatKhau.Text.Trim();
 
-                        if (!string.IsNullOrEmpty(txtMatKhau.Text))
+                        // ✅ Kiểm tra họ tên (không chứa ký tự đặc biệt hoặc số)
+                        if (!System.Text.RegularExpressions.Regex.IsMatch(hoTen, @"^[a-zA-ZÀ-ỹ\s]+$"))
                         {
-                            if (txtMatKhau.Text != txtXacNhanMatKhau.Text)
+                            lblMessage.Text = "❌ Họ tên không được chứa số hoặc ký tự đặc biệt.";
+                            return;
+                        }
+
+                        // Gán lại dữ liệu từ form
+                        taiKhoan.Ho_va_ten = hoTen;
+                        // KHÔNG cho sửa số điện thoại
+                        taiKhoan.Dia_chi = string.IsNullOrWhiteSpace(diaChi) ? null : diaChi;
+
+                        // ✅ Kiểm tra mật khẩu (nếu có nhập)
+                        if (!string.IsNullOrEmpty(matKhau))
+                        {
+                            if (matKhau != nhapLaiMatKhau)
                             {
                                 lblMessage.Text = "❌ Mật khẩu xác nhận không khớp.";
                                 return;
                             }
-                            taiKhoan.Mat_khau = ToMD5(txtMatKhau.Text.Trim());
+                            taiKhoan.Mat_khau = ToMD5(matKhau);
                         }
 
                         // Lưu thay đổi
@@ -140,6 +153,7 @@ namespace QL_BAN_HANG
                 lblMessage.Text = "❌ Lưu không thành công! Lỗi: " + ex.Message;
             }
         }
+
 
         protected void btnHuy_Click(object sender, EventArgs e)
         {
