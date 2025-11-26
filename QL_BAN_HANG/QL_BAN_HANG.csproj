@@ -128,14 +128,11 @@
     <Content Include="EditAccount.aspx" />
     <Content Include="EditDefault_admin.aspx" />
     <Content Include="HistoryList.aspx" />
-    <Content Include="layout\accountlist.css" />
     <Content Include="layout\default_admin.css" />
     <Content Include="layout\loginuser.css" />
+    <Content Include="layout\logo.png" />
     <Content Include="layout\master.css" />
-    <Content Include="layout\nav.css" />
-    <Content Include="layout\product.css" />
     <Content Include="layout\productuser.css" />
-    <Content Include="layout\registeruser.css" />
     <Content Include="layout\scripts.js" />
     <Content Include="layout\shopping.css" />
     <Content Include="layout\Style.css" />

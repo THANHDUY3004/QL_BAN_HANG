@@ -15,12 +15,12 @@ namespace QL_BAN_HANG
         {
             if (!IsPostBack)
             {
-                LoadDataBaiViet();
+                LoadDataBaiViet(0);
             }
         }
 
         // --- Tải dữ liệu ---
-        private void LoadDataBaiViet()
+        private void LoadDataBaiViet(int page)
         {
             var query = context.Bai_Viets.AsQueryable();
 
@@ -28,10 +28,15 @@ namespace QL_BAN_HANG
                 .OrderBy(bv => bv.OrderKey)              // Thứ tự tăng dần
                 .ThenByDescending(bv => bv.ID_BV)        // Nếu trùng OrderKey thì ID_BV giảm dần
                 .ToList();
-
+            GridViewBaiViet.PageIndex = page;
+            GridViewBaiViet.PageSize = 5;         // số bài mỗi trang
             GridViewBaiViet.DataBind();
         }
 
+        protected void GridViewBaiViet_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            LoadDataBaiViet(e.NewPageIndex); // gọi lại hàm load dữ liệu từ DB
+        }
 
         // --- Thêm bài viết ---
         protected void butAdd_Click(object sender, EventArgs e)
@@ -51,10 +56,14 @@ namespace QL_BAN_HANG
                     string savePath = Server.MapPath("~/uploads/images/") + fileName;
                     fileUploadHinhAnh.SaveAs(savePath);
                 }
+                else
+                {
+                    fileName = "0.jpg"; // Ảnh mặc định nếu không tải lên
+                }
 
-                // Lấy nội dung từ Rich Text Editor và đảm bảo không NULL
-                // Sử dụng toán tử ?? string.Empty để tránh lỗi "Cannot insert the value NULL"
-                string noiDung = Request.Unvalidated["EditorAddNoiDung"] ?? string.Empty;
+                    // Lấy nội dung từ Rich Text Editor và đảm bảo không NULL
+                    // Sử dụng toán tử ?? string.Empty để tránh lỗi "Cannot insert the value NULL"
+                    string noiDung = Request.Unvalidated["EditorAddNoiDung"] ?? string.Empty;
 
                 Bai_Viet newBaiViet = new Bai_Viet
                 {
@@ -77,7 +86,7 @@ namespace QL_BAN_HANG
                 EditorAddNoiDung.Text = string.Empty; // Reset Editor
                 txtAddOrderKey.Text = "1";
 
-                LoadDataBaiViet();
+                LoadDataBaiViet(0);
             }
             catch (Exception ex)
             {
@@ -112,7 +121,7 @@ namespace QL_BAN_HANG
                 }
 
                 // Refresh lại GridView
-                LoadDataBaiViet();
+                LoadDataBaiViet(0);
             }
         }
 
@@ -136,7 +145,7 @@ namespace QL_BAN_HANG
                     lblMessage.Text = "⚠️ Không tìm thấy bài viết cần xóa.";
                 }
 
-                LoadDataBaiViet();
+                LoadDataBaiViet(0);
             }
             catch (Exception ex)
             {

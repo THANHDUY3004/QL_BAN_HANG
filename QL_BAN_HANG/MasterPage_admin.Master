@@ -9,7 +9,6 @@
     </asp:ContentPlaceHolder>
     <link href="layout/master.css" rel="stylesheet" />
     <link href="layout/nav.css" rel="stylesheet" />
-    <link href="layout/bottom.css" rel="stylesheet" />
     <script src="layout/scripts.js"></script>
 </head>
 <body>
@@ -17,6 +16,9 @@
 <form runat="server">
     <div id="Banner"></div>
     <div id="MainMenu">
+        <a href="Default.aspx">
+            <img src="layout/logo.png" alt="Logo" width="100" />
+        </a>
         <asp:ContentPlaceHolder ID="ContentPlaceHolderMainMenu" runat="server">
             <div class="nav-toggle" onclick="toggleNav()">☰ Menu</div>
             <ul id="nav">

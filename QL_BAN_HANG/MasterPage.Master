@@ -8,8 +8,6 @@
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
     <link href="layout/master.css" rel="stylesheet" />
-    <link href="layout/nav.css" rel="stylesheet" />
-    <link href="layout/bottom.css" rel="stylesheet" />
     <script src="layout/scripts.js"></script>
 </head>
 <body>
@@ -17,37 +15,32 @@
 <form runat="server">
     <div id="Banner"></div>
     <div id="MainMenu">
-        <asp:ContentPlaceHolder ID="ContentPlaceHolderMainMenu" runat="server">
-s            <ul id="nav">
+        <a href="Default.aspx">
+            <img src="layout/logo.png" alt="Logo" width="100" />
+        </a>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolderMainMenu" runat="server">  
+            <ul id="nav">
                 <li><a href="Default.aspx">Giới Thiệu</a></li>
-                <li><a href="ProductUser.aspx">Danh Mục Sản Phẩm &raquo;</a>
+                <li>
+                    <a href="ProductUser.aspx">Danh Mục Sản Phẩm &raquo;</a>
                     <ul>
                         <li><a href="ProductUser.aspx?ID_MN=3">Trà Sữa</a></li>
                         <li><a href="ProductUser.aspx?ID_MN=4">Trà Trái Cây</a></li>
                         <li><a href="ProductUser.aspx?ID_MN=5">Bánh Ngọt</a></li>
                     </ul>
                 </li>
-
-                <!-- Link giỏ hàng động -->
-                <li id="nav-right-2">
+                <li id="nav-right">
                     <asp:HyperLink ID="lnkGioHang" runat="server" Text="Giỏ Hàng" NavigateUrl="#" />
                 </li>
-
-                <!-- Vùng hiển thị thông tin tài khoản hoặc đăng nhập -->
-                <li id="nav-right">
+                <li id="nav-right-2">
                     <asp:HyperLink ID="phUserTab" runat="server" Text="Đăng Nhập" NavigateUrl="LoginUser.aspx" />
                 </li>
             </ul>
         </asp:ContentPlaceHolder>
 
     </div>
-    <div id="Contens">
-        <div id="SubMenu">
-            <asp:ContentPlaceHolder ID="ContentPlaceHolderSubMenu" runat="server" />
-        </div>
-        <div id="Content">
-            <asp:ContentPlaceHolder ID="ContentPlaceHolderContent" runat="server" />
-        </div>
+    <div id="Content">
+        <asp:ContentPlaceHolder ID="ContentPlaceHolderContent" runat="server" />
     </div>
     <div id="Bottom">
         <asp:ContentPlaceHolder ID="ContentPlaceHolderBottom" runat="server" >

@@ -6,22 +6,24 @@ namespace QL_BAN_HANG
 {
     public partial class Default : System.Web.UI.Page
     {
+        private int currentIdBv = 0;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                int idBv = 0;
-                if (int.TryParse(Request.QueryString["ID_BV"], out idBv))
+                if (int.TryParse(Request.QueryString["ID_BV"], out currentIdBv))
                 {
-                    LoadBaiVietTheoId(idBv);
-                    LoadDanhSachBaiViet(idBv); // loại bỏ bài viết đang hiển thị
+                    LoadBaiVietTheoId(currentIdBv);
                 }
                 else
                 {
                     var baiVietHot = LoadBaiVietHot();
                     if (baiVietHot != null)
-                        LoadDanhSachBaiViet(baiVietHot.ID_BV);
+                        currentIdBv = baiVietHot.ID_BV;
                 }
+
+                LoadDanhSachBaiViet(currentIdBv, 0); // loại bỏ bài viết đang hiển thị
             }
         }
 
@@ -47,7 +49,7 @@ namespace QL_BAN_HANG
             }
         }
 
-        private void LoadDanhSachBaiViet(int excludeId)
+        private void LoadDanhSachBaiViet(int excludeId, int page)
         {
             using (var db = new Cua_Hang_Tra_SuaDataContext())
             {
@@ -56,10 +58,14 @@ namespace QL_BAN_HANG
                            .OrderByDescending(b => b.ID_BV)
                            .ToList();
 
+                GridView1.AllowPaging = true;   // bật phân trang
+                GridView1.PageSize = 5;         // số bài mỗi trang
+                GridView1.PageIndex = page;     // trang hiện tại
                 GridView1.DataSource = ds;
                 GridView1.DataBind();
             }
         }
+
 
         private void HienThiBaiViet(Bai_Viet baiViet)
         {
@@ -79,6 +85,11 @@ namespace QL_BAN_HANG
                 Noi_dung_hot.Text = "";
                 Image_hot.ImageUrl = "";
             }
+        }
+
+        protected void GridView1_PageIndexChanging(object sender, System.Web.UI.WebControls.GridViewPageEventArgs e)
+        {
+            LoadDanhSachBaiViet(currentIdBv, e.NewPageIndex);
         }
     }
 }

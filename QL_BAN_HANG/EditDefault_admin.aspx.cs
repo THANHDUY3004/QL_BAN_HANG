@@ -16,10 +16,12 @@ namespace QL_BAN_HANG
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            // Luôn gán ID_BV từ query string
+            int.TryParse(Request.QueryString["ID_BV"], out idBv);
+
             if (!IsPostBack)
             {
-                // Lấy ID_BV khi Page_Load lần đầu (IsPostBack = false)
-                if (int.TryParse(Request.QueryString["ID_BV"], out idBv))
+                if (idBv > 0)
                 {
                     LoadBaiViet(idBv);
                 }
@@ -28,9 +30,8 @@ namespace QL_BAN_HANG
                     lblMessage.Text = "⚠️ Thiếu ID_BV trên đường dẫn.";
                 }
             }
-            // Cần lấy ID_BV trong Page_Load ngay cả khi IsPostBack = true
-            // để đảm bảo idBv có giá trị cho hàm btnUpdate_Click nếu cần dùng (mặc dù Request.QueryString["ID_BV"] vẫn có sẵn)
         }
+
 
         private void LoadBaiViet(int id)
         {
@@ -40,8 +41,7 @@ namespace QL_BAN_HANG
                 txtOrderKey.Text = bv.OrderKey.ToString();
                 txtTieuDe.Text = bv.Tieu_de;
                 txtTomTat.Text = bv.Tom_tac;
-                EditorNoiDung.Text = bv.Noi_dung; // Tải nội dung vào Editor
-
+                EditorNoiDung.Text = bv.Noi_dung;
                 if (!string.IsNullOrEmpty(bv.Hinh_anh_page))
                 {
                     imgPreview.ImageUrl = "~/uploads/images/" + bv.Hinh_anh_page;
@@ -72,17 +72,16 @@ namespace QL_BAN_HANG
                 }
 
                 // Nếu hợp lệ thì gán vào DB
-                bv.OrderKey = int.Parse(orderKeyValue.ToString());
+                bv.OrderKey = orderKeyValue;  // Không cần int.Parse lại, đã có orderKeyValue
 
                 // Cập nhật nội dung text
                 bv.Tieu_de = txtTieuDe.Text.Trim();
                 bv.Tom_tac = txtTomTat.Text.Trim();
 
-                // Lấy nội dung từ Rich Text Editor
-                string noiDungMoi = Request.Unvalidated["EditorNoiDung"] ?? string.Empty;
-                bv.Noi_dung = noiDungMoi;
+                // Lấy nội dung từ Rich Text Editor (dùng .Text thay vì Request.Unvalidated)
+                bv.Noi_dung = EditorNoiDung.Text.Trim();  // Đảm bảo lấy giá trị đã cập nhật từ control
 
-                // Upload ảnh nếu có
+                // Upload ảnh nếu có (phần này không thay đổi)
                 if (fileUploadHinhAnh.HasFile)
                 {
                     try

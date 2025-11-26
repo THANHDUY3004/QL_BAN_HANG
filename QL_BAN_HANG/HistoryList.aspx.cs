@@ -135,7 +135,7 @@ namespace QL_BAN_HANG
                                     Dia_chi = tk.Dia_chi,
                                     Tong_tien = ctdh.Tong_tien,
                                     Trang_thai = ctdh.Trang_thai_don,
-                                    So_dien_thoai = tk.So_dien_thoai,
+                                    So_dien_thoai = tk.So_dien_thoai, // Đã lấy SĐT từ query
                                     Thoi_gian_dat = lsdh != null ? lsdh.Ngay_gio_ghi_nhan : DateTime.Now
                                 };
 
@@ -152,8 +152,8 @@ namespace QL_BAN_HANG
                     if (!string.IsNullOrWhiteSpace(searchTerm))
                     {
                         query = query.Where(q => q.Ten_khach_hang.Contains(searchTerm) ||
-                                                  q.So_dien_thoai.Contains(searchTerm) ||
-                                                  q.ID_DH.ToString().Contains(searchTerm));
+                                                 q.So_dien_thoai.Contains(searchTerm) ||
+                                                 q.ID_DH.ToString().Contains(searchTerm));
                     }
 
                     var result = query.OrderByDescending(q => q.Thoi_gian_dat).ToList();
@@ -166,9 +166,13 @@ namespace QL_BAN_HANG
                     dt.Columns.Add("Thoi_gian_dat", typeof(DateTime));
                     dt.Columns.Add("Trang_thai", typeof(string));
 
+                    // THÊM CỘT SỐ ĐIỆN THOẠI VÀO DATATABLE
+                    dt.Columns.Add("So_dien_thoai", typeof(string));
+
                     foreach (var item in result)
                     {
-                        dt.Rows.Add(item.ID_DH, item.Ten_khach_hang, item.Dia_chi, item.Tong_tien, item.Thoi_gian_dat, item.Trang_thai);
+                        // ĐÃ THÊM So_dien_thoai khi add Row
+                        dt.Rows.Add(item.ID_DH, item.Ten_khach_hang, item.Dia_chi, item.Tong_tien, item.Thoi_gian_dat, item.Trang_thai, item.So_dien_thoai);
                     }
 
                     gvHistoryOrders.DataSource = dt;
@@ -220,13 +224,36 @@ namespace QL_BAN_HANG
                         lblTotalDetail.Text = order.Tong_tien.ToString("N0") + " VNĐ";
                     }
 
+                    // Xử lý màu cho lblStatusDetail trong Modal
+                    string statusModal = lblStatusDetail.Text;
+                    string cssClassModal = "status-badge ";
+                    switch (statusModal.ToLower())
+                    {
+                        case "đang xử lý":
+                            cssClassModal += "status-pending";
+                            break;
+                        case "đang giao":
+                            cssClassModal += "status-shipping";
+                            break;
+                        case "hoàn thành":
+                            cssClassModal += "status-completed";
+                            break;
+                        case "đã hủy":
+                            cssClassModal += "status-cancelled";
+                            break;
+                        default:
+                            cssClassModal += "bg-gray-400 text-gray-800";
+                            break;
+                    }
+                    lblStatusDetail.CssClass = cssClassModal;
+
                     var detailQuery = from spdh in context.SP_Don_Hangs
                                       join sp in context.San_Phams on spdh.ID_SP equals sp.ID_SP
                                       where spdh.ID_CTDH == idCtdh
                                       select new
                                       {
                                           So_luong = spdh.So_luong,
-                                          Gia_Ban = spdh.Gia_Ban,
+                                          Gia_tai_thoi_diem = spdh.Gia_Ban, // Đã sửa tên cột
                                           Ghi_chu_item = spdh.Ghi_chu_item,
                                           Ten_san_pham = sp.Ten_san_pham
                                       };

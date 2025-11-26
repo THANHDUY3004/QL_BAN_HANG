@@ -19,7 +19,7 @@ namespace QL_BAN_HANG
                 LoadDataMenus();
                 LoadAddCategoryDropDown();
                 LoadStatusDropDown(); // <-- THÊM MỚI: Tải DropDownList trạng thái
-                LoadDataProducts();
+                LoadDataProducts(0);
             }
         }
 
@@ -84,7 +84,7 @@ namespace QL_BAN_HANG
             }
         }
 
-        private void LoadDataProducts()
+        private void LoadDataProducts(int page)
         {
             try
             {
@@ -98,6 +98,8 @@ namespace QL_BAN_HANG
                 }
 
                 GridViewProducts.DataSource = query.OrderBy(sp => sp.Ten_san_pham).ToList();
+                GridViewProducts.PageIndex = page;
+                GridViewProducts.PageSize = 5;
                 GridViewProducts.DataBind();
                 lblMessage.Text = "";
             }
@@ -109,7 +111,7 @@ namespace QL_BAN_HANG
 
         protected void ddlMenus_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LoadDataProducts();
+            LoadDataProducts(0);
         }
 
         // -------------------------------------------------------------
@@ -164,17 +166,21 @@ namespace QL_BAN_HANG
                         return;
                     }
                 }
-
-                // ✅ Tạo đối tượng sản phẩm mới
-                San_Pham newProduct = new San_Pham
+                else
                 {
-                    Ten_san_pham = txtTenSP.Text.Trim(),
-                    Gia_co_ban = giaCoBan,
-                    Mo_ta_san_pham = txtMoTa.Text.Trim(),
-                    ID_MN = idMn,
-                    Trang_thai = DropDownList1.SelectedValue,
-                    Hinh_anh = fileName
-                };
+                    fileName = "0.jpg";
+                }
+
+                    // ✅ Tạo đối tượng sản phẩm mới
+                    San_Pham newProduct = new San_Pham
+                    {
+                        Ten_san_pham = txtTenSP.Text.Trim(),
+                        Gia_co_ban = giaCoBan,
+                        Mo_ta_san_pham = txtMoTa.Text.Trim(),
+                        ID_MN = idMn,
+                        Trang_thai = DropDownList1.SelectedValue,
+                        Hinh_anh = fileName
+                    };
 
                 context.San_Phams.InsertOnSubmit(newProduct);
                 context.SubmitChanges();
@@ -188,7 +194,7 @@ namespace QL_BAN_HANG
                 ddlAddCategory.SelectedIndex = 0;
                 DropDownList1.SelectedIndex = 0;
 
-                LoadDataProducts();
+                LoadDataProducts(0);
             }
             catch (Exception ex)
             {
@@ -218,7 +224,7 @@ namespace QL_BAN_HANG
                 {
                     lblMessage.Text = "⚠️ Không tìm thấy sản phẩm cần xóa.";
                 }
-                LoadDataProducts();
+                LoadDataProducts(0);
             }
             catch (Exception ex)
             {
@@ -234,13 +240,13 @@ namespace QL_BAN_HANG
         protected void GridViewProducts_RowEditing(object sender, GridViewEditEventArgs e)
         {
             GridViewProducts.EditIndex = e.NewEditIndex;
-            LoadDataProducts();
+            LoadDataProducts(0);
         }
 
         protected void GridViewProducts_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
             GridViewProducts.EditIndex = -1;
-            LoadDataProducts();
+            LoadDataProducts(0);
         }
 
         protected void GridViewProducts_RowUpdating(object sender, GridViewUpdateEventArgs e)
@@ -298,7 +304,7 @@ namespace QL_BAN_HANG
             }
 
             GridViewProducts.EditIndex = -1;
-            LoadDataProducts();
+            LoadDataProducts(0);
         }
 
         protected void GridViewProducts_SelectedIndexChanged(object sender, EventArgs e)
@@ -356,7 +362,12 @@ namespace QL_BAN_HANG
             }
 
             // Tải lại danh sách SẢN PHẨM
-            LoadDataProducts();
+            LoadDataProducts(0);
+        }
+
+        protected void GridViewProducts_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            LoadDataProducts(e.NewPageIndex);
         }
     }
 }

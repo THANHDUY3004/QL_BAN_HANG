@@ -1,5 +1,5 @@
 ﻿/* Reset */
-* {
+/** {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -8,20 +8,20 @@
 body {
     font-family: 'Segoe UI', sans-serif;
     background-color: #f9f9f9;
-}
+}*/
 
 /* Navbar container */
-#nav {
+/*#nav {
     list-style: none;
     background-color: #2c3e50;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     padding: 0 20px;
-}
+}*/
 
     /* Navbar items */
-    #nav > li {
+    /*#nav > li {
         position: relative;
     }
 
@@ -35,10 +35,10 @@ body {
 
             #nav > li > a:hover {
                 background-color: #34495e;
-            }
+            }*/
 
     /* Dropdown menu */
-    #nav li ul {
+    /*#nav li ul {
         position: absolute;
         top: 100%;
         left: 0;
@@ -61,16 +61,16 @@ body {
 
         #nav li ul li a:hover {
             background-color: #3d566e;
-        }
+        }*/
 
     /* Right-aligned items */
-    #nav #nav-right,
+    /*#nav #nav-right,
     #nav #nav-right-2 {
         margin-left: auto;
-    }
+    }*/
 
 /* Responsive toggle */
-.nav-toggle {
+/*.nav-toggle {
     display: none;
     font-size: 24px;
     color: white;
@@ -109,8 +109,8 @@ body {
 }
 
 #Banner {
-    position: relative; /* Làm gốc tọa độ cho phần tử con */
-    width: 1000px;
+    position: relative;*/ /* Làm gốc tọa độ cho phần tử con */
+    /*width: 1000px;
     height: 100px;
     background-color: lightblue;
 }
@@ -149,7 +149,7 @@ body {
         display: flex;
         align-items: center;
         justify-content: center;
-    }
+    }*/
 
 /*#HotNews {
     width: 300px;
@@ -157,7 +157,7 @@ body {
     background-color: #FFCCFF;
 }*/
 
-#Content {
+/*#Content {
     width: 800px;
     height: 100px;
     min-height: 300px;
@@ -170,4 +170,4 @@ body {
     height: 50px;
     background-color: #6699ff;
     clear: both;
-}
+}*/
