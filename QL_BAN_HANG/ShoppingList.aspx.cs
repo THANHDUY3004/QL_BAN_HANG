@@ -175,13 +175,13 @@ namespace QL_BAN_HANG
             {
                 try
                 {
-                    var query = from ctdh in context.Chi_Tiet_Don_Hangs
+                    var query = from ctdh in context.Don_Hangs
                                 join tk in context.Tai_Khoans on ctdh.So_dien_thoai equals tk.So_dien_thoai
-                                join lsdh in context.Lich_Su_Don_Hangs on ctdh.ID_CTDH equals lsdh.ID_DH into lsdhGroup
+                                join lsdh in context.Lich_Su_Don_Hangs on ctdh.ID_DH equals lsdh.ID_DH into lsdhGroup
                                 from lsdh in lsdhGroup.DefaultIfEmpty()
                                 select new
                                 {
-                                    ID_DH = ctdh.ID_CTDH,
+                                    ID_DH = ctdh.ID_DH,
                                     Ten_khach_hang = tk.Ho_va_ten,
                                     Dia_chi = tk.Dia_chi,
                                     Tong_tien = ctdh.Tong_tien,
@@ -243,7 +243,7 @@ namespace QL_BAN_HANG
             {
                 try
                 {
-                    var order = context.Chi_Tiet_Don_Hangs.SingleOrDefault(o => o.ID_CTDH == orderId);
+                    var order = context.Don_Hangs.SingleOrDefault(o => o.ID_DH == orderId);
                     if (order != null)
                     {
                         order.Trang_thai_don = status;
@@ -271,14 +271,14 @@ namespace QL_BAN_HANG
                 try
                 {
                     // Lấy thông tin chung đơn hàng
-                    var orderQuery = from ctdh in context.Chi_Tiet_Don_Hangs
+                    var orderQuery = from ctdh in context.Don_Hangs
                                      join tk in context.Tai_Khoans on ctdh.So_dien_thoai equals tk.So_dien_thoai
-                                     join lsdh in context.Lich_Su_Don_Hangs on ctdh.ID_CTDH equals lsdh.ID_DH into lsdhGroup
+                                     join lsdh in context.Lich_Su_Don_Hangs on ctdh.ID_DH equals lsdh.ID_DH into lsdhGroup
                                      from lsdh in lsdhGroup.DefaultIfEmpty()
-                                     where ctdh.ID_CTDH == idCtdh
+                                     where ctdh.ID_DH == idCtdh
                                      select new
                                      {
-                                         ID_CTDH = ctdh.ID_CTDH,
+                                         ID_CTDH = ctdh.ID_DH,
                                          Ho_va_ten = tk.Ho_va_ten,
                                          So_dien_thoai = tk.So_dien_thoai,
                                          Dia_chi = tk.Dia_chi,
@@ -302,9 +302,9 @@ namespace QL_BAN_HANG
                     }
 
                     // Lấy chi tiết sản phẩm
-                    var detailQuery = from spdh in context.SP_Don_Hangs
+                    var detailQuery = from spdh in context.Chi_Tiet_Don_Hangs
                                       join sp in context.San_Phams on spdh.ID_SP equals sp.ID_SP
-                                      where spdh.ID_CTDH == idCtdh
+                                      where spdh.ID_DH == idCtdh
                                       select new
                                       {
                                           Ten_san_pham = sp.Ten_san_pham,

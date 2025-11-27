@@ -33,15 +33,6 @@ namespace QL_BAN_HANG
         protected global::System.Web.UI.WebControls.GridView gvGioHang;
 
         /// <summary>
-        /// lblThongBaoTrong control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblThongBaoTrong;
-
-        /// <summary>
         /// txtSoDienThoai control.
         /// </summary>
         /// <remarks>
@@ -51,6 +42,15 @@ namespace QL_BAN_HANG
         protected global::System.Web.UI.WebControls.TextBox txtSoDienThoai;
 
         /// <summary>
+        /// rfvPhone control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPhone;
+
+        /// <summary>
         /// txtDiaChiGiaoHang control.
         /// </summary>
         /// <remarks>
@@ -58,6 +58,15 @@ namespace QL_BAN_HANG
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDiaChiGiaoHang;
+
+        /// <summary>
+        /// rfvAddress control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvAddress;
 
         /// <summary>
         /// ddlHinhThucDatDon control.
@@ -105,15 +114,6 @@ namespace QL_BAN_HANG
         protected global::System.Web.UI.WebControls.GridView gvPendingOrders;
 
         /// <summary>
-        /// lblNoPendingOrders control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNoPendingOrders;
-
-        /// <summary>
         /// gvCompletedOrders control.
         /// </summary>
         /// <remarks>
@@ -121,15 +121,6 @@ namespace QL_BAN_HANG
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvCompletedOrders;
-
-        /// <summary>
-        /// lblNoCompletedOrders control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNoCompletedOrders;
 
         /// <summary>
         /// pnlDetailModal control.
@@ -193,6 +184,15 @@ namespace QL_BAN_HANG
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblStatusDetail;
+
+        /// <summary>
+        /// lblPaymentMethod control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPaymentMethod;
 
         /// <summary>
         /// lblNote control.

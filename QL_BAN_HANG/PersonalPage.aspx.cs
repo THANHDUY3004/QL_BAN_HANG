@@ -9,6 +9,11 @@ namespace QL_BAN_HANG
 {
     public partial class PersonalPage : System.Web.UI.Page
     {
+        // ... (Khai báo các Controls đã có)
+
+        // Cần đảm bảo txtMatKhauCu được khai báo trong Designer.cs hoặc thêm thủ công
+        // protected System.Web.UI.WebControls.TextBox txtMatKhauCu; 
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -32,13 +37,17 @@ namespace QL_BAN_HANG
                             txtSoDienThoai.Text = taiKhoan.So_dien_thoai;
                             txtDiaChi.Text = taiKhoan.Dia_chi;
 
-                            // Không hiển thị mật khẩu đã mã hóa
+                            // BỔ SUNG: Xóa giá trị mật khẩu cũ
+                            txtMatKhauCu.Text = "";
                             txtMatKhau.Text = "";
                             txtXacNhanMatKhau.Text = "";
 
                             txtHoTen.ReadOnly = true;
                             txtSoDienThoai.ReadOnly = true;
                             txtDiaChi.ReadOnly = true;
+
+                            // BỔ SUNG: Khóa mật khẩu cũ
+                            txtMatKhauCu.ReadOnly = true;
                             txtMatKhau.ReadOnly = true;
                             txtXacNhanMatKhau.ReadOnly = true;
 
@@ -63,6 +72,7 @@ namespace QL_BAN_HANG
 
         public string ToMD5(string input)
         {
+            // ... (Hàm MD5 giữ nguyên)
             using (MD5 md5 = MD5.Create())
             {
                 byte[] inputBytes = Encoding.UTF8.GetBytes(input);
@@ -91,6 +101,7 @@ namespace QL_BAN_HANG
                         taiKhoan.Ho_va_ten = hoTenMoi;
                         taiKhoan.Dia_chi = string.IsNullOrWhiteSpace(diaChiMoi) ? null : diaChiMoi;
 
+                        // Chỉ cập nhật mật khẩu khi có mật khẩu mới (đã được xác thực Mật khẩu cũ trước đó)
                         if (!string.IsNullOrWhiteSpace(matKhauMoi))
                         {
                             taiKhoan.Mat_khau = ToMD5(matKhauMoi);
@@ -119,6 +130,9 @@ namespace QL_BAN_HANG
         {
             txtHoTen.ReadOnly = false;
             txtDiaChi.ReadOnly = false;
+
+            // BỔ SUNG: Mở khóa mật khẩu cũ và mới
+            txtMatKhauCu.ReadOnly = false;
             txtMatKhau.ReadOnly = false;
             txtXacNhanMatKhau.ReadOnly = false;
 
@@ -135,14 +149,21 @@ namespace QL_BAN_HANG
         {
             txtHoTen.ReadOnly = true;
             txtDiaChi.ReadOnly = true;
+
+            // BỔ SUNG: Khóa lại và xóa nội dung mật khẩu cũ và mới
+            txtMatKhauCu.ReadOnly = true;
+            txtMatKhauCu.Text = "";
             txtMatKhau.ReadOnly = true;
+            txtMatKhau.Text = "";
             txtXacNhanMatKhau.ReadOnly = true;
+            txtXacNhanMatKhau.Text = "";
 
             btnSuaThongTin.Visible = true;
             btnLuuThongTin.Visible = false;
             btnHuy.Visible = false;
 
             lblMessage.Text = "Đã hủy chỉnh sửa.";
+            lblMessage.ForeColor = System.Drawing.Color.Black; // Đặt lại màu cho thông báo hủy
         }
 
         protected void btnLuuThongTin_Click(object sender, EventArgs e)
@@ -150,10 +171,14 @@ namespace QL_BAN_HANG
             string sdt = txtSoDienThoai.Text.Trim();
             string hoTen = txtHoTen.Text.Trim();
             string diaChi = txtDiaChi.Text.Trim();
-            string matKhau = txtMatKhau.Text.Trim();
-            string xacNhan = txtXacNhanMatKhau.Text.Trim();
 
-            // ✅ Kiểm tra họ tên (không chứa ký tự đặc biệt hoặc số)
+            // BỔ SUNG: Lấy giá trị mật khẩu cũ
+            string matKhauCu = txtMatKhauCu.Text.Trim();
+
+            string matKhauMoi = txtMatKhau.Text.Trim();
+            string xacNhanMoi = txtXacNhanMatKhau.Text.Trim();
+
+            // 1. Kiểm tra họ tên và số điện thoại (Giữ nguyên)
             if (!System.Text.RegularExpressions.Regex.IsMatch(hoTen, @"^[a-zA-ZÀ-ỹ\s]+$"))
             {
                 lblMessage.Text = "❌ Họ tên không được chứa số hoặc ký tự đặc biệt.";
@@ -161,7 +186,6 @@ namespace QL_BAN_HANG
                 return;
             }
 
-            // ✅ Kiểm tra số điện thoại (10 chữ số, bắt đầu bằng số 0)
             if (sdt.Length != 10 || !sdt.All(char.IsDigit) || !sdt.StartsWith("0"))
             {
                 lblMessage.Text = "❌ Số điện thoại phải gồm 10 chữ số và bắt đầu bằng số 0.";
@@ -169,34 +193,61 @@ namespace QL_BAN_HANG
                 return;
             }
 
-            // ✅ Kiểm tra mật khẩu (nếu có nhập)
-            if (!string.IsNullOrEmpty(matKhau))
+            // 2. LOGIC ĐỔI MẬT KHẨU:
+            // Chỉ tiến hành đổi mật khẩu nếu Mật khẩu MỚI được nhập
+            if (!string.IsNullOrEmpty(matKhauMoi))
             {
-                if (matKhau != xacNhan)
+                // 2a. Bắt buộc nhập mật khẩu cũ
+                if (string.IsNullOrEmpty(matKhauCu))
                 {
-                    lblMessage.Text = "❌ Mật khẩu xác nhận không khớp.";
+                    lblMessage.Text = "❌ Vui lòng nhập Mật khẩu cũ để xác nhận việc thay đổi mật khẩu.";
                     lblMessage.ForeColor = System.Drawing.Color.Red;
                     return;
                 }
 
-                // Có thể thêm kiểm tra độ mạnh mật khẩu (tối thiểu 8 ký tự, có chữ hoa, chữ thường, số)
-                if (matKhau.Length < 8 ||
-                    !matKhau.Any(char.IsUpper) ||
-                    !matKhau.Any(char.IsLower) ||
-                    !matKhau.Any(char.IsDigit))
+                // 2b. Xác thực mật khẩu cũ
+                using (Cua_Hang_Tra_SuaDataContext context = new Cua_Hang_Tra_SuaDataContext())
                 {
-                    lblMessage.Text = "❌ Mật khẩu phải có ít nhất 8 ký tự, gồm chữ hoa, chữ thường và số.";
+                    var taiKhoan = context.Tai_Khoans.SingleOrDefault(tk => tk.So_dien_thoai == sdt);
+                    if (taiKhoan != null)
+                    {
+                        // Kiểm tra MD5 của mật khẩu cũ người dùng nhập với mật khẩu trong DB
+                        if (taiKhoan.Mat_khau != ToMD5(matKhauCu))
+                        {
+                            lblMessage.Text = "❌ Mật khẩu cũ không chính xác.";
+                            lblMessage.ForeColor = System.Drawing.Color.Red;
+                            return;
+                        }
+                    }
+                }
+
+                // 2c. Kiểm tra mật khẩu mới và xác nhận
+                if (matKhauMoi != xacNhanMoi)
+                {
+                    lblMessage.Text = "❌ Mật khẩu mới và Xác nhận mật khẩu mới không khớp.";
+                    lblMessage.ForeColor = System.Drawing.Color.Red;
+                    return;
+                }
+
+                if (matKhauMoi.Length < 8 ||
+                    !matKhauMoi.Any(char.IsUpper) ||
+                    !matKhauMoi.Any(char.IsLower) ||
+                    !matKhauMoi.Any(char.IsDigit))
+                {
+                    lblMessage.Text = "❌ Mật khẩu mới phải có ít nhất 8 ký tự, gồm chữ hoa, chữ thường và số.";
                     lblMessage.ForeColor = System.Drawing.Color.Red;
                     return;
                 }
             }
+            // Nếu không nhập mật khẩu mới, thì không làm gì với mật khẩu cũ và mới.
 
-            // ✅ Gọi hàm cập nhật
-            EditAccountByPhone(sdt, hoTen, diaChi, matKhau);
+            // 3. Gọi hàm cập nhật (chỉ truyền matKhauMoi nếu nó đã được xác thực)
+            EditAccountByPhone(sdt, hoTen, diaChi, matKhauMoi); // EditAccountByPhone tự kiểm tra matKhauMoi có rỗng không
 
-            // Khóa lại các ô nhập
+            // 4. Khóa lại các ô nhập
             txtHoTen.ReadOnly = true;
             txtDiaChi.ReadOnly = true;
+            txtMatKhauCu.ReadOnly = true;
             txtMatKhau.ReadOnly = true;
             txtXacNhanMatKhau.ReadOnly = true;
 
@@ -204,8 +255,10 @@ namespace QL_BAN_HANG
             btnLuuThongTin.Visible = false;
             btnHuy.Visible = false;
 
-            lblMessage.Text = "✅ Thông tin đã được lưu thành công.";
-            lblMessage.ForeColor = System.Drawing.Color.Green;
+            // 5. Clear mật khẩu sau khi lưu để tránh hiển thị trên trang
+            txtMatKhauCu.Text = "";
+            txtMatKhau.Text = "";
+            txtXacNhanMatKhau.Text = "";
         }
 
 

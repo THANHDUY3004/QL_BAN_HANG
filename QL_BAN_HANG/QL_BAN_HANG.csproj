@@ -128,6 +128,8 @@
     <Content Include="EditAccount.aspx" />
     <Content Include="EditDefault_admin.aspx" />
     <Content Include="HistoryList.aspx" />
+    <Content Include="HomePage.aspx" />
+    <Content Include="HomePage_admin.aspx" />
     <Content Include="layout\default_admin.css" />
     <Content Include="layout\loginuser.css" />
     <Content Include="layout\logo.png" />
@@ -1261,6 +1263,20 @@
     </Compile>
     <Compile Include="HistoryList.aspx.designer.cs">
       <DependentUpon>HistoryList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HomePage.aspx.cs">
+      <DependentUpon>HomePage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HomePage.aspx.designer.cs">
+      <DependentUpon>HomePage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HomePage_admin.aspx.cs">
+      <DependentUpon>HomePage_admin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HomePage_admin.aspx.designer.cs">
+      <DependentUpon>HomePage_admin.aspx</DependentUpon>
     </Compile>
     <Compile Include="LoginUser.aspx.cs">
       <DependentUpon>LoginUser.aspx</DependentUpon>

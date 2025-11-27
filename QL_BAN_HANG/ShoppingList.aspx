@@ -236,7 +236,7 @@
                             </ItemTemplate>
                             <ItemStyle HorizontalAlign="Center" Width="120px" />
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Hành động" ItemStyle-Width="300px">
+                        <asp:TemplateField HeaderText="Hành động" ItemStyle-Width="250px">
                             <ItemTemplate>
                                 <asp:LinkButton ID="lnkConfirm" runat="server" CommandName="ConfirmOrder" CommandArgument='<%# Eval("ID_DH") %>' Text="Xác nhận & Giao" CssClass="btn btn-primary" />
                                 <asp:LinkButton ID="lnkComplete" runat="server" CommandName="CompleteOrder" CommandArgument='<%# Eval("ID_DH") %>' Text="Hoàn thành" CssClass="btn btn-success" Visible="false" />
@@ -244,11 +244,12 @@
                             </ItemTemplate>
                             <ItemStyle Width="300px" />
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Chi tiết" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="100px">
+                        <asp:TemplateField HeaderText="Chi tiết" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="200px">
                             <ItemTemplate>
                                 <asp:LinkButton ID="btnDetail" runat="server" Text="Xem chi tiết" CommandName="ViewDetail" CommandArgument='<%# Eval("ID_DH") %>' 
                                     CssClass="btn-detail" />
                             </ItemTemplate>
+                             <HeaderStyle Width="150px" />
                              <ItemStyle HorizontalAlign="Center" Width="100px" />
                         </asp:TemplateField>
                     </Columns>

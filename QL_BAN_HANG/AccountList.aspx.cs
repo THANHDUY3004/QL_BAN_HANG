@@ -29,7 +29,7 @@ namespace QL_BAN_HANG
             // Protected void DropDownList1_SelectedIndexChanged(...) { LoadDataAccount(); }
 
         }
-        protected void btnTimKiem_Click(object sender, EventArgs e)
+        protected void BtnTimKiem_Click(object sender, EventArgs e)
         {
             string tuKhoa = txtTuKhoa.Text.Trim();
             string selectedQuyen = ddlPhanQuyen.SelectedValue;
@@ -200,7 +200,7 @@ namespace QL_BAN_HANG
             e.Row.Cells[5].Attributes.Add("onclick", "javascript:return confirm('Xóa thiệt không?');");
 
         }
-        protected void butAdd_Click(object sender, EventArgs e)
+        protected void ButAdd_Click(object sender, EventArgs e)
         {
             try
             {
@@ -273,7 +273,7 @@ namespace QL_BAN_HANG
             LoadDataAccount();
 
         }
-        protected void butDelete_Click(object sender, EventArgs e)
+        protected void ButDelete_Click(object sender, EventArgs e)
         {
             try
             {
@@ -284,14 +284,11 @@ namespace QL_BAN_HANG
                     for (int i = 0; i < GridViewAccounts.Rows.Count; i++)
                     {
                         GridViewRow row = GridViewAccounts.Rows[i];
-                        CheckBox chkDelete = row.FindControl("ckhDelete") as CheckBox;
-
-                        if (chkDelete != null && chkDelete.Checked)
+                        if (row.FindControl("ckhDelete") is CheckBox chkDelete && chkDelete.Checked)
                         {
                             object dataKey = GridViewAccounts.DataKeys[i]?.Value;
-                            if (dataKey != null)
+                            if (dataKey is string soDienThoai)
                             {
-                                string soDienThoai = dataKey.ToString();
                                 var taiKhoan = context.Tai_Khoans.SingleOrDefault(t => t.So_dien_thoai == soDienThoai);
 
                                 if (taiKhoan != null)
@@ -327,7 +324,7 @@ namespace QL_BAN_HANG
             }
         }
         // Phương thức xử lý sự kiện cho nút "Đăng Nhập Tài Khoản"
-        protected void btnLoginPage_Click(object sender, EventArgs e)
+        protected void BtnLoginPage_Click(object sender, EventArgs e)
         {
             // Chuyển hướng đến trang Đăng nhập (Login.aspx)
             Session.Clear();

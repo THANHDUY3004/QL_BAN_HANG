@@ -23,27 +23,28 @@
     </div>
 
     <div class="input-group">
-        <asp:Label AssociatedControlID="txtMatKhau" Text="🔒 Mật khẩu" runat="server" />
+        <asp:Label AssociatedControlID="txtMatKhauCu" Text="🔑 Mật khẩu cũ (Để trống nếu không đổi)" runat="server" />
+        <asp:TextBox ID="txtMatKhauCu" runat="server" TextMode="Password" CssClass="form-control" ReadOnly="True" />
+    </div>
+    <div class="input-group">
+        <asp:Label AssociatedControlID="txtMatKhau" Text="🔒 Mật khẩu mới" runat="server" />
         <asp:TextBox ID="txtMatKhau" runat="server" TextMode="Password" CssClass="form-control" ReadOnly="True" />
     </div>
 
     <div class="input-group">
-        <asp:Label AssociatedControlID="txtXacNhanMatKhau" Text="🔁 Xác nhận mật khẩu" runat="server" />
+        <asp:Label AssociatedControlID="txtXacNhanMatKhau" Text="🔁 Xác nhận mật khẩu mới" runat="server" />
         <asp:TextBox ID="txtXacNhanMatKhau" runat="server" TextMode="Password" CssClass="form-control" ReadOnly="True" />
     </div>
 
-    <!-- Nút sửa -->
     <asp:Button ID="btnSuaThongTin" runat="server" Text="✏️ Sửa thông tin cá nhân"
         OnClick="btnSuaThongTin_Click" CssClass="btn-primary" />
 
-    <!-- Nút lưu và hủy (ẩn ban đầu) -->
     <asp:Button ID="btnLuuThongTin" runat="server" Text="💾 Lưu"
         OnClick="btnLuuThongTin_Click" CssClass="btn-primary" Visible="False" />
 
     <asp:Button ID="btnHuy" runat="server" Text="❌ Hủy"
         OnClick="btnHuy_Click" CssClass="btn-primary" Visible="False" />
 
-    <!-- Nút đăng xuất -->
     <asp:Button ID="btnDangXuat" runat="server" Text="🚪 Đăng xuất"
         OnClick="btnDangXuat_Click" CssClass="btn-primary" />
 
@@ -51,5 +52,4 @@
         <asp:Label ID="lblMessage" runat="server" CssClass="validation-error" EnableViewState="false" />
     </div>
 </div>
-
 </asp:Content>

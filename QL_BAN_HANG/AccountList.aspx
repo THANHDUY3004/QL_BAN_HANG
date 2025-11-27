@@ -213,7 +213,7 @@
             <asp:Button ID="btnLoginPage" 
                         runat="server" 
                         Text="Đăng Xuất (Quay lại trang Login)" 
-                        OnClick="btnLoginPage_Click" 
+                        OnClick="BtnLoginPage_Click" 
                         CssClass="btn-base btn-return" />
         </div>
 
@@ -255,7 +255,7 @@
                 
                 <div class="form-group-flex" style="justify-content: space-between; margin-top: 15px;">
                     <asp:Label ID="lblMessage" runat="server" Text="" CssClass="message-label text-sm ml-2"></asp:Label>
-                    <asp:Button ID="butAdd" runat="server" Text="➕ Thêm tài khoản" OnClick="butAdd_Click" CssClass="btn-base btn-primary" />
+                    <asp:Button ID="butAdd" runat="server" Text="➕ Thêm tài khoản" OnClick="ButAdd_Click" CssClass="btn-base btn-primary" />
                 </div>
             </div>
         </div>
@@ -267,7 +267,7 @@
             
             <div style="margin-bottom: 20px;" class="flex items-center space-x-3">
                 <asp:TextBox ID="txtTuKhoa" runat="server" CssClass="form-input" placeholder="Tìm theo tên hoặc SĐT..." Width="300px" />
-                <asp:Button ID="btnTimKiem" runat="server" Text="🔍 Tìm kiếm" OnClick="btnTimKiem_Click" CssClass="btn-base btn-primary" />
+                <asp:Button ID="btnTimKiem" runat="server" Text="🔍 Tìm kiếm" OnClick="BtnTimKiem_Click" CssClass="btn-base btn-primary" />
             </div>
             
             <div class="overflow-x-auto">
@@ -291,7 +291,7 @@
                         
                         <asp:TemplateField HeaderText="Chọn">
                             <HeaderTemplate>
-                                <asp:Button ID="butDelete" runat="server" OnClick="butDelete_Click" Text="Xóa" CssClass="btn-base btn-return" />
+                                <asp:Button ID="butDelete" runat="server" OnClick="ButDelete_Click" Text="Xóa" CssClass="btn-base btn-return" />
                             </HeaderTemplate>
                             <ItemTemplate>
                                 <asp:CheckBox ID="ckhDelete" runat="server" />

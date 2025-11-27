@@ -11,232 +11,196 @@ namespace QL_BAN_HANG
 {
 
 
-    public partial class ProductList
+    public partial class HomePage_admin
     {
 
         /// <summary>
-        /// lblMessage control.
+        /// btnShowSliderForm control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMessage;
+        protected global::System.Web.UI.WebControls.Button btnShowSliderForm;
 
         /// <summary>
-        /// ddlMenus control.
+        /// pnlSliderForm control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlMenus;
+        protected global::System.Web.UI.WebControls.Panel pnlSliderForm;
 
         /// <summary>
-        /// txtTenSP control.
+        /// hfSliderID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTenSP;
+        protected global::System.Web.UI.WebControls.HiddenField hfSliderID;
 
         /// <summary>
-        /// txtGia control.
+        /// txtSliderTitle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtGia;
+        protected global::System.Web.UI.WebControls.TextBox txtSliderTitle;
 
         /// <summary>
-        /// txtMoTa control.
+        /// txtSliderDesc control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMoTa;
+        protected global::System.Web.UI.WebControls.TextBox txtSliderDesc;
 
         /// <summary>
-        /// ddlAddCategory control.
+        /// txtSliderOrder control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlAddCategory;
+        protected global::System.Web.UI.WebControls.TextBox txtSliderOrder;
 
         /// <summary>
-        /// ddlStatus control.
+        /// fuSlider control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlStatus;
+        protected global::System.Web.UI.WebControls.FileUpload fuSlider;
 
         /// <summary>
-        /// fileUploadHinhAnh control.
+        /// chkSliderActive control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload fileUploadHinhAnh;
+        protected global::System.Web.UI.WebControls.CheckBox chkSliderActive;
 
         /// <summary>
-        /// butAdd control.
+        /// btnAddSlider control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button butAdd;
+        protected global::System.Web.UI.WebControls.Button btnAddSlider;
 
         /// <summary>
-        /// pnlEditProduct control.
+        /// btnCancelSlider control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlEditProduct;
+        protected global::System.Web.UI.WebControls.Button btnCancelSlider;
 
         /// <summary>
-        /// lblEditProductName control.
+        /// gvSlider control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblEditProductName;
+        protected global::System.Web.UI.WebControls.GridView gvSlider;
 
         /// <summary>
-        /// hfProductID control.
+        /// btnShowShopForm control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfProductID;
+        protected global::System.Web.UI.WebControls.Button btnShowShopForm;
 
         /// <summary>
-        /// txtEditTenSP control.
+        /// pnlShopForm control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEditTenSP;
+        protected global::System.Web.UI.WebControls.Panel pnlShopForm;
 
         /// <summary>
-        /// txtEditGia control.
+        /// hfShopID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEditGia;
+        protected global::System.Web.UI.WebControls.HiddenField hfShopID;
 
         /// <summary>
-        /// txtEditMoTa control.
+        /// txtShopAlt control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEditMoTa;
+        protected global::System.Web.UI.WebControls.TextBox txtShopAlt;
 
         /// <summary>
-        /// ddlEditCategory control.
+        /// txtShopOrder control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlEditCategory;
+        protected global::System.Web.UI.WebControls.TextBox txtShopOrder;
 
         /// <summary>
-        /// ddlEditStatus control.
+        /// fuShop control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlEditStatus;
+        protected global::System.Web.UI.WebControls.FileUpload fuShop;
 
         /// <summary>
-        /// chkEditHot control.
+        /// chkShopActive control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkEditHot;
+        protected global::System.Web.UI.WebControls.CheckBox chkShopActive;
 
         /// <summary>
-        /// txtEditOrderKey control.
+        /// btnAddShop control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEditOrderKey;
+        protected global::System.Web.UI.WebControls.Button btnAddShop;
 
         /// <summary>
-        /// imgEditCurrent control.
+        /// btnCancelShop control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgEditCurrent;
+        protected global::System.Web.UI.WebControls.Button btnCancelShop;
 
         /// <summary>
-        /// fileUploadEditHinhAnh control.
+        /// gvShop control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload fileUploadEditHinhAnh;
-
-        /// <summary>
-        /// hfCurrentHinhAnh control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfCurrentHinhAnh;
-
-        /// <summary>
-        /// btnUpdateProduct control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnUpdateProduct;
-
-        /// <summary>
-        /// btnCancelEdit control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancelEdit;
-
-        /// <summary>
-        /// GridViewProducts control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridViewProducts;
+        protected global::System.Web.UI.WebControls.GridView gvShop;
     }
 }

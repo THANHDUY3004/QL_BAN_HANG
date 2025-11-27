@@ -1,10 +1,13 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage_admin.Master" AutoEventWireup="true" CodeBehind="ProductList.aspx.cs" Inherits="QL_BAN_HANG.ProductList" %>
+﻿<%@ Page Title="Quản lý Sản Phẩm" Language="C#" MasterPageFile="~/MasterPage_admin.Master" AutoEventWireup="true" CodeBehind="ProductList.aspx.cs" Inherits="QL_BAN_HANG.ProductList" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <title>Quản Lý Sản Phẩm - Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         /* ================================
-           Layout chung
+           Layout chung (Đồng bộ với các trang Admin khác)
         ================================ */
-        .container {
+        .admin-container {
             margin: 30px auto;
             width: 95%;
             max-width: 1400px;
@@ -13,74 +16,75 @@
             border-radius: 10px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
-
-        body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background-color: #f4f7f6;
-            color: #333;
-            margin: 0;
-            padding: 0;
-        }
-
-        h2 {
-            color: #007bff;
+        
+        .admin-h2 {
             text-align: center;
-            margin-bottom: 30px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.875rem; /* text-3xl */
+            font-weight: 700; /* font-bold */
         }
-
-        h3 {
-            color: #555;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
-            margin-top: 20px;
+        
+        .admin-h3 {
+            color: #2980b9;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #ecf0f1;
+            font-size: 1.5rem; /* text-2xl */
+            font-weight: 600; /* font-semibold */
         }
 
         /* ================================
-           Form control area
+           Control Area (Thêm / Lọc / Sửa)
         ================================ */
         .control-area {
             display: flex;
             align-items: center;
             flex-wrap: wrap;
             margin-bottom: 20px;
-            gap: 20px;
+            gap: 20px; /* Khoảng cách giữa các phần tử */
             padding: 15px;
-            background-color: #f9f9f9;
             border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+        
+        /* Màu nền cho vùng thêm/sửa */
+        .control-area.add-form {
+            background-color: #e9f7e9; /* Màu xanh lá nhạt */
+        }
+
+        .control-area.edit-form {
+            background-color: #fcf8e3; /* Màu vàng nhạt */
         }
 
         .control-area label {
             font-weight: bold;
-            margin-right: 10px;
+            color: #2c3e50;
+            white-space: nowrap; /* Giữ nhãn không bị ngắt dòng */
         }
-
+        
         .control-area input[type="text"],
         .control-area select {
             padding: 8px;
             border: 1px solid #ccc;
-            border-radius: 4px;
+            border-radius: 6px;
             min-width: 150px;
-        }
-
-        .control-area input[type="text"][id$="txtMoTa"] {
-            min-width: 250px;
+            box-sizing: border-box;
         }
 
         /* ================================
-           Buttons
+           Buttons (Đồng bộ)
         ================================ */
-        .action-button {
-            padding: 10px 20px;
+        .action-button,
+        .link-action-base {
+            padding: 8px 16px;
             border: none;
             border-radius: 5px;
             font-weight: bold;
             cursor: pointer;
             color: #fff;
-            transition: background-color 0.3s, transform 0.1s;
-        }
-
-        .action-button:hover {
-            transform: translateY(-1px);
+            transition: background-color 0.3s;
         }
 
         .btn-add {
@@ -89,7 +93,7 @@
         .btn-add:hover {
             background-color: #1e7e34;
         }
-
+        
         .btn-delete {
             background-color: #dc3545;
         }
@@ -97,8 +101,22 @@
             background-color: #c82333;
         }
 
+        .btn-edit-save {
+            background-color: #3498db;
+        }
+        .btn-edit-save:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn-cancel {
+            background-color: #95a5a6;
+        }
+        .btn-cancel:hover {
+            background-color: #7f8c8d;
+        }
+
         /* ================================
-           GridView
+           GridView (Giữ lại style gốc, tối ưu hóa hiển thị)
         ================================ */
         .gridview-style {
             width: 100%;
@@ -107,215 +125,228 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
-        .gridview-style th,
-        .gridview-style td {
+        .gridview-style th {
+            background-color: #507CD1; /* Giữ màu header */
+            color: #fff;
             padding: 12px;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .gridview-style td {
+            padding: 10px;
             border: 1px solid #ddd;
             text-align: center;
             vertical-align: middle;
         }
-
-        .gridview-style th {
-            background-color: #507CD1;
-            color: #fff;
-            font-size: 14px;
+        
+        .link-update {
+            color: #27ae60;
             font-weight: bold;
-        }
-
-        .gridview-style tr:nth-child(even) {
-            background-color: #f6f6f6;
-        }
-
-        .gridview-style tr:hover {
-            background-color: #e9ecef;
-        }
-
-        .gridview-style img {
-            max-width: 100px;
-            max-height: 100px;
-            border-radius: 4px;
-        }
-
-        /* ================================
-           Pager (số trang)
-        ================================ */
-        .gridview-style .pgr {
-            text-align: center;
-            margin-top: 15px;
-        }
-
-        .gridview-style .pgr table {
-            margin: 0 auto;
-            border-collapse: collapse;
-        }
-
-        .gridview-style .pgr td {
-            padding: 0;
-            border: none;
-            background: none; /* bỏ nền trắng */
-        }
-
-        .gridview-style .pgr a {
-            display: inline-block;
-            padding: 6px 12px;
-            margin: 0 4px;
-            background-color: #3498db;
-            color: #fff !important; /* luôn trắng, không đổi */
-            border-radius: 4px;
             text-decoration: none;
+            margin-left: 5px;
+        }
+        .link-update:hover {
+            text-decoration: underline;
+        }
+
+        /* Nút Sửa trong GridView */
+        .link-edit-gv {
+            color: #2980b9;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 4px 8px;
             border: 1px solid #2980b9;
-            transition: background-color 0.3s ease;
+            border-radius: 4px;
         }
-
-        .gridview-style .pgr a:hover {
-            background-color: #e74c3c;
-            border-color: #c0392b;
-            color: #fff !important; /* giữ màu trắng, không bị nền trắng */
+        .link-edit-gv:hover {
+            background-color: #2980b9;
+            color: #fff;
         }
+        
     </style>
-    </asp:Content>
-    <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderContent" runat="server">
-            <div class="container">
-            <h2> QUẢN LÝ SẢN PHẨM</h2>
-            
-            <div class="control-area">
-                <label>Danh mục:</label>
-                <asp:DropDownList ID="ddlMenus" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlMenus_SelectedIndexChanged">
-                </asp:DropDownList>
-            </div>
-
-            <h3>➕ Thêm Sản Phẩm Mới</h3>
-            <div class="control-area" style="background-color: #e9f7e9;">
-                <label>Tên SP:</label><asp:TextBox ID="txtTenSP" runat="server" />
-                <label>Giá (VNĐ):</label><asp:TextBox ID="txtGia" runat="server" />
-                <label>Mô tả:</label><asp:TextBox ID="txtMoTa" runat="server" />
-                
-                <label>Danh mục:</label>
-                <asp:DropDownList ID="ddlAddCategory" runat="server">
-                </asp:DropDownList>
-                
-                <label>Trạng thái:<asp:DropDownList ID="DropDownList1" runat="server">
-                </asp:DropDownList>
-                Hình ảnh:</label>
-                <asp:FileUpload ID="fileUploadHinhAnh" runat="server" />
-                
-                <asp:Button ID="butAdd" runat="server" Text="Thêm Sản Phẩm" OnClick="butAdd_Click" CssClass="action-button btn-add" />
-            </div>
-
-            <b><asp:Label ID="lblMessage" runat="server" Text="" ForeColor="Red"></asp:Label></b>
-            
-            <h3>📋 Danh Sách Sản Phẩm</h3>
-
-            <asp:GridView ID="GridViewProducts" runat="server" 
-                AutoGenerateColumns="False" 
-                CellPadding="4" 
-                DataKeyNames="ID_SP" 
-                ForeColor="#333333" 
-                GridLines="None" 
-                CssClass="gridview-style"
-                AllowPaging ="true"
-                OnRowDeleting="GridViewProducts_RowDeleting"
-                OnRowEditing="GridViewProducts_RowEditing"
-                OnRowUpdating="GridViewProducts_RowUpdating"
-                OnRowCancelingEdit="GridViewProducts_RowCancelingEdit" OnPageIndexChanging="GridViewProducts_PageIndexChanging"
-                >            
-                <PagerStyle CssClass="pgr" HorizontalAlign="Center" />
-                <AlternatingRowStyle BackColor="White" />
-                <Columns>
-                    <asp:BoundField DataField="ID_SP" HeaderText="Mã SP" ReadOnly="True" ItemStyle-Width="60px" >
-                        <ItemStyle Width="60px"></ItemStyle>
-                    </asp:BoundField>
-                    
-                    <asp:TemplateField HeaderText="Hình ảnh" ItemStyle-Width="120px">
-                        <ItemTemplate>
-                            <asp:Image ID="imgSanPham" runat="server" 
-                                ImageUrl='<%# Eval("Hinh_anh", "~/uploads/images/{0}") %>' 
-                                Visible='<%# !string.IsNullOrEmpty(Eval("Hinh_anh") as string) %>'
-                                AlternateText='<%# Eval("Ten_san_pham") %>' />
-                        </ItemTemplate>
-                        <EditItemTemplate>
-                            <asp:TextBox ID="txtEditHinhAnh" runat="server" Text='<%# Bind("Hinh_anh") %>' Width="100px"></asp:TextBox>
-                        </EditItemTemplate>
-                        <ItemStyle Width="120px"></ItemStyle>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Tên Sản Phẩm" ItemStyle-HorizontalAlign="Left">
-                        <ItemTemplate>
-                            <asp:Label runat="server" Text='<%# Eval("Ten_san_pham") %>'></asp:Label>
-                        </ItemTemplate>
-                        <EditItemTemplate>
-                            <asp:TextBox ID="txtEditTenSP" runat="server" Text='<%# Bind("Ten_san_pham") %>' Width="200px"></asp:TextBox>
-                        </EditItemTemplate>
-                        <ItemStyle HorizontalAlign="Left"></ItemStyle>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Giá (VNĐ)" ItemStyle-Width="120px" ItemStyle-HorizontalAlign="Right">
-                         <ItemTemplate>
-                            <asp:Label runat="server" Text='<%# Eval("Gia_co_ban", "{0:N0}") %>'></asp:Label>
-                        </ItemTemplate>
-                        <EditItemTemplate>
-                            <asp:TextBox ID="txtEditGia" runat="server" Text='<%# Bind("Gia_co_ban") %>' Width="100px"></asp:TextBox>
-                        </EditItemTemplate>
-
-                        <ItemStyle HorizontalAlign="Right" Width="120px"></ItemStyle>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="ID Danh Mục" ItemStyle-Width="100px">
-                         <ItemTemplate>
-                            <asp:Label runat="server" Text='<%# Eval("ID_MN") %>'></asp:Label>
-                        </ItemTemplate>
-                        <EditItemTemplate>
-                            <asp:TextBox ID="txtEditIDMN" runat="server" Text='<%# Bind("ID_MN") %>' Width="80px"></asp:TextBox>
-                        </EditItemTemplate>
-
-                        <ItemStyle Width="100px"></ItemStyle>
-                    </asp:TemplateField>
-
-                    <asp:TemplateField HeaderText="Trạng Thái (Còn Hàng)" ItemStyle-Width="120px">
-                        <ItemTemplate>
-                            <%-- Hiển thị Checkbox chỉ để xem (readonly) --%>
-                            <asp:CheckBox ID="chkViewTrangThai" runat="server" 
-                                Enabled="false" 
-                                Checked='<%# Eval("Trang_thai").ToString() == "Còn hàng" %>' />
-                            <%-- Hiển thị trạng thái bằng text --%>
-                            <asp:Label ID="lblTrangThai" runat="server" Text='<%# Eval("Trang_thai") %>'></asp:Label>
-                        </ItemTemplate>
-                        <EditItemTemplate>
-                            <%-- Dùng Eval để đặt trạng thái ban đầu --%>
-                            <asp:CheckBox ID="chkEditTrangThai" runat="server" 
-                                Text="Còn Hàng" 
-                                Checked='<%# Eval("Trang_thai").ToString() == "Còn hàng" %>' />
-                        </EditItemTemplate>
-
-                        <ItemStyle Width="120px"></ItemStyle>
-                    </asp:TemplateField>
-
-                    <asp:TemplateField HeaderText="Chọn Xóa" ItemStyle-Width="80px">
-                        <HeaderTemplate>
-                            <asp:Button ID="butDelete" runat="server" OnClick="Button2_Click" CssClass="action-button btn-delete" Text="Xóa" />
-                        </HeaderTemplate>
-                        <ItemTemplate>
-                            <asp:CheckBox ID="chkDelete" runat="server" />
-                        </ItemTemplate>
-
-                    <ItemStyle Width="80px"></ItemStyle>
-                    </asp:TemplateField>
-                    <asp:CommandField ShowEditButton="True" EditText="Sửa" UpdateText="Lưu" CancelText="Hủy" ItemStyle-Width="80px" >
-                    <ItemStyle Width="80px"></ItemStyle>
-                    </asp:CommandField>
-                    <asp:CommandField ShowDeleteButton="True" DeleteText="Xóa" ItemStyle-Width="80px" >
-                    <ItemStyle Width="80px"></ItemStyle>
-                    </asp:CommandField>
-                </Columns>
-                <EditRowStyle BackColor="#FFFFCC" />
-                <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-                <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-                <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-                <RowStyle BackColor="#EFF3FB" />
-                <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
-                <SortedAscendingCellStyle BackColor="#F5F7FB" />
-                <SortedAscendingHeaderStyle BackColor="#6D95E1" />
-                <SortedDescendingCellStyle BackColor="#E9EBEF" />
-                <SortedDescendingHeaderStyle BackColor="#4870BE" />
-            </asp:GridView>
-
-        </div>
 </asp:Content>
 
+<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderContent" runat="server">
+    <div class="admin-container">
+        <h2 class="admin-h2">☕ QUẢN LÝ SẢN PHẨM</h2>
+        
+        <asp:Label ID="lblMessage" runat="server" Text="" ForeColor="Red" Font-Bold="True" CssClass="block my-3"></asp:Label>
+
+        <h3 class="admin-h3">🔍 Lọc Sản Phẩm</h3>
+        <div class="control-area">
+            <label>Danh mục:</label>
+            <asp:DropDownList ID="ddlMenus" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlMenus_SelectedIndexChanged">
+            </asp:DropDownList>
+        </div>
+
+        <h3 class="admin-h3">➕ Thêm Sản Phẩm Mới</h3>
+        <div class="control-area add-form">
+            
+            <label>Tên SP:</label>
+            <asp:TextBox ID="txtTenSP" runat="server" Placeholder="Nhập tên sản phẩm" />
+            
+            <label>Giá (VNĐ):</label>
+            <asp:TextBox ID="txtGia" runat="server" Placeholder="Nhập giá (số)" />
+            
+            <label>Mô tả:</label>
+            <asp:TextBox ID="txtMoTa" runat="server" Placeholder="Nhập mô tả" />
+            
+            <label>Danh mục:</label>
+            <asp:DropDownList ID="ddlAddCategory" runat="server">
+            </asp:DropDownList>
+            
+            <label>Trạng thái:</label>
+            <asp:DropDownList ID="ddlStatus" runat="server">
+            </asp:DropDownList>
+            
+            <label>Hình ảnh:</label>
+            <asp:FileUpload ID="fileUploadHinhAnh" runat="server" />
+            
+            <asp:Button ID="butAdd" runat="server" Text="Thêm Sản Phẩm" OnClick="butAdd_Click" CssClass="action-button btn-add" />
+        </div>
+        
+        <asp:Panel ID="pnlEditProduct" runat="server" Visible="false">
+             <h3 class="admin-h3">✏️ Chỉnh Sửa Sản Phẩm: <asp:Label ID="lblEditProductName" runat="server" ForeColor="#e67e22"></asp:Label></h3>
+            <div class="control-area edit-form flex flex-col md:flex-row md:justify-around items-start">
+                <asp:HiddenField ID="hfProductID" runat="server" Value="-1" />
+                
+                <div class="w-full md:w-1/3 p-2">
+                    <label>Tên SP:</label>
+                    <asp:TextBox ID="txtEditTenSP" runat="server" CssClass="w-full" />
+                    
+                    <label>Giá (VNĐ):</label>
+                    <asp:TextBox ID="txtEditGia" runat="server" CssClass="w-full" />
+                    
+                    <label>Mô tả:</label>
+                    <asp:TextBox ID="txtEditMoTa" runat="server" TextMode="MultiLine" Rows="2" CssClass="w-full" />
+                </div>
+                
+                <div class="w-full md:w-1/3 p-2">
+                    <label>Danh mục:</label>
+                    <asp:DropDownList ID="ddlEditCategory" runat="server" CssClass="w-full">
+                    </asp:DropDownList>
+                    
+                    <label>Trạng thái:</label>
+                    <asp:DropDownList ID="ddlEditStatus" runat="server" CssClass="w-full">
+                         <asp:ListItem Text="Còn hàng" Value="Còn hàng" />
+                         <asp:ListItem Text="Hết hàng" Value="Hết hàng" />
+                    </asp:DropDownList>
+                    
+                    <label>Trạng thái Hot:</label>
+                    <asp:CheckBox ID="chkEditHot" runat="server" Text="Sản phẩm Hot" CssClass="block my-2" />
+
+                    <label>Order Key:</label>
+                    <asp:TextBox ID="txtEditOrderKey" runat="server" CssClass="w-24" />
+                </div>
+                
+                <div class="w-full md:w-1/3 p-2 text-center">
+                    <label>Hình ảnh hiện tại:</label>
+                    <asp:Image ID="imgEditCurrent" runat="server" Width="100px" AlternateText="Ảnh hiện tại" CssClass="block mx-auto border p-1 rounded my-2" />
+                    
+                    <label>Thay hình ảnh (nếu cần):</label>
+                    <asp:FileUpload ID="fileUploadEditHinhAnh" runat="server" />
+                    <asp:HiddenField ID="hfCurrentHinhAnh" runat="server" />
+
+                    <div class="mt-4">
+                        <asp:Button ID="btnUpdateProduct" runat="server" Text="Lưu Cập Nhật" OnClick="btnUpdateProduct_Click" CssClass="action-button btn-edit-save" />
+                        <asp:Button ID="btnCancelEdit" runat="server" Text="Hủy" OnClick="btnCancelEdit_Click" CssClass="action-button btn-cancel ml-2" />
+                    </div>
+                </div>
+            </div>
+        </asp:Panel>
+
+
+        <hr class="my-8 border-t border-gray-300" />
+        
+        <h3 class="admin-h3">📋 Danh Sách Sản Phẩm</h3>
+
+        <asp:GridView ID="GridViewProducts" runat="server" 
+            AutoGenerateColumns="False" 
+            DataKeyNames="ID_SP" 
+            CssClass="gridview-style"
+            AllowPaging="true"
+            OnRowCommand="GridViewProducts_RowCommand"
+            OnRowDeleting="GridViewProducts_RowDeleting"
+            OnPageIndexChanging="GridViewProducts_PageIndexChanging">
+            <PagerStyle CssClass="pgr" HorizontalAlign="Center" />
+            <AlternatingRowStyle BackColor="White" />
+            <Columns>
+                <asp:BoundField DataField="ID_SP" HeaderText="Mã SP" ReadOnly="True" ItemStyle-Width="60px" />
+                
+                <asp:TemplateField HeaderText="Hình ảnh" ItemStyle-Width="100px">
+                    <ItemTemplate>
+                        <asp:Image ID="imgSanPham" runat="server" 
+                            ImageUrl='<%# Eval("Hinh_anh", "~/uploads/images/{0}") %>' 
+                            Visible='<%# !string.IsNullOrEmpty(Eval("Hinh_anh") as string) %>'
+                            AlternateText='<%# Eval("Ten_san_pham") %>'
+                            Width="80px" />
+                    </ItemTemplate>
+                </asp:TemplateField>
+                
+                <asp:BoundField DataField="Ten_san_pham" HeaderText="Tên Sản Phẩm" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="200px" />
+                
+                <asp:TemplateField HeaderText="Giá (VNĐ)" ItemStyle-Width="120px" ItemStyle-HorizontalAlign="Right">
+                    <ItemTemplate>
+                        <asp:Label runat="server" Text='<%# Eval("Gia_co_ban", "{0:N0}") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                
+                <asp:BoundField DataField="ID_DM" HeaderText="ID Danh Mục" ItemStyle-Width="80px" />
+
+                <asp:TemplateField HeaderText="Trạng Thái">
+                    <ItemTemplate>
+                        <asp:Label ID="lblTrangThai" runat="server" 
+                            Text='<%# Eval("Trang_thai") %>'
+                            ForeColor='<%# Eval("Trang_thai").ToString() == "Còn hàng" ? System.Drawing.Color.Green : System.Drawing.Color.Red %>'
+                            Font-Bold="True"></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Hot">
+                    <ItemTemplate>
+                        <asp:Label ID="lblHot" runat="server" 
+                            Text='<%# Convert.ToBoolean(Eval("IsHot")) ? "🔥 HOT" : "---" %>'
+                            ForeColor='<%# Convert.ToBoolean(Eval("IsHot")) ? System.Drawing.Color.Red : System.Drawing.Color.Gray %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                
+                <asp:TemplateField HeaderText="Thứ tự" ItemStyle-Width="100px">
+                     <ItemTemplate>
+                        <asp:TextBox ID="txtOrderKey" runat="server" 
+                            Text='<%# Eval("OrderKey") %>' Width="50px" CssClass="text-center border" />
+                        <asp:LinkButton ID="btnUpdateOrderKey" runat="server" 
+                            CommandName="UpdateOrderKey" 
+                            CommandArgument='<%# Eval("ID_SP") %>' 
+                            Text="Cập nhật" CssClass="link-update text-xs" />
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Hành động" ItemStyle-Width="100px">
+                    <ItemTemplate>
+                         <asp:LinkButton ID="btnEditProduct" runat="server" 
+                            CommandName="EditProduct" 
+                            CommandArgument='<%# Eval("ID_SP") %>' 
+                            Text="Sửa" CssClass="link-edit-gv" />
+                    </ItemTemplate>
+                </asp:TemplateField>
+                
+                <asp:TemplateField HeaderText="Chọn Xóa" ItemStyle-Width="60px">
+                    <HeaderTemplate>
+                        <asp:Button ID="butDelete" runat="server" OnClick="Button2_Click" CssClass="action-button btn-delete text-xs" Text="Xóa" />
+                    </HeaderTemplate>
+                    <ItemTemplate>
+                        <asp:CheckBox ID="chkDelete" runat="server" />
+                    </ItemTemplate>
+                </asp:TemplateField>
+                
+                <asp:CommandField ShowDeleteButton="True" DeleteText="Xóa" ItemStyle-Width="60px" />
+
+            </Columns>
+            <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+            <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+            <RowStyle BackColor="#EFF3FB" />
+        </asp:GridView>
+    </div>
+</asp:Content>

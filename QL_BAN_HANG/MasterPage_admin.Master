@@ -16,12 +16,12 @@
 <form runat="server">
     <div id="Banner"></div>
     <div id="MainMenu">
-        <a href="Default.aspx">
+        <a href="HomePage_admin.aspx">
             <img src="layout/logo.png" alt="Logo" width="100" />
         </a>
         <asp:ContentPlaceHolder ID="ContentPlaceHolderMainMenu" runat="server">
-            <div class="nav-toggle" onclick="toggleNav()">☰ Menu</div>
             <ul id="nav">
+                <li><a href="HomePage_admin.aspx">Trang Chủ</a></li>
                 <li><a href="Default_admin.aspx">Giới Thiệu</a></li>
                 <li><a href="ProductList.aspx">Danh Mục Sản Phẩm &raquo;</a></li>
                 <li id="nav-right"><a href="ShoppingList.aspx">Đơn Hàng</a></li>

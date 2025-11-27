@@ -11,10 +11,10 @@ namespace QL_BAN_HANG
         {
             if (!IsPostBack)
             {
-                int idMn = 0;
-                if (int.TryParse(Request.QueryString["ID_MN"], out idMn))
+                int idDm = 0;
+                if (int.TryParse(Request.QueryString["ID_DM"], out idDm))
                 {
-                    LoadProductsByMenu(idMn);
+                    LoadProductsByMenu(idDm);
                 }
                 else
                 {
@@ -44,28 +44,28 @@ namespace QL_BAN_HANG
             }
         }
 
-        private void LoadProductsByMenu(int idMn)
+        private void LoadProductsByMenu(int idDm)
         {
             try
             {
                 using (Cua_Hang_Tra_SuaDataContext context = new Cua_Hang_Tra_SuaDataContext())
                 {
                     var products = context.San_Phams
-                                          .Where(sp => sp.ID_MN == idMn)
+                                          .Where(sp => sp.ID_DM == idDm)
                                           .OrderBy(sp => sp.Ten_san_pham)
                                           .ToList();
 
                     RepeaterProducts.DataSource = products;
                     RepeaterProducts.DataBind();
-                    if (idMn == 3) 
+                    if (idDm == 3) 
                     {
                         lblMessage.Text = $"📦 Đã tải {products.Count} sản phẩm thuộc menu Trà Sữa";
                     }
-                    else if(idMn == 4) 
+                    else if(idDm == 4) 
                     {
                         lblMessage.Text = $"📦 Đã tải {products.Count} sản phẩm thuộc menu Trà Trái Cây";
                     }
-                    else if(idMn == 5)
+                    else if(idDm == 5)
                     {
                         lblMessage.Text = $"📦 Đã tải {products.Count} sản phẩm thuộc menu Bánh Ngọt";
                     }
@@ -125,7 +125,7 @@ namespace QL_BAN_HANG
                             So_dien_thoai = sdt,
                             ID_SP = sanPham.ID_SP,
                             So_luong = 1,
-                            Gia_tai_thoi_diem = sanPham.Gia_co_ban,
+                            Gia_luc_them = sanPham.Gia_co_ban,
                             Ghi_chu = "",
                             Ngay_them = DateTime.Now
                         };
