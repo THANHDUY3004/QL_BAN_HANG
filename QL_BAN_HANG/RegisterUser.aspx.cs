@@ -87,6 +87,7 @@ namespace QL_BAN_HANG
                         So_dien_thoai = soDienThoai,
                         Dia_chi = string.IsNullOrWhiteSpace(diaChi) ? null : diaChi,
                         Mat_khau = ToMD5(matKhau),
+                        Ngay_tao = DateTime.Now,
                         Phan_quyen = phanQuyenMacDinh
                     };
 

@@ -144,17 +144,18 @@
                     <ItemStyle HorizontalAlign="Right" Width="150px"></ItemStyle>
                 </asp:TemplateField>
 
-                <asp:TemplateField HeaderText="Hành Động" ItemStyle-Width="100px" ItemStyle-HorizontalAlign="Center">
+                <asp:TemplateField HeaderText="Hành Động" ItemStyle-Width="200px" ItemStyle-HorizontalAlign="Center">
                     <ItemTemplate>
                         <asp:LinkButton ID="btnUpdate" runat="server" Text="🔄 Cập nhật"
                             CommandName="CapNhatItem" CommandArgument='<%# Eval("ID_GH") %>'
                             CssClass="action-button btn-update" />
-                        <br />
+                        <br /><br />
                         <asp:LinkButton ID="btnDelete" runat="server" Text="🗑️ Xóa"
                             CommandName="XoaItem" CommandArgument='<%# Eval("ID_GH") %>'
                             CssClass="action-button btn-delete"
                             OnClientClick="return confirm('Bạn có chắc muốn xóa sản phẩm này khỏi giỏ?');" />
                     </ItemTemplate>
+                    <HeaderStyle Width="150px" />
                     <ItemStyle HorizontalAlign="Center" Width="100px"></ItemStyle>
                 </asp:TemplateField>
             </Columns>

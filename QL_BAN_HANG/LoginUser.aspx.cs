@@ -68,7 +68,7 @@ namespace QL_BAN_HANG
                     // Điều hướng theo phân quyền
                     if (foundUser.Phan_quyen == "Khách Hàng")
                     {
-                        Response.Redirect("Default.aspx");
+                        Response.Redirect("HomePage.aspx");
                     }
                     else if (foundUser.Phan_quyen == "Quản Trị")
                     {

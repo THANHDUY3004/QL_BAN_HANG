@@ -177,6 +177,29 @@
         .modal-close-btn:hover {
             background-color: #4b5563; /* Gray 600 */
         }
+        .order-history-button {
+            /* Màu sắc */
+            background-color: #4CAF50; /* Màu xanh lá cây */
+            color: white;
+
+            /* Khoảng cách và kích thước */
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 8px; /* Bo tròn góc */
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+    
+            /* Hiệu ứng chuyển động */
+            transition: background-color 0.3s ease;
+        }
+
+        .order-history-button:hover {
+            /* Thay đổi màu khi di chuột */
+            background-color: #45a049;
+        }
     </style>
 </asp:Content>
 
@@ -188,7 +211,8 @@
         <h1 class="page-header">
             <span class="page-header-icon">🛍️</span> Quản Lý Đơn Hàng Đang Chờ <br /> - Quán Trà Sữa -
         </h1>
-        
+        <asp:Button ID="btn_ls" runat="server" class="order-history-button" Text="Kiểm tra lịch sử đơn hàng" OnClick="btn_ls_Click" />
+
         <asp:Panel ID="pnlPendingOrders" runat="server" Visible="true">
             <h2 class="text-2xl font-semibold text-gray-800 mb-4 pt-4">Đơn Hàng Đang Chờ Xử Lý</h2>
 
