@@ -47,10 +47,9 @@ namespace QL_BAN_HANG
         /// <summary>
         /// Xử lý các nút trong GridView (chỉ Chi tiết cho History)
         /// </summary>
-        protected void gvOrders_RowCommand(object sender, GridViewCommandEventArgs e)
+        protected void GvOrders_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            int idCtdh = 0;
-            if (!int.TryParse(e.CommandArgument.ToString(), out idCtdh))
+            if (!int.TryParse(e.CommandArgument.ToString(), out int idCtdh))
             {
                 ShowNotification("Lỗi: ID đơn hàng không hợp lệ.", "error");
                 return;
@@ -73,7 +72,7 @@ namespace QL_BAN_HANG
         /// <summary>
         /// Xử lý màu mè cho Trạng thái trong GridView
         /// </summary>
-        protected void gvOrders_RowDataBound(object sender, GridViewRowEventArgs e)
+        protected void GvOrders_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
@@ -84,6 +83,7 @@ namespace QL_BAN_HANG
                     string status = lblStatus.Text;
                     string cssClass = "status-badge ";
 
+                    // Example of simplification for member access in switch statements
                     switch (status.ToLower())
                     {
                         case "đang xử lý":
@@ -110,7 +110,7 @@ namespace QL_BAN_HANG
         /// <summary>
         /// Xử lý nút Đóng Modal
         /// </summary>
-        protected void btnCloseDetail_Click(object sender, EventArgs e)
+        protected void BtnCloseDetail_Click(object sender, EventArgs e)
         {
             pnlDetailModal.Visible = false;
         }
@@ -205,6 +205,7 @@ namespace QL_BAN_HANG
                                          Ho_va_ten = tk.Ho_va_ten,
                                          So_dien_thoai = tk.So_dien_thoai,
                                          Dia_chi = tk.Dia_chi,
+                                         Dia_chi_giao_hang = ctdh.Dia_chi_giao_hang,
                                          Trang_thai_don = ctdh.Trang_thai_don,
                                          Tong_tien = ctdh.Tong_tien,
                                          Ghi_chu = ctdh.Ghi_chu,
@@ -218,6 +219,7 @@ namespace QL_BAN_HANG
                         lblCustomerName.Text = order.Ho_va_ten;
                         lblPhone.Text = order.So_dien_thoai;
                         lblAddress.Text = order.Dia_chi;
+                        lblDeliveryAddress.Text = order.Dia_chi_giao_hang;
                         lblOrderTime.Text = order.Thoi_gian_dat.ToString("g");
                         lblStatusDetail.Text = order.Trang_thai_don;
                         lblNote.Text = order.Ghi_chu;
@@ -269,7 +271,7 @@ namespace QL_BAN_HANG
             }
         }
 
-        protected void bnt_dh_Click(object sender, EventArgs e)
+        protected void Bnt_dh_Click(object sender, EventArgs e)
         {
             Response.Redirect("ShoppingList.aspx");
         }

@@ -164,7 +164,7 @@
         <label>Nội dung đầy đủ:</label>
         <RTE:Editor ID="EditorNoiDung" runat="server" Height="400px" Width="100%" />
 
-        <asp:Button ID="btnUpdate" runat="server" Text="Cập nhật bài viết" OnClick="btnUpdate_Click" CssClass="btn-update" />
-        <asp:Button ID="btnExit" runat="server" Text="Quay lại" OnClick="btnExit_Click" />
+        <asp:Button ID="btnUpdate" runat="server" Text="Cập nhật bài viết" OnClick="BtnUpdate_Click" CssClass="btn-update" />
+        <asp:Button ID="btnExit" runat="server" Text="Quay lại" OnClick="BtnExit_Click" />
     </div>
 </asp:Content>

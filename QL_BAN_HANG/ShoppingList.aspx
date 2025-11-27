@@ -189,11 +189,6 @@
             <span class="page-header-icon">🛍️</span> Quản Lý Đơn Hàng Đang Chờ <br /> - Quán Trà Sữa -
         </h1>
         
-        <div class="mb-6">
-            <asp:Button ID="btn_ls" runat="server" Text="Kiểm tra lịch sử đơn hàng" OnClick="btn_ls_Click" 
-                CssClass="btn-history" />
-        </div>
-        
         <asp:Panel ID="pnlPendingOrders" runat="server" Visible="true">
             <h2 class="text-2xl font-semibold text-gray-800 mb-4 pt-4">Đơn Hàng Đang Chờ Xử Lý</h2>
 
@@ -267,7 +262,8 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-700 text-base border border-gray-200 p-4 rounded-lg bg-gray-50 mb-6">
                     <p class="col-span-1 md:col-span-2 text-lg"><strong>Khách hàng:</strong> <asp:Label ID="lblCustomerName" runat="server" CssClass="font-semibold text-gray-900" /></p>
                     <p><strong>SĐT:</strong> <asp:Label ID="lblPhone" runat="server" CssClass="font-medium" /></p>
-                    <p><strong>Địa chỉ:</strong> <asp:Label ID="lblAddress" runat="server" CssClass="font-medium" /></p>
+                    <p><strong>Địa chỉ người đặt:</strong> <asp:Label ID="lblAddress" runat="server" CssClass="font-medium" /></p>
+                    <p class="col-span-1 md:col-span-2"><strong>Địa chỉ giao hàng:</strong> <asp:Label ID="lblDeliveryAddress" runat="server" CssClass="font-medium text-indigo-700 font-bold" /></p>
                     <p><strong>Thời gian đặt:</strong> <asp:Label ID="lblOrderTime" runat="server" CssClass="font-medium" /></p>
                     <p><strong>Trạng thái:</strong> <asp:Label ID="lblStatusDetail" runat="server" CssClass="font-bold status-badge" /></p>
                     <p class="col-span-1 md:col-span-2 mt-3 text-sm"><strong>Ghi chú đơn hàng:</strong> <asp:Label ID="lblNote" runat="server" CssClass="italic text-gray-600" /></p>

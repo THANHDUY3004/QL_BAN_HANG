@@ -9,7 +9,7 @@ namespace QL_BAN_HANG
 {
     public partial class Default_admin : System.Web.UI.Page
     {
-        private Cua_Hang_Tra_SuaDataContext context = new Cua_Hang_Tra_SuaDataContext();
+        private readonly Cua_Hang_Tra_SuaDataContext context = new Cua_Hang_Tra_SuaDataContext();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -39,7 +39,7 @@ namespace QL_BAN_HANG
         }
 
         // --- Thêm bài viết ---
-        protected void butAdd_Click(object sender, EventArgs e)
+        protected void ButAdd_Click(object sender, EventArgs e)
         {
             try
             {
@@ -103,8 +103,7 @@ namespace QL_BAN_HANG
                 GridViewRow row = ((LinkButton)e.CommandSource).NamingContainer as GridViewRow;
                 TextBox txtOrderKey = row.FindControl("txtOrderKey") as TextBox;
 
-                int newOrderKey;
-                if (!int.TryParse(txtOrderKey.Text.Trim(), out newOrderKey))
+                if (!int.TryParse(txtOrderKey.Text.Trim(), out int newOrderKey))
                 {
                     // Báo lỗi nếu nhập không phải số
                     lblMessage.Text = "⚠️ OrderKey phải là số. Vui lòng nhập lại.";
@@ -115,7 +114,7 @@ namespace QL_BAN_HANG
                 var bv = context.Bai_Viets.SingleOrDefault(b => b.ID_BV == idBv);
                 if (bv != null)
                 {
-                    bv.OrderKey = int.Parse(newOrderKey.ToString());
+                    bv.OrderKey = newOrderKey;
                     context.SubmitChanges();
                     lblMessage.Text = "✅ Đã cập nhật OrderKey thành công.";
                 }

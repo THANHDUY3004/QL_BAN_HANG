@@ -130,7 +130,6 @@
     <Content Include="HistoryList.aspx" />
     <Content Include="HomePage.aspx" />
     <Content Include="HomePage_admin.aspx" />
-    <Content Include="layout\default_admin.css" />
     <Content Include="layout\loginuser.css" />
     <Content Include="layout\logo.png" />
     <Content Include="layout\master.css" />

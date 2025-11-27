@@ -3,6 +3,13 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
+        /* CSS Chung cho Body */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7f6; /* Nền nhẹ nhàng */
+            color: #333;
+        }
+
         /* Container chính */
         .container {
             margin: 30px auto;
@@ -16,162 +23,258 @@
 
         h2 {
             text-align: center;
-            color: #2c3e50;
+            color: #2c3e50; /* Màu tiêu đề chính */
             margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
         }
 
         h3 {
-            color: #2980b9;
+            color: #2980b9; /* Màu tiêu đề phụ */
             margin-top: 25px;
             margin-bottom: 10px;
+            border-left: 5px solid #2980b9;
+            padding-left: 10px;
         }
 
-        /* Vùng thêm bài viết */
+        /* Vùng Thêm/Lọc - Sử dụng flexbox cho các cặp label/input và block cho RTE/FileUpload */
         .control-area {
             padding: 15px;
             border-radius: 8px;
             margin-bottom: 20px;
+            background-color: #e9f7e9; /* Nền nhẹ cho vùng thêm */
+            border: 1px solid #d4edda;
         }
 
-        .control-area label {
-            display: block;
-            font-weight: bold;
-            margin-top: 10px;
-            color: #2c3e50;
-        }
+            /* Nhóm label và input */
+            .control-group {
+                display: flex;
+                align-items: center;
+                margin-bottom: 15px;
+            }
 
-        .control-area input[type="text"],
-        .control-area textarea {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            margin-top: 5px;
-        }
+            .control-group label {
+                flex-basis: 200px; /* Cố định chiều rộng nhãn */
+                font-weight: bold;
+                color: #2c3e50;
+                text-align: right;
+                padding-right: 15px; /* Khoảng cách giữa nhãn và input */
+            }
+        
+            .control-group input[type="text"], 
+            .control-group select, 
+            .control-group textarea {
+                flex-grow: 1; /* Cho input mở rộng hết phần còn lại */
+                padding: 8px;
+                border: 1px solid #ccc;
+                border-radius: 6px;
+                box-sizing: border-box;
+            }
 
-        .full-width {
-            margin-top: 15px;
-            text-align: center;
-        }
+            .control-group textarea {
+                min-height: 80px;
+                resize: vertical;
+            }
 
+            /* Đặc biệt cho RTE Editor và FileUpload để chúng chiếm toàn bộ chiều rộng */
+            .control-group.full-width-control {
+                display: block; /* Chuyển về block để RTE/FileUpload chiếm dòng riêng */
+            }
+
+            .control-group.full-width-control label {
+                text-align: left; /* Nhãn của RTE/FileUpload căn trái */
+                flex-basis: auto; /* Bỏ cố định chiều rộng nhãn */
+                margin-bottom: 5px;
+                padding-right: 0;
+            }
+            /* Đảm bảo RTE và FileUpload chiếm toàn bộ chiều rộng có sẵn */
+            .control-group.full-width-control .RTE_Editor,
+            .control-group.full-width-control input[type="file"] {
+                width: 100%;
+            }
+
+
+            .action-button-container {
+                text-align: right; /* Đẩy nút Add về bên phải */
+                margin-top: 20px;
+            }
+
+        /* Nút bấm */
         .action-button {
             padding: 10px 20px;
             border: none;
             border-radius: 6px;
             cursor: pointer;
             font-weight: bold;
-            transition: background-color 0.3s ease;
+            color: white;
+            transition: background-color 0.3s ease, transform 0.1s;
         }
+
+            .action-button:hover {
+                transform: translateY(-1px);
+            }
 
         .btn-add {
             background-color: #27ae60;
-            color: #fff;
         }
 
-        .btn-add:hover {
-            background-color: #2ecc71;
-        }
+            .btn-add:hover {
+                background-color: #1e8449;
+            }
 
         /* Thông báo */
         #lblMessage {
+            display: block;
+            margin: 15px 0;
             font-weight: bold;
-            color: red;
+            color: #c0392b; /* Màu đỏ nổi bật */
+            text-align: center;
         }
 
-        /* GridView quản lý */
+        /* GridView Styling */
         .gridview-style {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
+            font-family: "Segoe UI", Arial, sans-serif;
+            font-size: 14px;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
-        .gridview-style th {
-            background-color: #3498db;
-            color: #fff;
-            padding: 10px;
-            text-align: center;
-        }
+            /* Header */
+            .gridview-style th {
+                background-color: #3498db; /* Màu xanh dương hiện đại */
+                color: #fff;
+                font-weight: bold;
+                text-align: center;
+                padding: 10px 12px;
+                border: 1px solid #2980b9;
+                line-height: 1.4;
+            }
 
-        .gridview-style td {
-            padding: 10px;
-            text-align: center;
-            border-bottom: 1px solid #eee;
-        }
+            /* Nội dung ô */
+            .gridview-style td {
+                padding: 8px 12px;
+                border: 1px solid #ddd;
+                color: #333;
+                vertical-align: middle;
+                line-height: 1.5;
+                word-break: break-word;
+                text-align: center; /* Căn giữa nội dung ô */
+            }
 
-        .gridview-style tr:hover {
-            background-color: #f9f9f9;
-        }
+            /* Dòng xen kẽ */
+            .gridview-style tr:nth-child(even) {
+                background-color: #f9f9f9;
+            }
 
-        .gridview-style img {
-            max-width: 100px;
-            border-radius: 6px;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.2);
-        }
+            /* Hover */
+            .gridview-style tr:hover {
+                background-color: #e6f0ff;
+                cursor: default;
+            }
+
+            /* Hình ảnh trong GridView */
+            .gridview-style img {
+                max-width: 100px;
+                max-height: 80px;
+                border-radius: 6px;
+                box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+            }
+
+            /* Ô nhập OrderKey */
+            .gridview-style input[type="text"] {
+                padding: 4px 6px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                text-align: center;
+            }
+
+            /* Nút bấm trong GridView (Cập nhật OrderKey) */
+            .gridview-style input[type="submit"],
+            .gridview-style button {
+                background-color: #27ae60;
+                color: #fff;
+                border: none;
+                padding: 6px 10px;
+                border-radius: 4px;
+                transition: background-color 0.3s ease;
+                font-size: 13px;
+                cursor: pointer;
+            }
+
+                .gridview-style input[type="submit"]:hover,
+                .gridview-style button:hover {
+                    background-color: #1e8449;
+                }
 
         /* Link hành động */
-        .link-edit {
-            color: #2980b9;
+        .link-edit, .link-update, .link-delete {
             font-weight: bold;
             text-decoration: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .link-edit {
+            color: #2980b9;
         }
         .link-edit:hover {
             text-decoration: underline;
-            color: #e67e22;
+            color: #1f618d;
+        }
+
+        .link-update {
+            color: #27ae60;
+        }
+        .link-update:hover {
+            text-decoration: underline;
+            color: #1e8449;
         }
 
         .link-delete {
             color: #e74c3c;
-            font-weight: bold;
-            text-decoration: none;
         }
         .link-delete:hover {
             text-decoration: underline;
             color: #c0392b;
         }
 
-        .link-update {
-            color: #27ae60;
-            font-weight: bold;
-            text-decoration: none;
-        }
-        .link-update:hover {
-            text-decoration: underline;
-            color: #2ecc71;
-        }
         /* Phân trang GridView */
-.gridview-style .pgr {
-    text-align: center;
-    margin-top: 15px;
-}
+        .gridview-style .pgr {
+            text-align: center;
+            margin-top: 15px;
+        }
 
-.gridview-style .pgr table {
-    margin: 0 auto;
-}
+        .gridview-style .pgr table {
+            margin: 0 auto;
+        }
 
-.gridview-style .pgr td {
-    padding: 6px 10px;
-    font-weight: bold;
-    color: #007bff;
-    font-size: 14px;
-}
+        .gridview-style .pgr td {
+            padding: 6px 10px;
+            font-weight: bold;
+            font-size: 14px;
+            border: none;
+        }
 
-.gridview-style .pgr a {
-    display: inline-block;
-    padding: 6px 12px;
-    margin: 0 4px;
-    background-color: #3498db;
-    color: #fff;
-    border-radius: 4px;
-    text-decoration: none;
-    border: 1px solid #2980b9;
-    transition: background-color 0.3s ease;
-}
+        .gridview-style .pgr a {
+            display: inline-block;
+            padding: 6px 12px;
+            margin: 0 4px;
+            background-color: #3498db;
+            color: #fff;
+            border-radius: 4px;
+            text-decoration: none;
+            border: 1px solid #2980b9;
+            transition: background-color 0.3s ease;
+        }
 
-.gridview-style .pgr a:hover {
-    background-color: #e74c3c;
-    border-color: #c0392b;
-}
-
+        .gridview-style .pgr a:hover {
+            background-color: #2980b9;
+            border-color: #1f618d;
+        }
+        
     </style>
 </asp:Content>
 
@@ -180,24 +283,35 @@
         <h2>📂 QUẢN LÝ BÀI VIẾT</h2>
 
         <h3>➕ Thêm Bài Viết Mới</h3>
-        <div class="control-area" style="background-color: #e9f7e9;">
-            <label>Thứ tự (OrderKey):</label>
-            <asp:TextBox ID="txtAddOrderKey" runat="server" Text="1" Width="100px" />
+        <div class="control-area">
+            <div class="control-group">
+                <label>Thứ tự (OrderKey):</label>
+                <asp:TextBox ID="txtAddOrderKey" runat="server" Text="1" Width="100px" />
+            </div>
 
-            <label>Tiêu đề:</label>
-            <asp:TextBox ID="txtAddTieuDe" runat="server" Width="100%" />
+            <div class="control-group">
+                <label>Tiêu đề:</label>
+                <asp:TextBox ID="txtAddTieuDe" runat="server" />
+            </div>
 
-            <label>Tóm tắt:</label>
-            <asp:TextBox ID="txtAddTomTat" runat="server" TextMode="MultiLine" Rows="3" Width="100%" />
+            <div class="control-group">
+                <label>Tóm tắt:</label>
+                <asp:TextBox ID="txtAddTomTat" runat="server" TextMode="MultiLine" Rows="3" />
+            </div>
 
-            <label>Nội dung đầy đủ:</label>
-            <RTE:Editor ID="EditorAddNoiDung" runat="server" Height="300px" Width="100%" />
+            <%-- RTE và FileUpload sẽ dùng control-group riêng để chiếm toàn bộ chiều rộng --%>
+            <div class="control-group full-width-control">
+                <label>Nội dung đầy đủ:</label>
+                <RTE:Editor ID="EditorAddNoiDung" runat="server" Height="300px" Width="100%" />
+            </div>
 
-            <label>Hình ảnh đại diện:</label>
-            <asp:FileUpload ID="fileUploadHinhAnh" runat="server" />
+            <div class="control-group full-width-control">
+                <label>Hình ảnh đại diện:</label>
+                <asp:FileUpload ID="fileUploadHinhAnh" runat="server" />
+            </div>
 
-            <div class="full-width">
-                <asp:Button ID="butAdd" runat="server" Text="Thêm Bài Viết" OnClick="butAdd_Click" CssClass="action-button btn-add" />
+            <div class="action-button-container">
+                <asp:Button ID="butAdd" runat="server" Text="Thêm Bài Viết" OnClick="ButAdd_Click" CssClass="action-button btn-add" />
             </div>
         </div>
 
@@ -226,7 +340,7 @@
                     </ItemTemplate>
                 </asp:TemplateField>
 
-                <asp:BoundField DataField="Tieu_de" HeaderText="Tiêu đề" />
+                <asp:BoundField DataField="Tieu_de" HeaderText="Tiêu đề" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="200px" />
                 <asp:BoundField DataField="OrderKey" HeaderText="Thứ tự" />
 
                 <asp:TemplateField HeaderText="Sửa OrderKey">

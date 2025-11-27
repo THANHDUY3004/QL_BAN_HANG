@@ -91,7 +91,7 @@ namespace QL_BAN_HANG
             }
         }
 
-        protected void btnLuuThongTin_Click(object sender, EventArgs e)
+        protected void BtnLuuThongTin_Click(object sender, EventArgs e)
         {
             try
             {
@@ -155,12 +155,12 @@ namespace QL_BAN_HANG
         }
 
 
-        protected void btnHuy_Click(object sender, EventArgs e)
+        protected void BtnHuy_Click(object sender, EventArgs e)
         {
             Response.Redirect("AccountList.aspx");
         }
 
-        protected void btnQuayLai_Click(object sender, EventArgs e)
+        protected void BtnQuayLai_Click(object sender, EventArgs e)
         {
             Response.Redirect("AccountList.aspx");
         }

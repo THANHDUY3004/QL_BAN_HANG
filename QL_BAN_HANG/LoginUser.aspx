@@ -1,6 +1,105 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="LoginUser.aspx.cs" Inherits="QL_BAN_HANG.LoginUser" %>
 <asp:Content ID="Content3" ContentPlaceHolderID="head" runat="server">
-    <link href="layout/loginuser.css" rel="stylesheet" />
+<style>
+    /* ================================
+   LOGINUSER.ASPX: Giao diện đăng nhập
+   ================================ */
+
+#login-form-wrapper {
+    margin: 40px auto;
+    max-width: 420px;
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+    #login-form-wrapper h2 {
+        color: #0d6efd;
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 26px;
+    }
+
+    #login-form-wrapper .input-group {
+        margin-bottom: 20px;
+    }
+
+        #login-form-wrapper .input-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: #333;
+        }
+
+    #login-form-wrapper .form-control {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 15px;
+        transition: border-color 0.3s;
+    }
+
+        #login-form-wrapper .form-control:focus {
+            border-color: #0d6efd;
+            outline: none;
+        }
+
+    #login-form-wrapper .btn-primary {
+        background-color: #0d6efd;
+        color: white;
+        padding: 12px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        width: 100%;
+        font-size: 17px;
+        font-weight: bold;
+        transition: background-color 0.3s;
+    }
+
+        #login-form-wrapper .btn-primary:hover {
+            background-color: #0b5ed7;
+        }
+
+    #login-form-wrapper .message {
+        text-align: center;
+        margin-top: 15px;
+        font-weight: bold;
+    }
+
+    #login-form-wrapper .link-footer {
+        text-align: center;
+        margin-top: 25px;
+        font-size: 14px;
+    }
+
+        #login-form-wrapper .link-footer a {
+            color: #0d6efd;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+            #login-form-wrapper .link-footer a:hover {
+                text-decoration: underline;
+            }
+
+    #login-form-wrapper .validation-error {
+        color: #dc3545;
+        font-size: 13px;
+        margin-top: 5px;
+        display: block;
+    }
+
+#Content {
+    width: 1000px;
+    min-height: 300px;
+    height: auto;
+    float: left;
+    background-color: #ffffff;
+}
+</style>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolderContent" runat="server">
     <div id="login-form-wrapper" class="container">

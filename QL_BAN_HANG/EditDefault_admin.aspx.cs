@@ -11,7 +11,7 @@ namespace QL_BAN_HANG
 {
     public partial class EditDefault_admin : System.Web.UI.Page
     {
-        private Cua_Hang_Tra_SuaDataContext context = new Cua_Hang_Tra_SuaDataContext();
+        private readonly Cua_Hang_Tra_SuaDataContext context = new Cua_Hang_Tra_SuaDataContext();
         private int idBv;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -58,14 +58,13 @@ namespace QL_BAN_HANG
             }
         }
 
-        protected void btnUpdate_Click(object sender, EventArgs e)
+        protected void BtnUpdate_Click(object sender, EventArgs e)
         {
             var bv = context.Bai_Viets.SingleOrDefault(b => b.ID_BV == idBv);
             if (bv != null)
             {
                 // Kiểm tra OrderKey phải là số
-                int orderKeyValue;
-                if (!int.TryParse(txtOrderKey.Text.Trim(), out orderKeyValue))
+                if (!int.TryParse(txtOrderKey.Text.Trim(), out int orderKeyValue))
                 {
                     lblMessage.Text = "⚠️ OrderKey phải là số. Vui lòng nhập lại.";
                     return; // Dừng không cập nhật
@@ -134,7 +133,7 @@ namespace QL_BAN_HANG
 
 
 
-        protected void btnExit_Click(object sender, EventArgs e)
+        protected void BtnExit_Click(object sender, EventArgs e)
         {
             Response.Redirect("Default_admin.aspx");
         }

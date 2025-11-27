@@ -170,7 +170,7 @@
         </h1>
 
         <div class="mb-6">
-            <asp:Button ID="bnt_dh" runat="server" Text="Quay lại quản lý đơn hàng" OnClick="bnt_dh_Click" 
+            <asp:Button ID="bnt_dh" runat="server" Text="Quay lại quản lý đơn hàng" OnClick="Bnt_dh_Click" 
                 CssClass="btn-return" />
         </div>
         
@@ -195,7 +195,7 @@
             <div class="overflow-x-auto">
                 <asp:GridView ID="gvHistoryOrders" runat="server" AutoGenerateColumns="False" 
                     DataKeyNames="ID_DH" CssClass="gridview-style" 
-                    OnRowDataBound="gvOrders_RowDataBound" OnRowCommand="gvOrders_RowCommand">
+                    OnRowDataBound="GvOrders_RowDataBound" OnRowCommand="GvOrders_RowCommand">
                     <Columns>
                         <asp:BoundField DataField="ID_DH" HeaderText="Mã ĐH" ItemStyle-Width="80px" />
                         <asp:BoundField DataField="Thoi_gian_dat" HeaderText="Thời gian" DataFormatString="{0:dd/MM/yyyy HH:mm}" />
@@ -233,7 +233,8 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-700 text-base border border-gray-200 p-4 rounded-lg bg-gray-50 mb-6">
                     <p class="col-span-1 md:col-span-2 text-lg"><strong>Khách hàng:</strong> <asp:Label ID="lblCustomerName" runat="server" CssClass="font-semibold text-gray-900" /></p>
                     <p><strong>SĐT:</strong> <asp:Label ID="lblPhone" runat="server" CssClass="font-medium" /></p>
-                    <p><strong>Địa chỉ:</strong> <asp:Label ID="lblAddress" runat="server" CssClass="font-medium" /></p>
+                    <p><strong>Địa chỉ người đặt:</strong> <asp:Label ID="lblAddress" runat="server" CssClass="font-medium" /></p>
+                    <p class="col-span-1 md:col-span-2"><strong>Địa chỉ giao hàng:</strong> <asp:Label ID="lblDeliveryAddress" runat="server" CssClass="font-medium text-indigo-700 font-bold" /></p>
                     <p><strong>Thời gian đặt:</strong> <asp:Label ID="lblOrderTime" runat="server" CssClass="font-medium" /></p>
                     <p><strong>Trạng thái:</strong> <asp:Label ID="lblStatusDetail" runat="server" CssClass="font-bold" /></p>
                     <p class="col-span-1 md:col-span-2 mt-3 text-sm"><strong>Ghi chú đơn hàng:</strong> <asp:Label ID="lblNote" runat="server" CssClass="italic text-gray-600" /></p>
@@ -257,7 +258,7 @@
                 </p>
 
                 <div class="text-right mt-6">
-                    <asp:Button ID="btnCloseDetail" runat="server" Text="Đóng" OnClick="btnCloseDetail_Click" 
+                    <asp:Button ID="btnCloseDetail" runat="server" Text="Đóng" OnClick="BtnCloseDetail_Click" 
                         CssClass="btn-base modal-close-btn py-2.5 px-6" />
                 </div>
             </div>

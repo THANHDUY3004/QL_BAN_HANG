@@ -37,14 +37,14 @@
 
     <!-- Nút lưu và hủy (hiển thị ngay khi load) -->
     <asp:Button ID="btnLuuThongTin" runat="server" Text="💾 Lưu"
-        OnClick="btnLuuThongTin_Click" CssClass="btn-primary" />
+        OnClick="BtnLuuThongTin_Click" CssClass="btn-primary" />
 
     <asp:Button ID="btnHuy" runat="server" Text="❌ Hủy"
-        OnClick="btnHuy_Click" CssClass="btn-primary" />
+        OnClick="BtnHuy_Click" CssClass="btn-primary" />
 
     <!-- Nút quay lại thay cho đăng xuất -->
     <asp:Button ID="btnQuayLai" runat="server" Text="↩️ Quay Lại"
-        OnClick="btnQuayLai_Click" CssClass="btn-primary" />
+        OnClick="BtnQuayLai_Click" CssClass="btn-primary" />
 
     <div class="message">
         <asp:Label ID="lblMessage" runat="server" CssClass="validation-error" EnableViewState="false" />

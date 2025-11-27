@@ -24,15 +24,6 @@ namespace QL_BAN_HANG
         protected global::System.Web.UI.ScriptManager ScriptManager1;
 
         /// <summary>
-        /// btn_ls control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_ls;
-
-        /// <summary>
         /// pnlPendingOrders control.
         /// </summary>
         /// <remarks>
@@ -130,6 +121,15 @@ namespace QL_BAN_HANG
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblAddress;
+
+        /// <summary>
+        /// lblDeliveryAddress control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDeliveryAddress;
 
         /// <summary>
         /// lblOrderTime control.

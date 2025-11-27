@@ -282,6 +282,7 @@ namespace QL_BAN_HANG
                                          Ho_va_ten = tk.Ho_va_ten,
                                          So_dien_thoai = tk.So_dien_thoai,
                                          Dia_chi = tk.Dia_chi,
+                                         Dia_chi_giao_hang = ctdh.Dia_chi_giao_hang,
                                          Trang_thai_don = ctdh.Trang_thai_don,
                                          Tong_tien = ctdh.Tong_tien,
                                          Ghi_chu = ctdh.Ghi_chu,
@@ -295,6 +296,7 @@ namespace QL_BAN_HANG
                         lblCustomerName.Text = order.Ho_va_ten;
                         lblPhone.Text = order.So_dien_thoai;
                         lblAddress.Text = order.Dia_chi;
+                        lblDeliveryAddress.Text = order.Dia_chi_giao_hang;
                         lblOrderTime.Text = order.Thoi_gian_dat.ToString("g");
                         lblStatusDetail.Text = order.Trang_thai_don;
                         lblNote.Text = order.Ghi_chu ?? string.Empty;
