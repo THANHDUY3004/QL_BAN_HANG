@@ -1204,7 +1204,6 @@
     <Content Include="richtexteditor\styles\tabview.css" />
     <Content Include="ShoppingList.aspx" />
     <Content Include="ShoppingUser.aspx" />
-    <Content Include="uploads\icons\pngtree-background-of-monitor-computer-with-online-game-streaming-desktop-image_15734080.jpg" />
     <Content Include="uploads\images\0.jpg" />
     <Content Include="uploads\images\background-banner.png" />
     <Content Include="uploads\images\background-content.png" />
@@ -1404,6 +1403,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="richtexteditor\dialogs\skins\gray\" />
+    <Folder Include="uploads\icons\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

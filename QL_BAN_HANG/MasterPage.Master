@@ -25,9 +25,9 @@
                 <li>
                     <a href="ProductUser.aspx">Danh Mục Sản Phẩm &raquo;</a>
                     <ul>
-                        <li><a href="ProductUser.aspx?ID_MN=3">Trà Sữa</a></li>
-                        <li><a href="ProductUser.aspx?ID_MN=4">Trà Trái Cây</a></li>
-                        <li><a href="ProductUser.aspx?ID_MN=5">Bánh Ngọt</a></li>
+                        <li><a href="ProductUser.aspx?ID_DM=3">Trà Sữa</a></li>
+                        <li><a href="ProductUser.aspx?ID_DM=4">Trà Trái Cây</a></li>
+                        <li><a href="ProductUser.aspx?ID_DM=5">Bánh Ngọt</a></li>
                     </ul>
                 </li>
                 <li id="nav-right">

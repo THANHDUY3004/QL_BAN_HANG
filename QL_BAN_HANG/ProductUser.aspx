@@ -129,7 +129,7 @@
                             <asp:Label ID="txt_sp" runat="server" Text='<%# Eval("Ten_san_pham") %>' CssClass="product-name" />
                             <asp:Label ID="txt_gcb" runat="server" Text='<%# String.Format("{0:N0} đ", Eval("Gia_co_ban")) %>' CssClass="product-price" />
                         </div>
-                        <asp:Button ID="btnAddCart" runat="server" Text="Thêm Giỏ Hàng"
+                        <asp:Button ID="btnAddCart" runat="server" Text="🛒 Thêm Giỏ Hàng"
                             CssClass="btn-cart"
                             CommandArgument='<%# Eval("ID_SP") %>'
                             OnClick="btnAddCart_Click" />

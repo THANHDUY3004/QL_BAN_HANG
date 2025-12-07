@@ -16,6 +16,9 @@
             border-radius: 5px 5px 0 0;
             transition: background 0.3s;
         }
+        .action-button {
+            text-decoration: none;
+        }
         .tab-button.active { 
             background: #fff; 
             border-bottom: 2px solid #007bff; 

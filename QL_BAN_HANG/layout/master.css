@@ -168,18 +168,18 @@ body {
     z-index: 1; /* thấp hơn MainMenu */
 }
 
-
 #MainMenu {
     height: 50px;
-    background-color: #34495e; /* Nền xám đậm */
+    background-color: #34495e;
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
-    /* THAY ĐỔI: Đặt MainMenu lên trên */
-    z-index: 10;
-    position: relative; /* Cần thiết cho z-index hoạt động */
+    z-index: 100; /* đảm bảo nằm trên nội dung */
+    position: sticky; /* ghim khi cuộn */
+    top: 0; /* dính sát mép trên */
 }
+
 
 /* --- KHU VỰC NỘI DUNG (FLEXBOX) --- */
 /* Gộp Content vào Contents */
