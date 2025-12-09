@@ -216,10 +216,6 @@
             </a>
         </div>
 
-        <!-- Footer đơn giản -->
-        <footer class="text-center mt-12 pt-6 border-t border-gray-300">
-            <p class="text-gray-500 text-sm">&copy; 2025 Cửa Hàng Trà Sữa Đồng Tháp. Vui lòng liên hệ 0337335364 để được hỗ trợ.</p>
-        </footer>
     </div>
 
     <!-- Script xử lý Slider -->

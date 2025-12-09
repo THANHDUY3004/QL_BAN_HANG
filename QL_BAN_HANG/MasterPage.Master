@@ -45,6 +45,7 @@
     </div>
     <div id="Bottom">
         <asp:ContentPlaceHolder ID="ContentPlaceHolderBottom" runat="server" >
+                <p>&copy; 2025 Cửa Hàng Trà Sữa Đồng Tháp. Vui lòng liên hệ 0337335364 để được hỗ trợ.</p>
             <table cellpadding="6" cellspacing="0" width="400" align="center" style="font-family: 'Times New Roman', Times, serif; font-size: 14px;">
               <tr>
                 <th colspan="2" style="text-align: center;">Thành viên trong nhóm</th>
