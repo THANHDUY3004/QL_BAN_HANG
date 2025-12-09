@@ -7,7 +7,7 @@
         .container {
             margin: 30px auto;
             width: 100%;
-            max-width: 1200px; /* giữ width tối đa 1200px */
+            max-width: 1200px;
             background-color: #fff;
             padding: 20px;
             border-radius: 10px;
@@ -29,6 +29,43 @@
             margin-bottom: 20px;
             font-size: 15px;
             color: #555;
+        }
+
+        /* --- PHẦN TÌM KIẾM --- */
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+
+        .search-container input[type="text"] {
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 20px 0 0 20px;
+            font-size: 16px;
+            width: 300px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .search-container input[type="text"]:focus {
+            border-color: #007bff;
+        }
+
+        /* Sửa lỗi: Đổi asp:Button thành class CSS "search-btn" */
+        .search-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 0 20px 20px 0;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .search-btn:hover {
+            background-color: #0056b3;
         }
 
         /* Grid sản phẩm */
@@ -97,6 +134,39 @@
             background: #27ae60;
         }
 
+        /* --- PHÂN TRANG --- */
+        .paging-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+            padding: 10px 0;
+        }
+
+        .paging-link {
+            text-decoration: none;
+            color: #007bff;
+            padding: 8px 12px;
+            margin: 0 5px;
+            border: 1px solid #007bff;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .paging-link:hover {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .paging-link.current-page {
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+            pointer-events: none;
+        }
+
+        /* Đã loại bỏ .paging-info */
+
         /* Responsive */
         @media (max-width: 992px) {
             .product-grid {
@@ -108,6 +178,9 @@
             .product-grid {
                 grid-template-columns: repeat(1, 1fr);
             }
+            .search-container input[type="text"] {
+                width: 70%;
+            }
         }
     </style>
 </asp:Content>
@@ -116,6 +189,11 @@
     <div class="container">
         <h2 class="page-title">🛍️ Danh Sách Sản Phẩm</h2>
         <asp:Label ID="lblMessage" runat="server" CssClass="message"></asp:Label>
+
+        <div class="search-container">
+            <asp:TextBox ID="txtSearch" runat="server" Placeholder="Nhập tên sản phẩm..." />
+            <asp:Button ID="btnSearch" runat="server" Text="Tìm Kiếm" OnClick="BtnSearch_Click" CssClass="search-btn" />
+        </div>
 
         <div class="product-grid">
             <asp:Repeater ID="RepeaterProducts" runat="server">
@@ -132,8 +210,20 @@
                         <asp:Button ID="btnAddCart" runat="server" Text="🛒 Thêm Giỏ Hàng"
                             CssClass="btn-cart"
                             CommandArgument='<%# Eval("ID_SP") %>'
-                            OnClick="btnAddCart_Click" />
+                            OnClick="BtnAddCart_Click" />
                     </div>
+                </ItemTemplate>
+            </asp:Repeater>
+        </div>
+
+        <div class="paging-container">
+            <asp:Repeater ID="RepeaterPaging" runat="server" OnItemCommand="RepeaterPaging_ItemCommand">
+                <ItemTemplate>
+                    <asp:LinkButton ID="lnkPage" runat="server"
+                        Text='<%# Container.DataItem %>'
+                        CommandName="Page"
+                        CommandArgument='<%# Container.DataItem %>'
+                        CssClass='<%# (Convert.ToInt32(Container.DataItem) == CurrentPage) ? "paging-link current-page" : "paging-link" %>' />
                 </ItemTemplate>
             </asp:Repeater>
         </div>
