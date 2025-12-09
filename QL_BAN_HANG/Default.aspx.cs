@@ -1,6 +1,7 @@
 ﻿using Cua_Hang_Tra_Sua;
 using System;
 using System.Linq;
+using System.Web;
 
 namespace QL_BAN_HANG
 {
@@ -13,25 +14,34 @@ namespace QL_BAN_HANG
         {
             if (!IsPostBack)
             {
-                // Xử lý query string cho ID_BV và page
+                // Xử lý query string cho ID_BV
                 if (int.TryParse(Request.QueryString["ID_BV"], out currentIdBv))
                 {
                     LoadBaiVietTheoId(currentIdBv);
+                    Session["ID_BV"] = currentIdBv; // Lưu vào Session
                 }
                 else
                 {
                     var baiVietHot = LoadBaiVietHot();
                     if (baiVietHot != null)
+                    {
                         currentIdBv = baiVietHot.ID_BV;
+                        Session["ID_BV"] = currentIdBv; // Lưu vào Session
+                    }
                 }
 
                 // Xử lý phân trang cho Repeater
                 if (int.TryParse(Request.QueryString["page"], out currentPage) && currentPage < 1)
                     currentPage = 1;
 
+                // Nếu không có ID_BV trong query thì lấy từ Session
+                if (currentIdBv == 0 && Session["ID_BV"] != null)
+                    currentIdBv = (int)Session["ID_BV"];
+
                 LoadNews(currentPage, currentIdBv);
             }
         }
+
 
         private void LoadBaiVietTheoId(int idBv)
         {
@@ -118,15 +128,19 @@ namespace QL_BAN_HANG
 
         private string GeneratePagingLinks(int totalPages, int currentPage)
         {
+            int currentIdBv = 0;
+            int.TryParse(HttpContext.Current.Request.QueryString["ID_BV"], out currentIdBv);
+
             string links = "";
             for (int i = 1; i <= totalPages; i++)
             {
                 if (i == currentPage)
                     links += $"<span class='px-3 py-1 bg-[#4c673d] text-white rounded-full mx-1'>{i}</span>";
                 else
-                    links += $"<a href='?page={i}' class='px-3 py-1 border border-[#4c673d] text-[#4c673d] rounded-full mx-1 hover:bg-[#4c673d] hover:text-white transition'>{i}</a>";
+                    links += $"<a href='?ID_BV={currentIdBv}&page={i}' class='px-3 py-1 border border-[#4c673d] text-[#4c673d] rounded-full mx-1 hover:bg-[#4c673d] hover:text-white transition'>{i}</a>";
             }
             return links;
         }
+
     }
 }

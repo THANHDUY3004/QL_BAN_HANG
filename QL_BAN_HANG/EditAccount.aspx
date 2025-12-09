@@ -52,5 +52,3 @@
 </div>
 
 </asp:Content>
-<asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolderBottom" runat="server">
-</asp:Content>
