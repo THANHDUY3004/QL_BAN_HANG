@@ -176,8 +176,7 @@
                 <div class="form-group">
                     <label>Địa chỉ giao hàng:</label>
                     <asp:TextBox ID="txtDiaChiGiaoHang" runat="server" placeholder="Vui lòng nhập địa chỉ nhận hàng" />
-                    <asp:RequiredFieldValidator ID="rfvAddress" runat="server" ControlToValidate="txtDiaChiGiaoHang"
-                        ErrorMessage="Địa chỉ không được để trống!" ForeColor="Red" Display="Dynamic" />
+                    <asp:Label ID="lblchackdiachi" runat="server" Text=""></asp:Label>
                 </div>
                 <div class="form-group">
                     <label>Hình thức đặt hàng:</label>

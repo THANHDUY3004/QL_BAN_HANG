@@ -92,7 +92,7 @@ namespace QL_BAN_HANG
 
                 GridViewProducts.DataSource = query.OrderBy(sp => sp.OrderKey).ToList();
                 GridViewProducts.PageIndex = page;
-                GridViewProducts.PageSize = 10; // Tăng PageSize lên 10
+                GridViewProducts.PageSize = 5; // Tăng PageSize lên 10
                 GridViewProducts.DataBind();
                 lblMessage.Text = "";
             }

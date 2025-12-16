@@ -115,14 +115,65 @@
         <asp:TextBox ID="txtPasswordLog" runat="server" TextMode="Password" CssClass="form-control" />
     </div>
 
-    <asp:Button ID="btnLogin" runat="server" Text="🚪 Đăng Nhập" OnClick="btnLogin_Click" CssClass="btn-primary" />
+
+
+    <asp:Button ID="btnLogin" runat="server" Text="🚪 Đăng Nhập" OnClick="BtnLogin_Click" CssClass="btn-primary" />
 
     <div class="message">
         <asp:Label ID="lblMessage" runat="server" CssClass="validation-error"></asp:Label>
     </div>
-
+    <asp:HiddenField ID="HiddenFieldIsLocked" runat="server" Value="false" />
+    <asp:HiddenField ID="HiddenFieldRemainingTime" runat="server" Value="0" />
     <div class="link-footer">
         <p>Chưa có tài khoản? <a href="RegisterUser.aspx">Đăng ký ngay</a></p>
     </div>
 </div>
+    <script type="text/javascript">
+    function startLockoutTimer(duration) {
+        // Sử dụng lblMessage để hiển thị thông báo và đếm ngược
+        var timerDisplay = document.getElementById('<%= lblMessage.ClientID %>');
+        var loginButton = document.getElementById('<%= btnLogin.ClientID %>');
+        var remaining = duration;
+
+        // Vô hiệu hóa nút Đăng nhập
+        loginButton.disabled = true;
+        loginButton.value = "⏳ Vui lòng chờ..."; 
+
+        // Đảm bảo thông báo hiển thị lỗi (màu đỏ)
+        timerDisplay.style.color = '#dc3545';
+        timerDisplay.style.fontWeight = 'bold';
+
+
+        var timerInterval = setInterval(function () {
+            // Hiển thị thông báo và đếm ngược
+            timerDisplay.innerHTML = "⚠️ Đã nhập sai 3 lần. Vui lòng chờ **" + remaining + " giây để thử lại.";
+            remaining--;
+
+            if (remaining < 0) {
+                clearInterval(timerInterval);
+                
+                // Kích hoạt lại nút
+                loginButton.disabled = false;
+                loginButton.value = "🚪 Đăng Nhập";
+                timerDisplay.innerHTML = "✅ Đã hết thời gian khóa. Vui lòng thử lại.";
+                timerDisplay.style.color = '#28a745'; // Đổi màu thông báo thành xanh lá
+            }
+        }, 1000);
+    }
+
+    // Kiểm tra và khởi động lại đồng hồ đếm ngược nếu cần (sau PostBack)
+    window.onload = function () {
+        var isLockedField = document.getElementById('<%= HiddenFieldIsLocked.ClientID %>');
+        var remainingTimeField = document.getElementById('<%= HiddenFieldRemainingTime.ClientID %>');
+        
+        if (isLockedField && remainingTimeField) {
+            var isLocked = isLockedField.value;
+            var remainingTime = parseInt(remainingTimeField.value);
+
+            if (isLocked === 'true' && remainingTime > 0) {
+                startLockoutTimer(remainingTime);
+            }
+        }
+    };
+    </script>
 </asp:Content>
