@@ -69,13 +69,13 @@ namespace QL_BAN_HANG
         protected global::System.Web.UI.WebControls.TextBox txtTomTat;
 
         /// <summary>
-        /// EditorNoiDung control.
+        /// NoiDung control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::RTE.Editor EditorNoiDung;
+        protected global::System.Web.UI.WebControls.TextBox NoiDung;
 
         /// <summary>
         /// btnUpdate control.

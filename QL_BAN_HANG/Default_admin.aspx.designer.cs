@@ -42,13 +42,13 @@ namespace QL_BAN_HANG
         protected global::System.Web.UI.WebControls.TextBox txtAddTomTat;
 
         /// <summary>
-        /// EditorAddNoiDung control.
+        /// AddNoiDung control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::RTE.Editor EditorAddNoiDung;
+        protected global::System.Web.UI.WebControls.TextBox AddNoiDung;
 
         /// <summary>
         /// fileUploadHinhAnh control.

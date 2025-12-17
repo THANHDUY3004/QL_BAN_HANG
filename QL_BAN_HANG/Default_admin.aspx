@@ -1,6 +1,5 @@
 ﻿<%@ Page Title="Quản lý bài viết" Language="C#" MasterPageFile="~/MasterPage_admin.Master" AutoEventWireup="true" CodeBehind="Default_admin.aspx.cs" Inherits="QL_BAN_HANG.Default_admin" validateRequest="false" %>
-<%@ Register Assembly="RichTextEditor" Namespace="RTE" TagPrefix="RTE" %>
-
+<%-- <%@ Register Assembly="RichTextEditor" Namespace="RTE" TagPrefix="RTE" %> --%>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
         /* CSS Chung cho Body */
@@ -302,7 +301,13 @@
             <%-- RTE và FileUpload sẽ dùng control-group riêng để chiếm toàn bộ chiều rộng --%>
             <div class="control-group full-width-control">
                 <label>Nội dung đầy đủ:</label>
-                <RTE:Editor ID="EditorAddNoiDung" runat="server" Height="300px" Width="100%" />
+                <asp:TextBox ID="AddNoiDung" runat="server" 
+                    Width="100%" Height="100px" TextMode="MultiLine"
+                    Style="font-family:Segoe UI, Arial; font-size:14px; line-height:1.6; 
+                           padding:10px; border:1px solid #ccc; border-radius:6px; 
+                           background-color:#f9f9f9; color:#333; resize:vertical;">
+                </asp:TextBox>
+            <%--    <RTE:Editor ID="EditorAddNoiDung" runat="server" Height="300px" Width="100%" /> --%>
             </div>
 
             <div class="control-group full-width-control">

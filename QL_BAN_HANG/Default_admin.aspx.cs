@@ -43,6 +43,22 @@ namespace QL_BAN_HANG
         {
             try
             {
+                // Kiểm tra rỗng các ô dữ liệu
+                if (string.IsNullOrWhiteSpace(txtAddTieuDe.Text))
+                {
+                    lblMessage.Text = "❌ Tiêu đề không được để trống.";
+                    return;
+                }
+                if (string.IsNullOrWhiteSpace(txtAddTomTat.Text))
+                {
+                    lblMessage.Text = "❌ Tóm tắt không được để trống.";
+                    return;
+                }
+                if (string.IsNullOrWhiteSpace(AddNoiDung.Text))
+                {
+                    lblMessage.Text = "❌ Nội dung không được để trống.";
+                    return;
+                }
                 if (!int.TryParse(txtAddOrderKey.Text, out int orderKey))
                 {
                     lblMessage.Text = "❌ OrderKey phải là số.";
@@ -61,16 +77,12 @@ namespace QL_BAN_HANG
                     fileName = "0.jpg"; // Ảnh mặc định nếu không tải lên
                 }
 
-                    // Lấy nội dung từ Rich Text Editor và đảm bảo không NULL
-                    // Sử dụng toán tử ?? string.Empty để tránh lỗi "Cannot insert the value NULL"
-                    string noiDung = Request.Unvalidated["EditorAddNoiDung"] ?? string.Empty;
-
                 Bai_Viet newBaiViet = new Bai_Viet
                 {
                     ID_DM = 1, // mặc định luôn là danh mục ID=1
                     Tieu_de = txtAddTieuDe.Text.Trim(),
                     Tom_tac = txtAddTomTat.Text.Trim(),
-                    Noi_dung = noiDung, // ĐÃ CẬP NHẬT
+                    Noi_dung = AddNoiDung.Text.Trim(),
                     Hinh_anh_page = fileName,
                     OrderKey = orderKey
                 };
@@ -83,7 +95,7 @@ namespace QL_BAN_HANG
                 // Reset form
                 txtAddTieuDe.Text = string.Empty;
                 txtAddTomTat.Text = string.Empty;
-                EditorAddNoiDung.Text = string.Empty; // Reset Editor
+                AddNoiDung.Text = string.Empty;
                 txtAddOrderKey.Text = "1";
 
                 LoadDataBaiViet(0);
@@ -93,6 +105,7 @@ namespace QL_BAN_HANG
                 lblMessage.Text = "❌ Lỗi khi thêm bài viết: " + ex.Message;
             }
         }
+
         protected void GridViewBaiViet_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "UpdateOrderKey")

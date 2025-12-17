@@ -41,7 +41,7 @@ namespace QL_BAN_HANG
                 txtOrderKey.Text = bv.OrderKey.ToString();
                 txtTieuDe.Text = bv.Tieu_de;
                 txtTomTat.Text = bv.Tom_tac;
-                EditorNoiDung.Text = bv.Noi_dung;
+                NoiDung.Text = bv.Noi_dung;
                 if (!string.IsNullOrEmpty(bv.Hinh_anh_page))
                 {
                     imgPreview.ImageUrl = "~/uploads/images/" + bv.Hinh_anh_page;
@@ -60,6 +60,28 @@ namespace QL_BAN_HANG
 
         protected void BtnUpdate_Click(object sender, EventArgs e)
         {
+            // Kiểm tra rỗng trước
+            if (string.IsNullOrWhiteSpace(txtTieuDe.Text))
+            {
+                lblMessage.Text = "❌ Tiêu đề không được để trống.";
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(txtTomTat.Text))
+            {
+                lblMessage.Text = "❌ Tóm tắt không được để trống.";
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(NoiDung.Text))
+            {
+                lblMessage.Text = "❌ Nội dung không được để trống.";
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(txtOrderKey.Text))
+            {
+                lblMessage.Text = "❌ OrderKey không được để trống.";
+                return;
+            }
+
             var bv = context.Bai_Viets.SingleOrDefault(b => b.ID_BV == idBv);
             if (bv != null)
             {
@@ -67,24 +89,34 @@ namespace QL_BAN_HANG
                 if (!int.TryParse(txtOrderKey.Text.Trim(), out int orderKeyValue))
                 {
                     lblMessage.Text = "⚠️ OrderKey phải là số. Vui lòng nhập lại.";
-                    return; // Dừng không cập nhật
+                    return;
                 }
 
-                // Nếu hợp lệ thì gán vào DB
-                bv.OrderKey = orderKeyValue;  // Không cần int.Parse lại, đã có orderKeyValue
-
-                // Cập nhật nội dung text
+                bv.OrderKey = orderKeyValue;
                 bv.Tieu_de = txtTieuDe.Text.Trim();
                 bv.Tom_tac = txtTomTat.Text.Trim();
+                bv.Noi_dung = NoiDung.Text.Trim();
 
-                // Lấy nội dung từ Rich Text Editor (dùng .Text thay vì Request.Unvalidated)
-                bv.Noi_dung = EditorNoiDung.Text.Trim();  // Đảm bảo lấy giá trị đã cập nhật từ control
-
-                // Upload ảnh nếu có (phần này không thay đổi)
+                // Upload ảnh nếu có (giữ nguyên phần kiểm tra định dạng/dung lượng như đã viết)
                 if (fileUploadHinhAnh.HasFile)
                 {
                     try
                     {
+                        string extension = Path.GetExtension(fileUploadHinhAnh.FileName).ToLower();
+                        string[] allowedExtensions = { ".jpg", ".jpeg", ".png", ".gif" };
+                        if (!allowedExtensions.Contains(extension))
+                        {
+                            lblMessage.Text = "⚠️ Chỉ được phép upload file ảnh (.jpg, .jpeg, .png, .gif).";
+                            return;
+                        }
+
+                        int fileSize = fileUploadHinhAnh.PostedFile.ContentLength;
+                        if (fileSize > 5 * 1024 * 1024)
+                        {
+                            lblMessage.Text = "⚠️ Dung lượng ảnh vượt quá 5MB.";
+                            return;
+                        }
+
                         string fileName = Path.GetFileName(fileUploadHinhAnh.FileName);
                         string folderPath = Server.MapPath("~/uploads/images/");
                         if (!Directory.Exists(folderPath))
@@ -104,13 +136,9 @@ namespace QL_BAN_HANG
                             }
                         }
 
-                        // Lưu ảnh mới
                         fileUploadHinhAnh.SaveAs(savePath);
-
-                        // Cập nhật tên file vào DB
                         bv.Hinh_anh_page = fileName;
 
-                        // Hiển thị lại ảnh mới (chống cache)
                         imgPreview.ImageUrl = "~/uploads/images/" + fileName + "?v=" + DateTime.Now.Ticks;
                         imgPreview.Visible = true;
                     }
@@ -121,7 +149,6 @@ namespace QL_BAN_HANG
                     }
                 }
 
-                // Lưu thay đổi vào DB
                 context.SubmitChanges();
                 lblMessage.Text = "✅ Đã cập nhật bài viết thành công.";
             }
@@ -130,6 +157,7 @@ namespace QL_BAN_HANG
                 lblMessage.Text = "⚠️ Không tìm thấy bài viết cần cập nhật.";
             }
         }
+
 
 
 

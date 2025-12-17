@@ -1,0 +1,85 @@
+﻿
+body {
+	margin: 0px;
+	padding-bottom: 10px;
+	background-color: #ffffff;
+	padding:5px;
+}
+
+body, table, p, div {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color: #414141;
+	font-size: 14px;
+	line-height: 1.6;
+}
+
+a {
+	color: #377dff;
+	text-decoration: none;
+	-webkit-transition: color 0.2s ease 0s, text-decoration 0.2s ease 0s;
+	-moz-transition: color 0.2s ease 0s, text-decoration 0.2s ease 0s;
+	-o-transition: color 0.2s ease 0s, text-decoration 0.2s ease 0s;
+	transition: color 0.2s ease 0s, text-decoration 0.2s ease 0s;
+}
+::selection {
+	background: #b5d6fd;
+	color: #000030;
+}
+p
+{
+	margin-top:3px;
+}
+
+
+.printpagebreak
+{
+	height:5px;
+	border-bottom:dotted 1px #999999!important;
+	border-top:dotted 1px #999999!important;
+	clear: both !important; 
+	page-break-after: always; 
+	background-image:url(images/pagebreak.gif)!important;
+	background-position: 50% 50%; background-repeat: no-repeat no-repeat !important;
+}
+.printpagebreak:before
+{
+	
+}
+
+.dragcontrol,.dragcontrol *
+{
+	cursor:default!important;
+}
+.dragcontrol .dragcontrol
+{
+	background-color:#eeeeee;
+	opacity:0.5;
+	alpha(opacity=50);
+}
+
+.designborder div.rtelayer
+{
+	border:2px solid #0099ff;
+}
+.designborder form
+{
+	border:1px dotted #ff0000;
+}
+
+.designborder table
+{
+	border:dotted 1px #7F7C75;
+}
+.designborder tr
+{
+	min-height:10px;
+}
+.designborder td
+{
+	border:dotted 1px #7F7C75;
+}
+
+/*fix opera*/
+body > br:first-child { display:none; }
+
+

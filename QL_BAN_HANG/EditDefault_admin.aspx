@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="Chỉnh sửa Bài Viết" Language="C#" MasterPageFile="~/MasterPage_admin.Master" AutoEventWireup="true" CodeBehind="EditDefault_admin.aspx.cs" Inherits="QL_BAN_HANG.EditDefault_admin" validateRequest="false" %>
 
-<%@ Register Assembly="RichTextEditor" Namespace="RTE" TagPrefix="RTE" %>
+<%-- <%@ Register Assembly="RichTextEditor" Namespace="RTE" TagPrefix="RTE" %> --%>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <title>Chỉnh sửa Bài Viết - Admin</title>
@@ -162,7 +162,13 @@
         <asp:TextBox ID="txtTomTat" runat="server" TextMode="MultiLine" Rows="3" Width="100%" CssClass="w-full" />
 
         <label>Nội dung đầy đủ:</label>
-        <RTE:Editor ID="EditorNoiDung" runat="server" Height="400px" Width="100%" />
+        <%-- <RTE:Editor ID="EditorNoiDung" runat="server" Height="400px" Width="100%" /> --%>
+        <asp:TextBox ID="NoiDung" runat="server" 
+            Width="100%" Height="100px" TextMode="MultiLine"
+            Style="font-family:Segoe UI, Arial; font-size:14px; line-height:1.6; 
+                    padding:10px; border:1px solid #ccc; border-radius:6px; 
+                    background-color:#f9f9f9; color:#333; resize:vertical;">
+        </asp:TextBox>
 
         <asp:Button ID="btnUpdate" runat="server" Text="Cập nhật bài viết" OnClick="BtnUpdate_Click" CssClass="btn-update" />
         <asp:Button ID="btnExit" runat="server" Text="Quay lại" OnClick="BtnExit_Click" />
