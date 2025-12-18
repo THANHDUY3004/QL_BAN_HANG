@@ -77,6 +77,7 @@ namespace QL_BAN_HANG
                     fileName = "0.jpg"; // Ảnh mặc định nếu không tải lên
                 }
 
+
                 Bai_Viet newBaiViet = new Bai_Viet
                 {
                     ID_DM = 1, // mặc định luôn là danh mục ID=1

@@ -315,7 +315,7 @@
                     <asp:Label ID="Label2" runat="server" />
                 </p>
                 <div class="hot-body">
-                    <asp:Label ID="Label3" runat="server" />
+                    <asp:Literal ID="litResult" runat="server"></asp:Literal>
                 </div>
             </div>
         </div>

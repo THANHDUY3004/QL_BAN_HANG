@@ -71,7 +71,14 @@ namespace QL_BAN_HANG
             {
                 Label1.Text = baiViet.Tieu_de;
                 Label2.Text = baiViet.Tom_tac;
-                Label3.Text = baiViet.Noi_dung;
+                if (!string.IsNullOrEmpty(baiViet.Noi_dung))
+                {
+                    litResult.Text = baiViet.Noi_dung;
+                }
+                else
+                {
+                    litResult.Text = "<i style='color:red;'>Nội dung trống!</i>";
+                }
                 Image1.ImageUrl = string.IsNullOrEmpty(baiViet.Hinh_anh_page)
                     ? "https://placehold.co/600x400/e2e8f0/64748b?text=No+Image"
                     : "~/uploads/images/" + baiViet.Hinh_anh_page;
@@ -80,7 +87,7 @@ namespace QL_BAN_HANG
             {
                 Label1.Text = "Không tìm thấy bài viết";
                 Label2.Text = "";
-                Label3.Text = "";
+                litResult.Text = "";
                 Image1.ImageUrl = "https://placehold.co/600x400/e2e8f0/64748b?text=No+Image";
             }
         }
