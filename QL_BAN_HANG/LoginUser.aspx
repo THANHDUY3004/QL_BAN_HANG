@@ -146,7 +146,7 @@
 
         var timerInterval = setInterval(function () {
             // Hiển thị thông báo và đếm ngược
-            timerDisplay.innerHTML = "⚠️ Đã nhập sai 3 lần. Vui lòng chờ **" + remaining + " giây để thử lại.";
+            timerDisplay.innerHTML = "⚠️ Đã nhập sai 3 lần. Vui lòng chờ " + remaining + " giây để thử lại.";
             remaining--;
 
             if (remaining < 0) {

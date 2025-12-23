@@ -27,6 +27,7 @@ namespace QL_BAN_HANG
                     {
                         currentIdBv = baiVietHot.ID_BV;
                         Session["ID_BV"] = currentIdBv; // Lưu vào Session
+                        baiVietHot.ID_BV = currentIdBv;
                     }
                 }
 
@@ -135,16 +136,33 @@ namespace QL_BAN_HANG
 
         private string GeneratePagingLinks(int totalPages, int currentPage)
         {
-            int currentIdBv = 0;
-            int.TryParse(HttpContext.Current.Request.QueryString["ID_BV"], out currentIdBv);
+            // 1. Ưu tiên lấy ID từ Session vì Page_Load đã đảm bảo Session luôn có dữ liệu (ID_BV hot hoặc ID từ URL)
+            int idToLink = 0;
+            if (Session["ID_BV"] != null)
+            {
+                idToLink = (int)Session["ID_BV"];
+            }
+            else
+            {
+                // 2. Backup: Nếu Session trống, thử lấy từ QueryString
+                int.TryParse(Request.QueryString["ID_BV"], out idToLink);
+            }
 
             string links = "";
             for (int i = 1; i <= totalPages; i++)
             {
                 if (i == currentPage)
+                {
                     links += $"<span class='px-3 py-1 bg-[#4c673d] text-white rounded-full mx-1'>{i}</span>";
+                }
                 else
-                    links += $"<a href='?ID_BV={currentIdBv}&page={i}' class='px-3 py-1 border border-[#4c673d] text-[#4c673d] rounded-full mx-1 hover:bg-[#4c673d] hover:text-white transition'>{i}</a>";
+                {
+                    // Nếu idToLink vẫn bằng 0 (trường hợp hy hữu), link sẽ gọn hơn, 
+                    // nhưng thường Session sẽ luôn có giá trị sau khi Page_Load chạy.
+                    string url = idToLink > 0 ? $"?ID_BV={idToLink}&page={i}" : $"?page={i}";
+
+                    links += $"<a href='{url}' class='px-3 py-1 border border-[#4c673d] text-[#4c673d] rounded-full mx-1 hover:bg-[#4c673d] hover:text-white transition'>{i}</a>";
+                }
             }
             return links;
         }
